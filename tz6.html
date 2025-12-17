@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[讨论]求助泗水哪里有好玩的 - 泗水吧 - 千度贴吧</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Sans Serif", Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #e8f0e8;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4jWNgYGD4T0cwwsLwMKP5w9DwjRWGRgkjhCEF6O4oCQAAAABJRU5ErkJggg==');
+        }
+        
+        .container {
+            width: 980px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(to bottom, #2e8b57, #1e6b47);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0a4d2e;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .bar-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border: 2px solid white;
+            border-radius: 4px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .bar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+        
+        .logo-subtitle {
+            font-size: 14px;
+            margin-left: 10px;
+            opacity: 0.8;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .search-container:focus-within {
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3) inset;
+        }
+        
+        .search-input {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            color: white;
+            width: 200px;
+            font-size: 14px;
+            outline: none;
+            border-radius: 16px 0 0 16px;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-button {
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 0 16px 16px 0;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+        
+        .search-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .user-info {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2e8b57;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        /* 帖子详情样式 */
+        .post-detail {
+            padding: 20px;
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .post-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e8b57;
+            margin-bottom: 15px;
+        }
+        
+        .post-content {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .post-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #2e8b57;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info {
+            font-size: 14px;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            color: #2e8b57;
+        }
+        
+        .post-time {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+        
+        .action-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 5px 15px;
+            margin-left: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .action-btn:hover {
+            background-color: #e5e5e5;
+        }
+        
+        .gift-btn {
+            background-color: #ffd700;
+            border-color: #ffc400;
+        }
+        
+        /* 评论区样式 */
+        .comments-section {
+            margin-top: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .comment {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #e5e5e5;
+        }
+        
+        .comment-avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #3a9a66;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        
+        .comment-content {
+            flex: 1;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: #2e8b57;
+        }
+        
+        .comment-time {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .comment-text {
+            margin-bottom: 8px;
+        }
+        
+        .comment-reply {
+            color: #2e8b57;
+            font-size: 12px;
+            cursor: default; /* 改为默认光标，表示不可点击 */
+        }
+        
+        .nested-reply {
+            margin-left: 30px;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f5f9f5;
+            border-radius: 4px;
+            border-left: 2px solid #2e8b57;
+        }
+        
+        .nested-reply-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .nested-reply-author {
+            font-weight: bold;
+            color: #3a9a66;
+        }
+        
+        .nested-reply-time {
+            color: #999;
+            font-size: 11px;
+        }
+        
+        .nested-reply-text {
+            margin-bottom: 5px;
+        }
+        
+        .reply-form {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        
+        .reply-form textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+        
+        .reply-form button {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .reply-form button:hover {
+            background-color: #1e6b47;
+        }
+        
+        /* 底部样式 */
+        footer {
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .main-content {
+            padding: 20px;
+        }
+        
+        .post-detail-container {
+            width: 100%;
+        }
+        
+        .highlight {
+            background-color: #f0fff0;
+            border-left: 3px solid #2e8b57;
+        }
+        
+        /* 隐藏用户头像的样式 */
+        .user-avatar, .comment-avatar, .author-avatar {
+            display: none;
+        }
+        
+        /* 骰子插件样式 */
+        .pixel-dice-plugin {
+            font-family: 'Courier New', monospace;
+            background-color: #0a0a0a;
+            border: 2px solid #333;
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 320px;
+            color: #e0e0e0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: none; /* 初始隐藏，因为初始状态为最小化 */
+        }
+        
+        /* 页面容器 - 修改为独立页面 */
+        .plugin-pages {
+            display: flex;
+            width: 100%; /* 修改为100% */
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .plugin-page {
+            width: 100%; /* 每个页面占100%宽度 */
+            min-height: 280px; /* 固定高度与插件框相同 */
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0; /* 防止页面被压缩 */
+        }
+        
+        .page-switched .plugin-pages {
+            transform: translateX(-100%); /* 切换到第二个页面 */
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: absolute;
+            top: 5px;
+            background-color: #333;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+        
+        .nav-btn:hover {
+            background-color: #444;
+            border-color: #00ff00;
+        }
+        
+        .collapse-btn {
+            width: 20px;
+            height: 20px;
+            right: 5px;
+        }
+        
+        .next-btn {
+            width: 20px;
+            height: 20px;
+            right: 30px; /* 放在收缩按钮左边 */
+        }
+        
+        .prev-btn {
+            width: 20px;
+            height: 20px;
+            right: 55px; /* 放在next按钮左边 */
+            display: none; /* 初始隐藏 */
+        }
+        
+        /* 页面一：骰子页面样式 */
+        .dice-page {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .item-display {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .dice-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #555;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .dice-icon.activated {
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+        
+        .dice-icon.cooldown {
+            border-color: #ff9900;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px rgba(255, 153, 0, 0.3); }
+            50% { box-shadow: 0 0 15px rgba(255, 153, 0, 0.5); }
+            100% { box-shadow: 0 0 5px rgba(255, 153, 0, 0.3); }
+        }
+        
+        .dice-image {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+        
+        .item-name {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #00ff00;
+            flex-grow: 1;
+        }
+        
+        .cooldown-info {
+            font-size: 0.8rem;
+            color: #ff9900;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+        
+        /* 新增的正方形图片区域 */
+        .dice-image-container {
+            width: 100%;
+            height: 120px; /* 固定高度，可根据需要调整 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #111;
+        }
+        
+        .dice-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .dice-main-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .use-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: #00aa00;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: auto; /* 推到底部 */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .use-btn:hover:not(:disabled) {
+            background-color: #00cc00;
+        }
+        
+        .use-btn:disabled {
+            background-color: #333;
+            color: #777;
+            cursor: not-allowed;
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 153, 0, 0.1) 10px,
+                rgba(255, 153, 0, 0.1) 20px
+            );
+        }
+        
+        .cooldown-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #ff9900;
+            font-weight: bold;
+        }
+        
+        /* 页面二：SAN值页面样式 */
+        .san-page {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .page-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .investigator-info {
+            margin-bottom: 25px;
+        }
+        
+        .info-group {
+            margin-bottom: 15px;
+        }
+        
+        .info-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+        
+        .info-value {
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .info-text {
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .san-display {
+            margin-top: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .san-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #00ff00;
+            font-size: 0.9rem;
+        }
+        
+        .san-value {
+            font-weight: bold;
+            color: #00ff00;
+        }
+        
+        .san-progress-container {
+            width: 100%;
+            height: 20px;
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .san-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #00ff00, #00cc00);
+            width: 100%; /* 初始值100% */
+            transition: width 0.5s ease;
+            position: relative;
+        }
+        
+        .san-progress-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        /* 对话框样式 */
+        .dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .dialog-content {
+            background-color: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #00ff00;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .dialog-text {
+            color: #00ff00;
+            font-size: 1rem;
+            line-height: 1.5;
+            min-height: 60px;
+            white-space: pre-wrap;
+            margin-bottom: 15px;
+        }
+        
+        /* 不同成功等级的文字颜色 */
+        .critical-success-text {
+            color: #00ff00; /* 大成功 - 绿色 */
+            font-weight: bold;
+        }
+        
+        .critical-failure-text {
+            color: #ff0000; /* 大失败 - 红色 */
+            font-weight: bold;
+        }
+        
+        .extreme-success-text {
+            color: #00ccff; /* 极难成功 - 亮蓝色 */
+        }
+        
+        .hard-success-text {
+            color: #0099ff; /* 困难成功 - 蓝色 */
+        }
+        
+        .regular-success-text {
+            color: #00ff00; /* 普通成功 - 绿色 */
+        }
+        
+        .failure-text {
+            color: #ff9900; /* 失败 - 橙色 */
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 6px;
+            height: 1rem;
+            background-color: #00ff00;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .dialog-close {
+            background-color: #00ff00;
+            color: #000;
+            border: none;
+            padding: 6px 15px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            float: right;
+            font-size: 0.9rem;
+        }
+        
+        .dialog-close:hover {
+            background-color: #00cc00;
+        }
+        
+        /* 工具提示样式 */
+        .dice-tooltip {
+            position: fixed;
+            background-color: rgba(10, 10, 10, 0.95);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            border-radius: 6px;
+            max-width: 280px;
+            z-index: 10001;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.3;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+        }
+        
+        .dice-tooltip strong {
+            color: #00ff00;
+        }
+        
+        .epic-text {
+            color: #9370db;
+            font-weight: bold;
+        }
+        
+        .warning-text {
+            color: #00ff00;
+            font-style: italic;
+        }
+        
+        /* 插件容器样式 - 右下角固定定位 */
+        #dicePluginContainer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 320px;
+        }
+        
+        /* 折叠后的圆形图标 */
+        .dice-minimized {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #0a0a0a;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .dice-minimized:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+        
+        .dice-minimized .expand-icon {
+            color: #e0e0e0;
+            font-size: 24px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .dice-minimized:hover .expand-icon {
+            color: #00ff00;
+            transform: scale(1.2);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            #dicePluginContainer {
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: calc(100% - 20px);
+            }
+            
+            .dice-minimized {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="sishuiba.html" style="text-decoration: none; color: inherit;">
+                <div class="logo-container">
+                    <div class="bar-logo">
+                        <img src="images/xishuitouxiang.jpg" alt="泗水吧头像">
+                    </div>
+                    <div>
+                        <div class="logo">泗水吧<span class="logo-subtitle">千度贴吧</span></div>
+                    </div>
+                </div>
+            </a>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="搜索贴吧内容">
+                    <button class="search-button" id="search-button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.7422 10.3439C12.5329 9.2673 13 7.9382 13 6.5C13 2.91015 10.0899 0 6.5 0C2.91015 0 0 2.91015 0 6.5C0 10.0899 2.91015 13 6.5 13C7.93858 13 9.26801 12.5327 10.3448 11.7415L10.3439 11.7422C10.3734 11.7822 10.4062 11.8204 10.4424 11.8566L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L11.8566 10.4424C11.8204 10.4062 11.7822 10.3734 11.7422 10.3439ZM12 6.5C12 9.53757 9.53757 12 6.5 12C3.46243 12 1 9.53757 1 6.5C1 3.46243 3.46243 1 6.5 1C9.53757 1 12 3.46243 12 6.5Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">张</div>
+                    <span>张特 (已登录)</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="post-detail-container">
+                <div class="post-detail">
+                    <div class="post-header">
+                        <div class="post-title">求助泗水哪里有好玩的</div>
+                    </div>
+                    
+                    <div class="post-author">
+                        <div class="author-avatar">贴</div>
+                        <div class="author-info">
+                            <div class="author-name">贴吧用户_JP76UAD</div>
+                            <div class="post-time">IP属地:云南 1楼 2025-07-07 21:40</div>
+                        </div>
+                    </div>
+                    
+                    <div class="post-content">
+                        <p>泗水哪里有好玩的 介绍给弄俩盒烟</p>
+                    </div>
+                    
+                    <div class="post-actions">
+                    </div>
+                </div>
+                
+                <div class="comments-section">
+                    <div class="section-title">全部回复(7)</div>
+                    
+                    <!-- 2楼 -->
+                    <div class="comment">
+                        <div class="comment-avatar">这</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <div class="comment-author">这有一个人</div>
+                                <div class="comment-time">IP属地:云南 2楼 2025-07-08 10:08</div>
+                            </div>
+                            <div class="comment-text">啥烟</div>
+                            <div class="comment-reply">回复</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 4楼 -->
+                    <div class="comment">
+                        <div class="comment-avatar">黄</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <div class="comment-author">黄昏下的乌鸦D</div>
+                                <div class="comment-time">IP属地:云南 4楼 2025-07-11 21:12</div>
+                            </div>
+                            <div class="comment-text">来泗水没住的地方找我</div>
+                            <div class="comment-reply">回复</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 5楼 -->
+                    <div class="comment">
+                        <div class="comment-avatar">泗</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <div class="comment-author">泗水老农民</div>
+                                <div class="comment-time">IP属地:云南 5楼 2025-11-14 10:42</div>
+                            </div>
+                            <div class="comment-text">周末想去趋源泉玩，听奶奶说那里的风景很美，泉水也特别清澈，有想一起去的朋友吗？可以拼车一起去！</div>
+                            <div class="comment-reply">收起回复</div>
+                            
+                            <!-- 嵌套回复1 -->
+                            <div class="nested-reply">
+                                <div class="nested-reply-header">
+                                    <div class="nested-reply-author">暗号b！</div>
+                                    <div class="nested-reply-time">IP属地:云南 2025-11-14 13:34</div>
+                                </div>
+                                <div class="nested-reply-text">楼主别去了，那里这两年被一个有钱开发商整片承包做旅游景区了，到现在还没完工。</div>
+                            </div>
+                            
+                            <!-- 嵌套回复2 -->
+                            <div class="nested-reply">
+                                <div class="nested-reply-header">
+                                    <div class="nested-reply-author">暗号b！</div>
+                                    <div class="nested-reply-time">IP属地:云南 2025-11-14 13:36</div>
+                                </div>
+                                <div class="nested-reply-text">但是啊我听传言说其实老早就完工了。那个老板好像在里面发现了什么，然后转卖给一个神秘人，偶尔还有一大帮看上去不像工人的进进出出。</div>
+                            </div>
+                            
+                            <!-- 嵌套回复3 -->
+                            <div class="nested-reply">
+                                <div class="nested-reply-header">
+                                    <div class="nested-reply-author">泗水老农民</div>
+                                    <div class="nested-reply-time">IP属地:云南 2025-11-14 13:45</div>
+                                </div>
+                                <div class="nested-reply-text">啊？这样吗，好吧。遗憾。</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reply-form">
+                        <textarea id="reply-textarea" placeholder="发表你的回复..."></textarea>
+                        <button id="reply-button">发表回复</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+            <p>Copyright© xukaiwen. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- 骰子插件容器 -->
+    <div id="dicePluginContainer"></div>
+
+    <script>
+        // NPC回复状态记录
+        let npcReplyStatus = {
+            '泗水老农民': false,
+            '暗号b！': false
+        };
+        
+        // 像素骰子插件类
+        class PixelDicePlugin {
+            constructor(containerSelector, options = {}) {
+                // 默认配置
+                this.config = {
+                    userId: 'default_user',
+                    userName: '调查员',
+                    skillName: '灵感',
+                    skillValue: 50,
+                    extraText: '', // 修改为空字符串，不再有默认附加文本
+                    storageKey: 'pixelDiceState',
+                    sanKey: 'pixelDiceSanState',
+                    cooldownKey: 'pixelDiceCooldown', // 冷却时间存储key
+                    ...options
+                };
+                
+                // 容器元素
+                this.container = document.querySelector(containerSelector);
+                if (!this.container) {
+                    console.error('未找到容器元素:', containerSelector);
+                    return;
+                }
+                
+                // 插件状态 - 初始状态设为激活
+                this.isActivated = true; // 修改为默认激活
+                this.isLoaded = false;
+                this.isMinimized = true; // 初始状态为最小化
+                this.currentPage = 1; // 1: 骰子页面, 2: SAN值页面
+                
+                // SAN值相关
+                this.investigatorName = '张三'; // 默认调查员姓名
+                this.sanValue = 100; // 初始SAN值
+                this.maxSanValue = 100; // 最大SAN值
+                
+                // 冷却相关
+                this.cooldownDuration = 300; // 5分钟，单位：秒
+                this.cooldownEndTime = null; // 冷却结束时间戳
+                this.cooldownTimer = null; // 冷却计时器
+                this.isExtendedCooldown = false; // 是否已延长冷却时间
+                
+                // 隐藏功能相关
+                this.hiddenFeatureClickCount = 0;
+                this.hiddenFeatureStartTime = 0;
+                this.hiddenFeatureTimeout = null;
+                
+                // 初始化插件
+                this.init();
+            }
+            
+            // 初始化插件
+            init() {
+                // 加载保存的状态
+                this.loadState();
+                
+                // 创建插件UI
+                this.createUI();
+                
+                // 绑定事件
+                this.bindEvents();
+                
+                // 启动冷却检查定时器
+                this.startCooldownTimer();
+                
+                this.isLoaded = true;
+                console.log('像素骰子插件已初始化');
+            }
+            
+            // 创建UI
+            createUI() {
+                // 创建插件容器
+                this.pluginEl = document.createElement('div');
+                this.pluginEl.className = 'pixel-dice-plugin';
+                
+                // 创建页面容器
+                const pagesContainer = document.createElement('div');
+                pagesContainer.className = 'plugin-pages';
+                
+                // 创建页面一（骰子页面）- 完全独立
+                this.createDicePage(pagesContainer);
+                
+                // 创建页面二（SAN值页面）- 完全独立
+                this.createSanPage(pagesContainer);
+                
+                // 创建收缩按钮
+                this.createCollapseButton();
+                
+                // 创建导航按钮（> 按钮）
+                this.createNextButton();
+                
+                // 创建返回按钮（< 按钮）
+                this.createPrevButton();
+                
+                // 创建结果对话框
+                this.createResultDialog();
+                
+                // 创建最小化图标
+                this.createMinimizedIcon();
+                
+                // 组装插件
+                this.pluginEl.appendChild(pagesContainer);
+                this.container.appendChild(this.pluginEl);
+                
+                // 初始状态为最小化，显示圆形图标
+                this.minimizedIcon.style.display = 'flex';
+                
+                // 更新UI状态
+                this.updateUI();
+            }
+            
+            // 创建骰子页面 - 完全独立
+            createDicePage(pagesContainer) {
+                const dicePage = document.createElement('div');
+                dicePage.className = 'plugin-page dice-page';
+                
+                // 物品显示区域
+                const itemDisplay = document.createElement('div');
+                itemDisplay.className = 'item-display';
+                
+                // 物品图标
+                this.itemIcon = document.createElement('div');
+                this.itemIcon.className = 'dice-icon activated'; // 添加激活类
+                this.itemIcon.title = '命运骰子 - 已激活';
+                
+                // 使用图片作为图标
+                const img = document.createElement('img');
+                img.src = 'chajian/chajianimages/touzi.png'; // 使用正确的路径
+                img.alt = '骰子';
+                img.className = 'dice-image';
+                this.itemIcon.appendChild(img);
+                
+                // 物品名称
+                const itemName = document.createElement('div');
+                itemName.className = 'item-name';
+                itemName.textContent = '命运骰子';
+                
+                // 冷却信息显示
+                this.cooldownInfo = document.createElement('span');
+                this.cooldownInfo.className = 'cooldown-info';
+                
+                itemName.appendChild(this.cooldownInfo);
+                itemDisplay.appendChild(this.itemIcon);
+                itemDisplay.appendChild(itemName);
+                
+                // 新增的正方形图片区域
+                const diceImageContainer = document.createElement('div');
+                diceImageContainer.className = 'dice-image-container';
+                
+                const diceMainImage = document.createElement('img');
+                diceMainImage.src = 'chajian/touzi.png'; // 修改为指定的图片路径
+                diceMainImage.alt = '骰子图片';
+                diceMainImage.className = 'dice-main-image';
+                diceImageContainer.appendChild(diceMainImage);
+                
+                // 使用按钮
+                this.useBtn = document.createElement('button');
+                this.useBtn.className = 'use-btn';
+                this.useBtn.textContent = '使用';
+                
+                // 冷却覆盖层
+                this.cooldownOverlay = document.createElement('div');
+                this.cooldownOverlay.className = 'cooldown-overlay';
+                this.cooldownOverlay.textContent = '冷却中';
+                this.useBtn.appendChild(this.cooldownOverlay);
+                
+                dicePage.appendChild(itemDisplay);
+                dicePage.appendChild(diceImageContainer); // 添加图片容器
+                dicePage.appendChild(this.useBtn);
+                
+                pagesContainer.appendChild(dicePage);
+            }
+            
+            // 创建SAN值页面 - 完全独立
+            createSanPage(pagesContainer) {
+                const sanPage = document.createElement('div');
+                sanPage.className = 'plugin-page san-page';
+                
+                // 页面标题
+                const pageTitle = document.createElement('div');
+                pageTitle.className = 'page-title';
+                pageTitle.textContent = '调查员状态';
+                sanPage.appendChild(pageTitle);
+                
+                // 调查员信息
+                const investigatorInfo = document.createElement('div');
+                investigatorInfo.className = 'investigator-info';
+                
+                // 调查员姓名
+                const nameGroup = document.createElement('div');
+                nameGroup.className = 'info-group';
+                
+                const nameLabel = document.createElement('div');
+                nameLabel.className = 'info-label';
+                nameLabel.textContent = '调查员姓名:';
+                
+                this.nameDisplay = document.createElement('div');
+                this.nameDisplay.className = 'info-text';
+                this.nameDisplay.textContent = this.investigatorName;
+                
+                nameGroup.appendChild(nameLabel);
+                nameGroup.appendChild(this.nameDisplay);
+                investigatorInfo.appendChild(nameGroup);
+                
+                // SAN值显示
+                const sanDisplay = document.createElement('div');
+                sanDisplay.className = 'san-display';
+                
+                const sanLabel = document.createElement('div');
+                sanLabel.className = 'san-label';
+                sanLabel.innerHTML = '<span>SAN值</span><span class="san-value">' + this.sanValue + '/' + this.maxSanValue + '</span>';
+                
+                this.sanProgressContainer = document.createElement('div');
+                this.sanProgressContainer.className = 'san-progress-container';
+                
+                this.sanProgressBar = document.createElement('div');
+                this.sanProgressBar.className = 'san-progress-bar';
+                this.sanProgressBar.style.width = (this.sanValue / this.maxSanValue) * 100 + '%';
+                
+                this.sanProgressText = document.createElement('div');
+                this.sanProgressText.className = 'san-progress-text';
+                this.sanProgressText.textContent = this.sanValue + '/' + this.maxSanValue;
+                
+                this.sanProgressContainer.appendChild(this.sanProgressBar);
+                this.sanProgressContainer.appendChild(this.sanProgressText);
+                
+                sanDisplay.appendChild(sanLabel);
+                sanDisplay.appendChild(this.sanProgressContainer);
+                
+                sanPage.appendChild(investigatorInfo);
+                sanPage.appendChild(sanDisplay);
+                
+                pagesContainer.appendChild(sanPage);
+            }
+            
+            // 创建收缩按钮
+            createCollapseButton() {
+                this.collapseBtn = document.createElement('div');
+                this.collapseBtn.className = 'nav-btn collapse-btn';
+                this.collapseBtn.innerHTML = '−';
+                this.collapseBtn.title = '最小化';
+                this.pluginEl.appendChild(this.collapseBtn);
+            }
+            
+            // 创建下一页按钮
+            createNextButton() {
+                this.nextBtn = document.createElement('div');
+                this.nextBtn.className = 'nav-btn next-btn';
+                this.nextBtn.innerHTML = '›';
+                this.nextBtn.title = '下一页';
+                this.pluginEl.appendChild(this.nextBtn);
+            }
+            
+            // 创建上一页按钮
+            createPrevButton() {
+                this.prevBtn = document.createElement('div');
+                this.prevBtn.className = 'nav-btn prev-btn';
+                this.prevBtn.innerHTML = '‹';
+                this.prevBtn.title = '上一页';
+                this.pluginEl.appendChild(this.prevBtn);
+            }
+            
+            // 创建结果对话框
+            createResultDialog() {
+                // 对话框遮罩
+                this.dialogOverlay = document.createElement('div');
+                this.dialogOverlay.className = 'dialog-overlay';
+                
+                // 对话框内容
+                this.dialogContent = document.createElement('div');
+                this.dialogContent.className = 'dialog-content';
+                
+                // 对话框文本
+                this.dialogText = document.createElement('div');
+                this.dialogText.className = 'dialog-text';
+                
+                // 关闭按钮
+                this.dialogClose = document.createElement('button');
+                this.dialogClose.className = 'dialog-close';
+                this.dialogClose.textContent = '关闭';
+                
+                this.dialogContent.appendChild(this.dialogText);
+                this.dialogContent.appendChild(this.dialogClose);
+                this.dialogOverlay.appendChild(this.dialogContent);
+                
+                // 添加到body
+                document.body.appendChild(this.dialogOverlay);
+            }
+            
+            // 创建最小化图标
+            createMinimizedIcon() {
+                this.minimizedIcon = document.createElement('div');
+                this.minimizedIcon.className = 'dice-minimized';
+                this.minimizedIcon.title = '骰子插件 (点击展开)';
+                
+                // 加号图标
+                const expandIcon = document.createElement('div');
+                expandIcon.className = 'expand-icon';
+                expandIcon.innerHTML = '+';
+                
+                this.minimizedIcon.appendChild(expandIcon);
+                
+                // 添加到body
+                document.body.appendChild(this.minimizedIcon);
+            }
+            
+            // 绑定事件
+            bindEvents() {
+                // 收缩按钮点击
+                this.collapseBtn.addEventListener('click', () => this.collapse());
+                
+                // 下一页按钮点击
+                this.nextBtn.addEventListener('click', () => this.nextPage());
+                
+                // 上一页按钮点击
+                this.prevBtn.addEventListener('click', () => this.prevPage());
+                
+                // 使用按钮点击
+                this.useBtn.addEventListener('click', () => this.useDice());
+                
+                // 物品图标悬停提示
+                this.itemIcon.addEventListener('mouseenter', () => this.showTooltip());
+                this.itemIcon.addEventListener('mouseleave', () => this.hideTooltip());
+                
+                // 物品图标点击 - 隐藏功能（无UI提示）
+                this.itemIcon.addEventListener('click', (e) => this.handleHiddenFeatureClick(e));
+                
+                // 最小化图标点击
+                this.minimizedIcon.addEventListener('click', () => this.expand());
+                
+                // 关闭对话框
+                this.dialogClose.addEventListener('click', () => this.closeDialog());
+                this.dialogOverlay.addEventListener('click', (e) => {
+                    if (e.target === this.dialogOverlay) {
+                        this.closeDialog();
+                    }
+                });
+                
+                // ESC键关闭对话框
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.dialogOverlay.style.display === 'flex') {
+                        this.closeDialog();
+                    }
+                });
+            }
+            
+            // 处理隐藏功能点击（无UI动画）
+            handleHiddenFeatureClick(e) {
+                e.stopPropagation(); // 防止事件冒泡
+                
+                const now = Date.now();
+                
+                // 如果第一次点击或者超过4秒，重置计数器
+                if (now - this.hiddenFeatureStartTime > 4000) {
+                    this.hiddenFeatureClickCount = 0;
+                    this.hiddenFeatureStartTime = now;
+                }
+                
+                // 增加点击计数
+                this.hiddenFeatureClickCount++;
+                
+                // 清除之前的超时
+                if (this.hiddenFeatureTimeout) {
+                    clearTimeout(this.hiddenFeatureTimeout);
+                }
+                
+                // 设置新的超时，4秒后重置计数器
+                this.hiddenFeatureTimeout = setTimeout(() => {
+                    this.hiddenFeatureClickCount = 0;
+                }, 4000);
+                
+                // 如果达到10次点击
+                if (this.hiddenFeatureClickCount >= 10) {
+                    this.activateHiddenFeature();
+                    this.hiddenFeatureClickCount = 0;
+                }
+            }
+            
+            // 激活隐藏功能（静默完成，无UI提示）
+            activateHiddenFeature() {
+                // 立即完成冷却
+                this.cooldownEndTime = null;
+                this.saveCooldownState();
+                this.updateCooldownDisplay();
+                
+                // 清除超时
+                if (this.hiddenFeatureTimeout) {
+                    clearTimeout(this.hiddenFeatureTimeout);
+                    this.hiddenFeatureTimeout = null;
+                }
+                
+                // 重置计数器
+                this.hiddenFeatureClickCount = 0;
+                
+                // 仅在控制台输出信息（用于调试，用户看不到）
+                console.log('隐藏功能激活：冷却立即完成！');
+            }
+            
+            // 切换到下一页
+            nextPage() {
+                if (this.currentPage === 1) {
+                    this.currentPage = 2;
+                    this.pluginEl.classList.add('page-switched');
+                    this.updateNavButtons();
+                }
+            }
+            
+            // 切换到上一页
+            prevPage() {
+                if (this.currentPage === 2) {
+                    this.currentPage = 1;
+                    this.pluginEl.classList.remove('page-switched');
+                    this.updateNavButtons();
+                }
+            }
+            
+            // 更新导航按钮显示状态
+            updateNavButtons() {
+                if (this.currentPage === 1) {
+                    // 页面一：显示>按钮，隐藏<按钮
+                    this.nextBtn.style.display = 'flex';
+                    this.prevBtn.style.display = 'none';
+                } else if (this.currentPage === 2) {
+                    // 页面二：显示<按钮，隐藏>按钮
+                    this.prevBtn.style.display = 'flex';
+                    this.nextBtn.style.display = 'none';
+                }
+            }
+            
+            // 收缩插件
+            collapse() {
+                this.isMinimized = true;
+                this.pluginEl.style.display = 'none';
+                this.minimizedIcon.style.display = 'flex';
+            }
+            
+            // 展开插件
+            expand() {
+                this.isMinimized = false;
+                this.pluginEl.style.display = 'block';
+                this.minimizedIcon.style.display = 'none';
+            }
+            
+            // 激活骰子
+            activateDice() {
+                if (this.isActivated) return;
+                
+                this.isActivated = true;
+                this.updateUI();
+                this.saveState();
+                
+                // 显示激活反馈
+                this.itemIcon.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.itemIcon.style.transform = 'scale(1)';
+                }, 300);
+                
+                console.log('骰子物品已激活');
+            }
+            
+            // 关闭骰子（供外部调用）
+            deactivateDice() {
+                if (!this.isActivated) return;
+                
+                this.isActivated = false;
+                this.updateUI();
+                this.saveState();
+                
+                console.log('骰子物品已关闭');
+            }
+            
+            // 更新SAN值显示
+            updateSanDisplay() {
+                if (this.sanProgressBar && this.sanProgressText) {
+                    const percentage = (this.sanValue / this.maxSanValue) * 100;
+                    this.sanProgressBar.style.width = percentage + '%';
+                    this.sanProgressText.textContent = this.sanValue + '/' + this.maxSanValue;
+                    
+                    // 更新SAN值标签
+                    const sanLabel = this.sanProgressContainer.parentElement.querySelector('.san-label');
+                    if (sanLabel) {
+                        sanLabel.querySelector('.san-value').textContent = this.sanValue + '/' + this.maxSanValue;
+                    }
+                }
+            }
+            
+            // 设置SAN值
+            setSanValue(value) {
+                const newValue = Math.max(0, Math.min(this.maxSanValue, parseInt(value) || 0));
+                if (this.sanValue !== newValue) {
+                    this.sanValue = newValue;
+                    this.updateSanDisplay();
+                    this.saveSanState();
+                    return true;
+                }
+                return false;
+            }
+            
+            // 使用骰子
+            useDice() {
+                // 检查冷却状态
+                if (this.isInCooldown()) {
+                    const remaining = this.getCooldownRemaining();
+                    alert(`骰子正在冷却中，请等待${Math.ceil(remaining / 60)}分钟${remaining % 60}秒后再使用`);
+                    return;
+                }
+                
+                if (!this.isActivated) {
+                    alert('请先激活骰子物品');
+                    return;
+                }
+                
+                // 获取配置值，优先使用调查员姓名
+                const userName = this.investigatorName || this.config.userName;
+                const skillName = this.config.skillName || '未命名技能';
+                const skillValue = this.config.skillValue || 50;
+                const extraText = this.config.extraText || ''; // 用户附加文本，默认为空
+                
+                // 验证技能值
+                if (skillValue < 0 || skillValue > 100) {
+                    alert('技能数值必须在0-100之间');
+                    return;
+                }
+                
+                // 执行检定
+                const result = this.performD100Check({
+                    userName,
+                    skillName,
+                    skillValue,
+                    extraText
+                });
+                
+                // 显示结果
+                this.showResult(result);
+                
+                // 开始冷却
+                this.startCooldown();
+            }
+            
+            // D100检定逻辑
+            performD100Check(params) {
+                // 生成两个D10随机数（个位和十位）
+                const rollD10 = () => Math.floor(Math.random() * 10) + 1;
+                const tens = rollD10() - 1; // 0-9
+                const units = rollD10() - 1; // 0-9
+                
+                // 计算总值（两个0表示100）
+                let total;
+                if (tens === 0 && units === 0) {
+                    total = 100;
+                } else {
+                    total = tens * 10 + units;
+                }
+                
+                // 计算成功等级
+                const successInfo = this.calculateSuccessLevel(total, params.skillValue);
+                
+                // 获取成功等级对应的附加文本
+                const successLevelExtraText = this.getSuccessLevelExtraText(successInfo.successLevel);
+                
+                // 构建结果文本
+                let resultText = `${params.userName}的"${params.skillName}"检定结果为D100=${total}/${params.skillValue},${successInfo.successLevelText}`;
+                
+                // 添加成功等级附加文本
+                resultText += `\n${successLevelExtraText}`;
+                
+                // 添加用户提供的附加文本（如果有）
+                if (params.extraText && params.extraText.trim() !== '') {
+                    resultText += `\n\n${params.extraText}`;
+                }
+                
+                // 检查是否为大失败，如果是则延长冷却时间
+                if (successInfo.successLevel === 'critical_failure' && !this.isExtendedCooldown) {
+                    this.cooldownDuration = 600; // 10分钟
+                    this.isExtendedCooldown = true;
+                    console.log('大失败触发：冷却时间延长至10分钟');
+                } else if (successInfo.successLevel !== 'critical_failure') {
+                    // 如果不是大失败，恢复默认冷却时间
+                    this.cooldownDuration = 300; // 5分钟
+                }
+                
+                // 返回结果
+                return {
+                    userName: params.userName,
+                    skillName: params.skillName,
+                    skillValue: params.skillValue,
+                    rollValue: total,
+                    tens,
+                    units,
+                    successLevel: successInfo.successLevel,
+                    successLevelText: successInfo.successLevelText,
+                    resultText,
+                    extraText: params.extraText,
+                    timestamp: new Date().toISOString()
+                };
+            }
+            
+            // 获取成功等级对应的附加文本
+            getSuccessLevelExtraText(successLevel) {
+                // 成功等级对应的文本（修改为新的文本）
+                const successLevelTexts = {
+                    'critical_success': '你或许可以问问那座山叫什么，然后等一段时间，说不定会有人回复你。',
+                    'extreme_success': '看他们都是本地人，说不定可以问问他们那座特殊的山的名字？',
+                    'hard_success': '看他们都是本地人，说不定可以问问他们那座特殊的山的名字？',
+                    'regular_success': '那座山好像有点意思，值得找找线索。',
+                    'failure': '一个普通的帖子啊，没什么值得注意的。',
+                    'critical_failure': '一个普通的帖子啊，没什么值得注意的。'
+                };
+                
+                return successLevelTexts[successLevel] || '未知的成功等级';
+            }
+            
+            // 获取成功等级对应的CSS类名
+            getSuccessLevelClassName(successLevel) {
+                const classMap = {
+                    'critical_success': 'critical-success-text',
+                    'extreme_success': 'extreme-success-text',
+                    'hard_success': 'hard-success-text',
+                    'regular_success': 'regular-success-text',
+                    'failure': 'failure-text',
+                    'critical_failure': 'critical-failure-text'
+                };
+                return classMap[successLevel] || 'regular-success-text';
+            }
+            
+            // 计算成功等级
+            calculateSuccessLevel(rollValue, skillValue) {
+                // 向下取整
+                const floor = (num) => Math.floor(num);
+                const halfSkill = floor(skillValue / 2);
+                const fifthSkill = floor(skillValue / 5);
+                
+                let successLevel;
+                let successLevelText;
+                
+                // 大成功：小于等于5
+                if (rollValue <= 5) {
+                    successLevel = 'critical_success';
+                    successLevelText = '大成功';
+                }
+                // 大失败：大于等于96
+                else if (rollValue >= 96) {
+                    successLevel = 'critical_failure';
+                    successLevelText = '大失败';
+                }
+                // 极难成功：小于等于技能值的1/5且大于5
+                else if (rollValue <= fifthSkill && rollValue > 5) {
+                    successLevel = 'extreme_success';
+                    successLevelText = '极难成功';
+                }
+                // 困难成功：小于等于技能值的一半且大于技能值的1/5
+                else if (rollValue <= halfSkill && rollValue > fifthSkill) {
+                    successLevel = 'hard_success';
+                    successLevelText = '困难成功';
+                }
+                // 普通成功：小于等于技能值且大于技能值的一半
+                else if (rollValue <= skillValue && rollValue > halfSkill) {
+                    successLevel = 'regular_success';
+                    successLevelText = '普通成功';
+                }
+                // 失败：大于技能值且小于96
+                else {
+                    successLevel = 'failure';
+                    successLevelText = '失败';
+                }
+                
+                return {
+                    successLevel,
+                    successLevelText,
+                    halfSkill,
+                    fifthSkill
+                };
+            }
+            
+            // 显示检定结果
+            showResult(result) {
+                // 显示对话框
+                this.dialogOverlay.style.display = 'flex';
+                
+                // 清空文本
+                this.dialogText.innerHTML = '';
+                
+                // 获取成功等级对应的CSS类名
+                const successClass = this.getSuccessLevelClassName(result.successLevel);
+                
+                // 构建带格式的结果文本
+                let formattedText = '';
+                const lines = result.resultText.split('\n');
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    
+                    // 第一行是检定结果，使用不同颜色
+                    if (i === 0) {
+                        formattedText += `<span class="${successClass}">${line}</span>`;
+                    }
+                    // 第二行是成功等级附加文本
+                    else if (i === 1) {
+                        formattedText += `<span class="${successClass}">${line}</span>`;
+                    }
+                    // 第三行是空行（如果有用户附加文本）
+                    else if (i === 2 && line === '') {
+                        formattedText += '<br>';
+                    }
+                    // 用户提供的附加文本（如果有）
+                    else if (i >= 2 && line.trim() !== '') {
+                        formattedText += line;
+                    }
+                    
+                    if (i < lines.length - 1 && lines[i+1] !== '') {
+                        formattedText += '<br>';
+                    }
+                }
+                
+                // 使用打字机效果显示结果
+                this.typeWriter(formattedText, this.dialogText, 30, true);
+            }
+            
+            // 打字机效果（支持HTML）
+            typeWriter(html, element, speed = 50, isHtml = false) {
+                let i = 0;
+                let fullText = '';
+                
+                // 提取HTML中的所有文本内容
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                const textContent = tempDiv.textContent;
+                
+                function type() {
+                    if (i < textContent.length) {
+                        // 获取当前位置的字符
+                        const char = textContent.charAt(i);
+                        
+                        // 构建到当前位置的文本
+                        const currentText = textContent.substring(0, i + 1);
+                        
+                        // 重建HTML结构，保持格式
+                        let newHtml = '';
+                        let htmlIndex = 0;
+                        let inTag = false;
+                        let currentTag = '';
+                        
+                        for (let j = 0; j < html.length; j++) {
+                            if (html[j] === '<') {
+                                inTag = true;
+                                currentTag = '<';
+                            } else if (html[j] === '>') {
+                                currentTag += '>';
+                                newHtml += currentTag;
+                                inTag = false;
+                                currentTag = '';
+                            } else if (inTag) {
+                                currentTag += html[j];
+                            } else {
+                                // 如果是文本内容
+                                if (htmlIndex < currentText.length) {
+                                    newHtml += currentText.charAt(htmlIndex);
+                                    htmlIndex++;
+                                }
+                            }
+                        }
+                        
+                        element.innerHTML = newHtml;
+                        
+                        // 添加闪烁光标
+                        const cursor = document.createElement('span');
+                        cursor.className = 'cursor';
+                        element.appendChild(cursor);
+                        
+                        i++;
+                        setTimeout(type, speed);
+                    }
+                }
+                
+                type();
+            }
+            
+            // 关闭对话框
+            closeDialog() {
+                this.dialogOverlay.style.display = 'none';
+                this.dialogText.innerHTML = '';
+            }
+            
+            // 显示工具提示
+            showTooltip() {
+                // 创建工具提示元素
+                this.tooltip = document.createElement('div');
+                this.tooltip.className = 'dice-tooltip';
+                
+                // 获取物品信息
+                const itemInfo = {
+                    tooltip: `
+                        <div style="margin-bottom: 8px;"><strong>命运骰子</strong></div>
+                        <div style="margin-bottom: 8px;">神秘的骰子，被世界之外的高维叙事力量所掌控。</div>
+                        <div style="margin-bottom: 8px;">可以进行D100检定，是调查员人生经历，技能和目前状的综合体现。</div>
+                        <div style="margin-bottom: 8px; height: 8px;"></div> <!-- 空行 -->
+                        <div class="warning-text" style="margin-bottom: 8px;">"当你想使用它操纵角色的人生时，请留意暗处操纵骰子的可能并非只有你一个人。若非必要请不要使用它"</div>
+                        <div style="margin-bottom: 8px; height: 8px;"></div> <!-- 空行 -->
+                        <div style="margin-bottom: 4px;">稀有度: <span class="epic-text">史诗</span></div>
+                        <div>冷却时间: 5分钟</div>
+                        <div>使用方式: 单击进行检定。</div>
+                    `
+                };
+                
+                // 设置工具提示内容
+                this.tooltip.innerHTML = itemInfo.tooltip;
+                
+                // 添加到body以便计算尺寸
+                document.body.appendChild(this.tooltip);
+                
+                // 获取图标和工具提示的位置和尺寸
+                const rect = this.itemIcon.getBoundingClientRect();
+                const tooltipWidth = this.tooltip.offsetWidth;
+                const tooltipHeight = this.tooltip.offsetHeight;
+                
+                // 计算位置：工具提示的右下角对齐图标的左上角
+                let left = rect.left - tooltipWidth;
+                let top = rect.top - tooltipHeight;
+                
+                // 如果左边界超出屏幕，则调整到图标右侧
+                if (left < 10) {
+                    left = rect.right + 10;
+                }
+                
+                // 如果上边界超出屏幕，则调整到底部
+                if (top < 10) {
+                    top = rect.bottom + 10;
+                }
+                
+                // 设置工具提示位置
+                this.tooltip.style.position = 'fixed';
+                this.tooltip.style.left = left + 'px';
+                this.tooltip.style.top = top + 'px';
+            }
+            
+            // 隐藏工具提示
+            hideTooltip() {
+                if (this.tooltip && this.tooltip.parentNode) {
+                    this.tooltip.parentNode.removeChild(this.tooltip);
+                    this.tooltip = null;
+                }
+            }
+            
+            // 更新UI状态
+            updateUI() {
+                if (!this.isLoaded) return;
+                
+                // 更新激活状态
+                if (this.isActivated) {
+                    this.itemIcon.classList.add('activated');
+                    this.itemIcon.title = '命运骰子 - 已激活';
+                } else {
+                    this.itemIcon.classList.remove('activated');
+                    this.itemIcon.title = '命运骰子 - 未激活';
+                }
+                
+                // 更新导航按钮
+                this.updateNavButtons();
+            }
+            
+            // 加载保存的状态
+            loadState() {
+                // 强制设置技能为"灵感"，技能数值为50
+                this.config.skillName = "灵感";
+                this.config.skillValue = 50;
+                
+                // 保存强制设置的状态
+                this.saveState();
+                
+                // 加载骰子状态
+                try {
+                    const savedState = localStorage.getItem(this.config.storageKey);
+                    if (savedState) {
+                        const state = JSON.parse(savedState);
+                        // 从本地存储加载激活状态，如果没有则保持默认激活状态
+                        this.isActivated = state.isActivated !== undefined ? state.isActivated : true;
+                        this.config.skillName = state.skillName || "灵感";
+                        this.config.skillValue = state.skillValue || 50;
+                        this.config.extraText = state.extraText || ''; // 确保附加文本为空
+                        console.log('插件状态已加载');
+                    }
+                } catch (e) {
+                    console.error('加载插件状态失败:', e);
+                }
+                
+                // 加载SAN值状态
+                try {
+                    const savedSanState = localStorage.getItem(this.config.sanKey);
+                    if (savedSanState) {
+                        const sanState = JSON.parse(savedSanState);
+                        this.investigatorName = sanState.investigatorName || '张三';
+                        this.sanValue = sanState.sanValue !== undefined ? sanState.sanValue : 100;
+                        console.log('SAN值状态已加载');
+                    }
+                } catch (e) {
+                    console.error('加载SAN值状态失败:', e);
+                }
+                
+                // 加载冷却状态
+                this.loadCooldownState();
+                
+                // 更新SAN值显示
+                this.updateSanDisplay();
+                
+                // 更新冷却显示
+                this.updateCooldownDisplay();
+            }
+            
+            // 保存骰子状态
+            saveState() {
+                try {
+                    const state = {
+                        isActivated: this.isActivated,
+                        skillName: this.config.skillName,
+                        skillValue: this.config.skillValue,
+                        extraText: this.config.extraText,
+                        savedAt: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem(this.config.storageKey, JSON.stringify(state));
+                } catch (e) {
+                    console.error('保存插件状态失败:', e);
+                }
+            }
+            
+            // 保存SAN值状态
+            saveSanState() {
+                try {
+                    const sanState = {
+                        investigatorName: this.investigatorName,
+                        sanValue: this.sanValue,
+                        maxSanValue: this.maxSanValue,
+                        savedAt: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem(this.config.sanKey, JSON.stringify(sanState));
+                } catch (e) {
+                    console.error('保存SAN值状态失败:', e);
+                }
+            }
+            
+            // 冷却相关方法
+            
+            // 加载冷却状态
+            loadCooldownState() {
+                try {
+                    const savedCooldown = localStorage.getItem(this.config.cooldownKey);
+                    if (savedCooldown) {
+                        const cooldownData = JSON.parse(savedCooldown);
+                        this.cooldownEndTime = cooldownData.endTime;
+                        console.log('冷却状态已加载');
+                    }
+                } catch (e) {
+                    console.error('加载冷却状态失败:', e);
+                }
+            }
+            
+            // 保存冷却状态
+            saveCooldownState() {
+                try {
+                    const cooldownData = {
+                        endTime: this.cooldownEndTime,
+                        savedAt: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem(this.config.cooldownKey, JSON.stringify(cooldownData));
+                } catch (e) {
+                    console.error('保存冷却状态失败:', e);
+                }
+            }
+            
+            // 开始冷却
+            startCooldown() {
+                // 设置冷却结束时间（当前时间 + 冷却时间）
+                this.cooldownEndTime = Date.now() + (this.cooldownDuration * 1000);
+                
+                // 保存冷却状态
+                this.saveCooldownState();
+                
+                // 更新冷却显示
+                this.updateCooldownDisplay();
+                
+                console.log(`骰子冷却开始，持续${this.cooldownDuration/60}分钟`);
+            }
+            
+            // 检查是否在冷却中
+            isInCooldown() {
+                if (!this.cooldownEndTime) return false;
+                
+                const now = Date.now();
+                return now < this.cooldownEndTime;
+            }
+            
+            // 获取剩余冷却时间（秒）
+            getCooldownRemaining() {
+                if (!this.isInCooldown()) return 0;
+                
+                const now = Date.now();
+                const remainingMs = this.cooldownEndTime - now;
+                return Math.max(0, Math.ceil(remainingMs / 1000));
+            }
+            
+            // 格式化剩余时间
+            formatCooldownTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }
+            
+            // 更新冷却显示
+            updateCooldownDisplay() {
+                if (!this.isLoaded) return;
+                
+                const inCooldown = this.isInCooldown();
+                
+                // 更新按钮状态
+                this.useBtn.disabled = inCooldown;
+                
+                // 更新冷却覆盖层显示
+                if (inCooldown) {
+                    const remaining = this.getCooldownRemaining();
+                    this.cooldownOverlay.textContent = `冷却中 (${this.formatCooldownTime(remaining)})`;
+                    this.cooldownOverlay.style.display = 'flex';
+                    
+                    // 更新物品图标状态
+                    this.itemIcon.classList.add('cooldown');
+                    this.itemIcon.classList.remove('activated');
+                    
+                    // 更新冷却信息显示
+                    this.cooldownInfo.textContent = `冷却中 (${this.formatCooldownTime(remaining)})`;
+                } else {
+                    this.cooldownOverlay.style.display = 'none';
+                    
+                    // 恢复物品图标状态
+                    this.itemIcon.classList.remove('cooldown');
+                    if (this.isActivated) {
+                        this.itemIcon.classList.add('activated');
+                    }
+                    
+                    // 清除冷却信息显示
+                    this.cooldownInfo.textContent = '';
+                }
+            }
+            
+            // 启动冷却计时器
+            startCooldownTimer() {
+                // 清除现有的计时器
+                if (this.cooldownTimer) {
+                    clearInterval(this.cooldownTimer);
+                }
+                
+                // 每秒更新一次冷却显示
+                this.cooldownTimer = setInterval(() => {
+                    this.updateCooldownDisplay();
+                }, 1000);
+            }
+            
+            // 公共API方法
+            
+            // 设置用户名
+            setUserName(name) {
+                this.config.userName = name || '调查员';
+                return this;
+            }
+            
+            // 设置调查员姓名
+            setInvestigatorName(name) {
+                this.investigatorName = name || '张三';
+                if (this.nameDisplay) {
+                    this.nameDisplay.textContent = this.investigatorName;
+                }
+                this.saveSanState();
+                return this;
+            }
+            
+            // 设置技能名称
+            setSkillName(name) {
+                this.config.skillName = name || '灵感';
+                this.saveState();
+                return this;
+            }
+            
+            // 设置技能数值
+            setSkillValue(value) {
+                this.config.skillValue = parseInt(value) || 50;
+                this.saveState();
+                return this;
+            }
+            
+            // 设置附加文本
+            setExtraText(text) {
+                this.config.extraText = text || '';
+                this.saveState();
+                return this;
+            }
+            
+            // 设置SAN值
+            setSan(value) {
+                this.setSanValue(value);
+                return this;
+            }
+            
+            // 手动激活骰子
+            activate() {
+                this.activateDice();
+                return this;
+            }
+            
+            // 手动关闭骰子
+            deactivate() {
+                this.deactivateDice();
+                return this;
+            }
+            
+            // 执行检定
+            roll(skillName, skillValue, extraText) {
+                if (skillName) this.setSkillName(skillName);
+                if (skillValue) this.setSkillValue(skillValue);
+                if (extraText) this.setExtraText(extraText);
+                
+                this.useDice();
+                return this;
+            }
+            
+            // 清除冷却
+            clearCooldown() {
+                this.cooldownEndTime = null;
+                this.cooldownDuration = 300; // 恢复默认5分钟
+                this.isExtendedCooldown = false; // 重置延长冷却状态
+                localStorage.removeItem(this.config.cooldownKey);
+                this.updateCooldownDisplay();
+                console.log('冷却已清除');
+                return this;
+            }
+            
+            // 销毁插件
+            destroy() {
+                // 清除冷却计时器
+                if (this.cooldownTimer) {
+                    clearInterval(this.cooldownTimer);
+                }
+                
+                // 清除隐藏功能超时
+                if (this.hiddenFeatureTimeout) {
+                    clearTimeout(this.hiddenFeatureTimeout);
+                }
+                
+                // 移除事件监听器
+                this.collapseBtn.removeEventListener('click', () => this.collapse());
+                this.nextBtn.removeEventListener('click', () => this.nextPage());
+                this.prevBtn.removeEventListener('click', () => this.prevPage());
+                this.useBtn.removeEventListener('click', () => this.useDice());
+                this.itemIcon.removeEventListener('click', (e) => this.handleHiddenFeatureClick(e));
+                this.minimizedIcon.removeEventListener('click', () => this.expand());
+                
+                // 移除工具提示
+                this.hideTooltip();
+                
+                // 移除对话框
+                if (this.dialogOverlay && this.dialogOverlay.parentNode) {
+                    this.dialogOverlay.parentNode.removeChild(this.dialogOverlay);
+                }
+                
+                // 移除最小化图标
+                if (this.minimizedIcon && this.minimizedIcon.parentNode) {
+                    this.minimizedIcon.parentNode.removeChild(this.minimizedIcon);
+                }
+                
+                // 移除插件元素
+                if (this.pluginEl && this.pluginEl.parentNode) {
+                    this.pluginEl.parentNode.removeChild(this.pluginEl);
+                }
+                
+                console.log('像素骰子插件已销毁');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取回复按钮和文本框
+            const replyButton = document.getElementById('reply-button');
+            const replyTextarea = document.getElementById('reply-textarea');
+            const commentsSection = document.querySelector('.comments-section');
+            const sectionTitle = document.querySelector('.section-title');
+            
+            // 为回复按钮添加点击事件
+            replyButton.addEventListener('click', function() {
+                const replyContent = replyTextarea.value.trim();
+                
+                if (replyContent === '') {
+                    alert('请输入回复内容！');
+                    return;
+                }
+                
+                // 创建新的回复元素
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                
+                // 获取当前时间
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                
+                // 日期固定为12月8日
+                const year = 2025;
+                const month = '12';
+                const day = '08';
+                
+                // 计算新的楼层号
+                const currentComments = document.querySelectorAll('.comment');
+                const newFloor = currentComments.length + 2; // 因为已经有1个主帖
+                
+                // 设置新回复的HTML内容
+                newComment.innerHTML = `
+                    <div class="comment-avatar">张</div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <div class="comment-author">张特</div>
+                            <div class="comment-time">IP属地:四川 ${newFloor}楼 ${year}-${month}-${day} ${hours}:${minutes}</div>
+                        </div>
+                        <div class="comment-text">${replyContent}</div>
+                        <div class="comment-reply">回复</div>
+                    </div>
+                `;
+                
+                // 在回复表单前插入新回复
+                const replyForm = document.querySelector('.reply-form');
+                commentsSection.insertBefore(newComment, replyForm);
+                
+                // 更新回复数量
+                const currentCount = parseInt(sectionTitle.textContent.match(/全部回复\((\d+)\)/)[1]);
+                sectionTitle.textContent = `全部回复(${currentCount + 1})`;
+                
+                // 清空回复框
+                replyTextarea.value = '';
+                
+                // 显示成功消息
+                alert('回复成功！');
+                
+                // 检查是否需要NPC回复
+                checkNPCReply(replyContent, newFloor + 1);
+            });
+            
+            // 检查并触发NPC回复的函数
+            function checkNPCReply(replyContent, nextFloor) {
+                const replyContentLower = replyContent.toLowerCase();
+                
+                // 检查是否触发泗水老农民的回复条件
+                const hasFarmerKeywords = (replyContentLower.includes('趋源泉') || replyContentLower.includes('泉水'));
+                
+                // 检查是否触发暗号b！的回复条件
+                const hasDarkKeywords = (replyContentLower.includes('位置') || replyContentLower.includes('在哪里') || 
+                                        replyContentLower.includes('哪座山') || replyContentLower.includes('什么山'));
+                
+                // 确定要触发的NPC
+                let npcToReply = null;
+                
+                // 如果两个关键词都触发，优先由泗水老农民回复
+                if (hasFarmerKeywords && !npcReplyStatus['泗水老农民']) {
+                    npcToReply = {
+                        name: '泗水老农民',
+                        content: '说是泉，其实听我奶奶描述应该看起来更像一个湖吧。',
+                        avatar: '泗'
+                    };
+                } else if (hasDarkKeywords && !npcReplyStatus['暗号b！']) {
+                    npcToReply = {
+                        name: '暗号b！',
+                        content: '那座山，我记得叫泗源山来着？',
+                        avatar: '暗'
+                    };
+                }
+                
+                // 如果找到了要回复的NPC
+                if (npcToReply) {
+                    // 设置10秒后触发NPC回复
+                    setTimeout(() => {
+                        // 检查NPC是否已经回复过，如果是，则不再执行
+                        if (npcReplyStatus[npcToReply.name]) {
+                            return;
+                        }
+                        
+                        // 弹出系统提示（只有确定按钮，没有取消按钮）
+                        alert('您有新的回复');
+                        
+                        // 标记NPC已回复
+                        npcReplyStatus[npcToReply.name] = true;
+                        
+                        // 计算半小时后的时间（用户回复后的半小时后）
+                        const now = new Date();
+                        const halfHourLater = new Date(now.getTime() + 30 * 60 * 1000); // 30分钟 = 30 * 60 * 1000毫秒
+                        
+                        // 添加NPC回复，时间戳为半小时后
+                        addNPCReply(npcToReply.name, npcToReply.content, npcToReply.avatar, nextFloor, halfHourLater);
+                    }, 10000); // 10秒后
+                }
+            }
+            
+            // 添加NPC回复的函数
+            function addNPCReply(npcName, npcContent, npcAvatar, floorNumber, replyTime) {
+                // 从replyTime中获取小时和分钟（半小时后的时间）
+                const hours = String(replyTime.getHours()).padStart(2, '0');
+                const minutes = String(replyTime.getMinutes()).padStart(2, '0');
+                
+                // NPC回复的日期固定为12月8日
+                const year = 2025;
+                const month = '12';
+                const day = '08';
+                
+                // 创建NPC回复元素
+                const npcComment = document.createElement('div');
+                npcComment.className = 'comment';
+                npcComment.innerHTML = `
+                    <div class="comment-avatar">${npcAvatar}</div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <div class="comment-author">${npcName}</div>
+                            <div class="comment-time">IP属地:云南 ${floorNumber}楼 ${year}-${month}-${day} ${hours}:${minutes}</div>
+                        </div>
+                        <div class="comment-text">${npcContent}</div>
+                        <div class="comment-reply">回复</div>
+                    </div>
+                `;
+                
+                // 在回复表单前插入NPC回复
+                const replyForm = document.querySelector('.reply-form');
+                commentsSection.insertBefore(npcComment, replyForm);
+                
+                // 更新回复数量
+                const currentCount = parseInt(sectionTitle.textContent.match(/全部回复\((\d+)\)/)[1]);
+                sectionTitle.textContent = `全部回复(${currentCount + 1})`;
+                
+                // 滚动到新回复
+                npcComment.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // 搜索功能
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    // 跳转到searchba.html，并传递搜索关键词作为参数
+                    window.location.href = `searchba.html?q=${encodeURIComponent(searchTerm)}`;
+                } else {
+                    alert('请输入搜索内容！');
+                }
+            }
+            
+            // 搜索按钮点击事件
+            searchButton.addEventListener('click', performSearch);
+            
+            // 按回车键搜索
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // 移除"回复"按钮的点击事件 - 现在点击不会有任何反应
+            // 我们只需要确保没有事件监听器附加到这些元素上
+            const replyLinks = document.querySelectorAll('.comment-reply');
+            replyLinks.forEach(link => {
+                // 移除所有可能的事件监听器
+                link.replaceWith(link.cloneNode(true));
+                // 设置光标样式为默认，表示不可点击
+                link.style.cursor = 'default';
+            });
+            
+            // 初始化像素骰子插件到右下角
+            window.dicePlugin = new PixelDicePlugin('#dicePluginContainer', {
+                userName: '调查员',
+                skillName: '灵感',
+                skillValue: 50,
+                extraText: '' // 默认附加文本为空
+            });
+        });
+    </script>
+</body>
+</html>

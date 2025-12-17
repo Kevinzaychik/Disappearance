@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索结果-学生论坛</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        /* 顶部导航栏 */
+        .header {
+            background-color: #fff;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: baseline;
+        }
+        .logo-main {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.8rem;
+            margin-left: 0.5rem;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+        .nav a {
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        .nav a:hover {
+            color: #777;
+        }
+        /* 搜索框样式 */
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 4px;
+            padding: 8px 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-right: 2rem;
+        }
+        .search-box input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            width: 180px;
+            font-size: 0.9rem;
+        }
+        .search-box i {
+            color: #777;
+        }
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        /* 搜索信息区域 */
+        .search-info {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+        .search-term {
+            font-weight: 600;
+            color: #333;
+        }
+        .result-count {
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        /* 搜索结果面板 */
+        .search-results {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04),
+                        0 4px 8px rgba(0,0,0,0.04),
+                        0 8px 16px rgba(0,0,0,0.04);
+            padding: 2rem;
+            min-height: 300px;
+        }
+        .no-results {
+            text-align: center;
+            padding: 3rem 0;
+            color: #777;
+        }
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+        .no-results p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .no-results .search-term {
+            color: #333;
+        }
+        /* 结果列表 */
+        .result-list {
+            list-style: none;
+        }
+        .result-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .result-title:hover {
+            color: #555;
+        }
+        .result-meta {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        .result-excerpt {
+            color: #555;
+            line-height: 1.5;
+        }
+        .result-highlight {
+            background-color: #fff9c4;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #888;
+            font-size: 0.8rem;
+            background-color: #fff;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+            margin-top: 3rem;
+            line-height: 1.4;
+        }
+        
+        /* 登录/注册弹窗 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .login-modal {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            max-width: 90%;
+            padding: 2rem;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .login-modal {
+            transform: translateY(0);
+        }
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #888;
+        }
+        .login-modal h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #888;
+        }
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        .remember-me input {
+            margin-right: 0.5rem;
+        }
+        .forgot-password {
+            color: #777;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .login-btn:hover {
+            background-color: #555;
+        }
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .register-link a {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            .search-box {
+                margin-right: 0;
+            }
+            .search-box input {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="logo">
+            <a href="luntan.html">密撕卡托尼克大学<span class="logo-main">学生论坛</span></a>
+        </div>
+        <nav class="nav">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="搜索帖子、用户...">
+            </div>
+            <a href="luntan.html">首页</a>
+            <a href="#" class="require-login">版块</a>
+            <a href="#" class="require-login">热门</a>
+            <a href="#" id="login-link">登录/注册</a>
+        </nav>
+    </header>
+
+    <!-- 主内容区 -->
+    <div class="container">
+        <div class="search-info">
+            <h1>搜索结果</h1>
+            <div class="result-count">找到 <span id="result-count">0</span> 个相关结果</div>
+        </div>
+        
+        <div class="search-results">
+            <div id="results-container">
+                <!-- 搜索结果将在这里动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+        <p>Copyright© xukaiwen. All Rights Reserved.</p>
+    </footer>
+    
+    <!-- 登录/注册弹窗 -->
+    <div class="modal-overlay" id="login-modal">
+        <div class="login-modal">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h2>登录学生论坛</h2>
+            <form>
+                <div class="form-group">
+                    <label for="username">用户名/邮箱</label>
+                    <input type="text" id="username" placeholder="请输入用户名或邮箱">
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" placeholder="请输入密码">
+                </div>
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">记住我</label>
+                    </div>
+                    <a href="#" class="forgot-password" id="forgot-password">忘记密码?</a>
+                </div>
+                <button type="button" class="login-btn">登录</button>
+                <div class="register-link">
+                    还没有账号? <a href="#" id="register-link">立即注册</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 模拟资料库数据 - 现在只保留特殊的一条
+        const database = [
+            {
+                title: "【求助】云南泗水镇有人去过吗？求当地情况",
+                author: "凯文_徐",
+                date: "7个月前",
+                section: "旅行交流",
+                content: "",
+                link: "kw2.html"
+            }
+        ];
+
+        // 获取URL参数
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // 高亮关键词
+        function highlightText(text, keyword) {
+            if (!keyword) return text;
+            const regex = new RegExp(`(${keyword})`, 'gi');
+            return text.replace(regex, '<span class="result-highlight">$1</span>');
+        }
+
+        // 搜索功能
+        function performSearch() {
+            const searchTerm = getQueryParam('q') || '';
+            const resultsContainer = document.getElementById('results-container');
+            const resultCountElement = document.getElementById('result-count');
+            
+            // 设置搜索框值
+            document.getElementById('search-input').value = searchTerm;
+            
+            if (!searchTerm.trim()) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>请输入搜索关键词</p>
+                    </div>
+                `;
+                resultCountElement.textContent = '0';
+                return;
+            }
+            
+            // 执行搜索 - 只有当搜索词是"泗水"或"泗水镇"时才显示结果
+            let results = [];
+            const normalizedSearchTerm = searchTerm.trim().toLowerCase();
+            
+            if (normalizedSearchTerm === "泗水" || normalizedSearchTerm === "泗水镇") {
+                results = database.filter(item => {
+                    // 只匹配标题中包含搜索词的
+                    return item.title.toLowerCase().includes(normalizedSearchTerm);
+                });
+            }
+            
+            // 显示结果
+            if (results.length > 0) {
+                let resultsHTML = '<ul class="result-list">';
+                
+                results.forEach(item => {
+                    resultsHTML += `
+                        <li class="result-item">
+                            <a href="${item.link}" class="result-title">${highlightText(item.title, searchTerm)}</a>
+                            <div class="result-meta">${item.section} · 作者: ${item.author} · ${item.date}</div>
+                            ${item.content ? `<div class="result-excerpt">${highlightText(item.content, searchTerm)}</div>` : ''}
+                        </li>
+                    `;
+                });
+                
+                resultsHTML += '</ul>';
+                resultsContainer.innerHTML = resultsHTML;
+                resultCountElement.textContent = results.length;
+            } else {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>抱歉，没有找到与 "<span class="search-term">${searchTerm}</span>" 相关的结果。</p>
+                        <p>请尝试使用其他关键词或检查拼写是否正确。</p>
+                    </div>
+                `;
+                resultCountElement.textContent = '0';
+            }
+        }
+
+        // 页面加载完成后执行搜索
+        document.addEventListener('DOMContentLoaded', function() {
+            performSearch();
+            
+            // 搜索框回车事件
+            document.getElementById('search-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const searchTerm = this.value.trim();
+                    if (searchTerm) {
+                        window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+                    }
+                }
+            });
+            
+            // 登录弹窗控制
+            const loginLink = document.getElementById('login-link');
+            const loginModal = document.getElementById('login-modal');
+            const closeModal = document.getElementById('close-modal');
+            const registerLink = document.getElementById('register-link');
+            const forgotPasswordLink = document.getElementById('forgot-password');
+            
+            loginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginModal.classList.add('active');
+            });
+            
+            closeModal.addEventListener('click', function() {
+                loginModal.classList.remove('active');
+            });
+            
+            // 点击模态框外部关闭
+            loginModal.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.classList.remove('active');
+                }
+            });
+            
+            // 为需要登录的元素添加事件监听
+            const requireLoginElements = document.querySelectorAll('.require-login');
+            requireLoginElements.forEach(element => {
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('请先登录');
+                });
+            });
+            
+            // 注册链接点击事件
+            registerLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('请登录校园局域网后注册');
+            });
+            
+            // 忘记密码链接点击事件
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('请联系管理员');
+            });
+        });
+    </script>
+</body>
+</html>

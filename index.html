@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密撕卡托尼克大学 - 探索知识的边界</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* 左侧导航栏 */
+        .sidebar {
+            width: 60px;
+            background: linear-gradient(135deg, #1a2a6c, #2a4a8c);
+            color: white;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            position: relative;
+        }
+        
+        .sidebar:hover {
+            width: 250px;
+        }
+        
+        .logo {
+            padding: 20px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .university-emblem {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .emblem-svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .logo-text {
+            white-space: nowrap;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .nav-links {
+            padding: 15px 0;
+        }
+        
+        .nav-links li {
+            list-style: none;
+            padding: 12px 20px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .nav-links li:hover, .nav-links li.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .nav-links i {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+            color: #2a4a8c;
+            font-weight: 600;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 4px;
+            padding: 8px 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .search-box input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            width: 180px;
+            font-size: 0.9rem;
+        }
+        
+        .search-box i {
+            color: #777;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: #2a4a8c;
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #2a4a8c;
+            color: #2a4a8c;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 页面内容区域 */
+        .page-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 浮动方块区域 */
+        .floating-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1a2a6c, #4CAF50);
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            color: #2a4a8c;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #2a4a8c;
+        }
+        
+        .card-text {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .card-link {
+            color: #2a4a8c;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-link i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .card-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* 新闻部分 */
+        .news-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #2a4a8c;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .news-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        
+        .news-date {
+            background: #2a4a8c;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            min-width: 80px;
+            text-align: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .news-content {
+            flex: 1;
+        }
+        
+        .news-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .news-excerpt {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* 特色书籍样式 */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .book-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #1a2a6c, #4CAF50);
+        }
+        
+        .book-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2a4a8c;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+        
+        .book-author {
+            color: #2a4a8c;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .book-category {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .book-status {
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px dashed #eaeaea;
+            color: #4CAF50;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* 关于我们页面样式 */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .about-text {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        .about-highlights {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .highlight-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .highlight-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .highlight-icon {
+            font-size: 1.8rem;
+            color: #2a4a8c;
+            margin-bottom: 10px;
+        }
+        
+        .highlight-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2a4a8c;
+        }
+        
+        /* 教职员工样式 */
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .faculty-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faculty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .faculty-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #1a2a6c, #4CAF50);
+        }
+        
+        .faculty-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2a4a8c;
+            font-size: 1.1rem;
+        }
+        
+        .faculty-title {
+            color: #2a4a8c;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .faculty-department {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .faculty-specialty {
+            color: #777;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+        
+        .faculty-quote {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #eaeaea;
+            color: #888;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+        
+        /* 活动时间线样式 */
+        .timeline {
+            position: relative;
+            max-width: 100%;
+            margin: 30px 0;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #2a4a8c;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #2a4a8c;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #2a4a8c;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .timeline-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* 学术项目样式 */
+        .academic-programs {
+            margin-top: 20px;
+        }
+        
+        .program-category {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .program-category-title {
+            font-size: 1.4rem;
+            color: #2a4a8c;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .program-level {
+            margin-bottom: 25px;
+        }
+        
+        .program-level-title {
+            font-size: 1.2rem;
+            color: #2a4a8c;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .program-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            padding-left: 20px;
+        }
+        
+        .program-item {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border-left: 3px solid #2a4a8c;
+            transition: all 0.3s;
+        }
+        
+        .program-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .modal-icon {
+            font-size: 3rem;
+            color: #ff9800;
+            margin-bottom: 15px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2a4a8c;
+        }
+        
+        .modal-text {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .modal-close {
+            background-color: #2a4a8c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eaeaea;
+            margin-top: 40px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 21px;
+            }
+            
+            .program-list {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: 60px;
+            }
+            
+            .sidebar:hover {
+                width: 100%;
+                height: auto;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .sidebar:hover .nav-links {
+                display: block;
+            }
+            
+            .floating-cards, .faculty-grid, .program-list, .books-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-box input {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-content">
+                    <div class="university-emblem">
+                        <svg class="emblem-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- 外圆 -->
+                            <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                            
+                            <!-- 内圆 - 不对称位置 -->
+                            <circle cx="60" cy="40" r="25" stroke="white" stroke-width="1.5" fill="none"/>
+                            
+                            <!-- 交叉线 -->
+                            <line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="1.5"/>
+                            <line x1="30" y1="70" x2="70" y2="30" stroke="white" stroke-width="1.5"/>
+                            
+                            <!-- 数字和字母 -->
+                            <text x="30" y="35" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">M</text>
+                            <text x="65" y="65" font-family="Arial, sans-serif" font-size="8" fill="white">1690</text>
+                            
+                            <!-- 不对称的装饰线 -->
+                            <line x1="15" y1="50" x2="35" y2="50" stroke="white" stroke-width="1"/>
+                            <line x1="65" y1="50" x2="85" y2="50" stroke="white" stroke-width="1"/>
+                            
+                            <!-- 装饰点 -->
+                            <circle cx="25" cy="25" r="2" fill="white"/>
+                            <circle cx="75" cy="75" r="2" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">密撕卡托尼克大学</div>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-page="home"><i class="fas fa-home"></i> <span>首页</span></li>
+                <li data-page="programs"><i class="fas fa-graduation-cap"></i> <span>学术项目</span></li>
+                <li data-page="courses"><i class="fas fa-book"></i> <span>特色书籍</span></li>
+                <li data-page="faculty"><i class="fas fa-users"></i> <span>教职员工</span></li>
+                <li data-page="events"><i class="fas fa-calendar-alt"></i> <span>校园活动</span></li>
+                <li data-page="news"><i class="fas fa-newspaper"></i> <span>新闻公告</span></li>
+                <li data-page="about"><i class="fas fa-question-circle"></i> <span>关于我们</span></li>
+            </ul>
+        </div>
+        
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <div class="header">
+                <h1 class="page-title">欢迎来到密撕卡托尼克大学</h1>
+                <div class="user-actions">
+                    <a href="luntan.html" class="btn btn-outline">学生论坛</a>
+                    <button class="btn btn-primary" id="applyBtn">申请入学</button>
+                </div>
+            </div>
+            
+            <!-- 首页内容 -->
+            <div id="home-page" class="page-content active">
+                <!-- 浮动方块区域 -->
+                <div class="floating-cards">
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="card-title">本科教育</h3>
+                        <p class="card-text">我们提供超过80个本科专业，涵盖人文、科学、工程和艺术等领域。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="card-title">研究生院</h3>
+                        <p class="card-text">探索我们的硕士和博士项目，与世界级教授一起开展前沿研究。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3 class="card-title">科学研究</h3>
+                        <p class="card-text">我们的研究团队在人工智能、生物技术和可持续发展等领域取得突破。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3 class="card-title">国际交流</h3>
+                        <p class="card-text">与全球100多所顶尖大学建立合作关系，提供丰富的海外学习机会。</p>
+                    </div>
+                </div>
+                
+                <!-- 新闻部分 -->
+                <div class="news-section">
+                    <h2 class="section-title">校园新闻</h2>
+                    
+                    <div class="news-item">
+                        <div class="news-date">10月15日</div>
+                        <div class="news-content">
+                            <h3 class="news-title">密撕卡托尼克大学荣获2023年教学创新奖</h3>
+                            <p class="news-excerpt">我校因在跨学科教育和数字化教学方面的卓越表现，荣获国家级教学创新奖。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-date">10月10日</div>
+                        <div class="news-content">
+                            <h3 class="news-title">新科研中心正式启用</h3>
+                            <p class="news-excerpt">投资5亿元的人工智能与量子计算研究中心正式投入使用，将推动前沿科技研究。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-date">10月5日</div>
+                        <div class="news-content">
+                            <h3 class="news-title">2024年春季学期招生开始</h3>
+                            <p class="news-excerpt">欢迎全球优秀学子申请我校2024年春季学期本科及研究生项目。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 学术项目页面 -->
+            <div id="programs-page" class="page-content">
+                <div class="news-section">
+                    <h2 class="section-title">学术项目</h2>
+                    <p>密撕卡托尼克大学提供广泛的学术项目，涵盖人文、社会科学、自然科学、工程技术、医学等多个领域。</p>
+                    
+                    <div class="academic-programs">
+                        <!-- 人文与社会科学学院 -->
+                        <div class="program-category">
+                            <h2 class="program-category-title">人文与社会科学学院</h2>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">本科项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">哲学导论</div>
+                                    <div class="program-item">宗教学基础</div>
+                                    <div class="program-item">社会学原理</div>
+                                    <div class="program-item">历史学概论</div>
+                                    <div class="program-item">语言学基础</div>
+                                    <div class="program-item">比较文学导论</div>
+                                    <div class="program-item">文化人类学</div>
+                                    <div class="program-item">民俗学研究</div>
+                                    <div class="program-item">古典文献学</div>
+                                    <div class="program-item">艺术史概论</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">硕士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">伦理学研究</div>
+                                    <div class="program-item">宗教哲学</div>
+                                    <div class="program-item">社会研究方法</div>
+                                    <div class="program-item">世界史专题</div>
+                                    <div class="program-item">应用语言学</div>
+                                    <div class="program-item">文学批评理论</div>
+                                    <div class="program-item">文化遗产研究</div>
+                                    <div class="program-item">民俗文化保护</div>
+                                    <div class="program-item">古代文献整理</div>
+                                    <div class="program-item">跨文化交流</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">博士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">哲学原理与应用</div>
+                                    <div class="program-item">宗教与社会互动研究</div>
+                                    <div class="program-item">社会发展理论</div>
+                                    <div class="program-item">历史地理研究</div>
+                                    <div class="program-item">语言习得机制</div>
+                                    <div class="program-item">比较文学与文化研究</div>
+                                    <div class="program-item">人类学理论构建</div>
+                                    <div class="program-item">民俗学前沿方法论</div>
+                                    <div class="program-item">古典文献校勘学</div>
+                                    <div class="program-item">艺术史与文化认同</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">证书项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">文化遗产保护资格</div>
+                                    <div class="program-item">文献翻译认证</div>
+                                    <div class="program-item">民俗调查与记录技术</div>
+                                    <div class="program-item">跨文化沟通技能证书</div>
+                                    <div class="program-item">博物馆陈列设计培训</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 考古学与文化遗产学院 -->
+                        <div class="program-category">
+                            <h2 class="program-category-title">考古学与文化遗产学院</h2>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">本科项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">考古学导论</div>
+                                    <div class="program-item">文化遗产概论</div>
+                                    <div class="program-item">史前考古学</div>
+                                    <div class="program-item">历史考古学</div>
+                                    <div class="program-item">文物修复基础</div>
+                                    <div class="program-item">考古测绘技术</div>
+                                    <div class="program-item">博物馆学基础</div>
+                                    <div class="program-item">考古发掘方法</div>
+                                    <div class="program-item">文物鉴赏入门</div>
+                                    <div class="program-item">文化遗产法规</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">硕士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">史前文明研究</div>
+                                    <div class="program-item">历史时期考古</div>
+                                    <div class="program-item">文物保护技术</div>
+                                    <div class="program-item">考古遗址保护</div>
+                                    <div class="program-item">博物馆管理</div>
+                                    <div class="program-item">文化遗产数字化</div>
+                                    <div class="program-item">古建筑修复</div>
+                                    <div class="program-item">考古材料分析</div>
+                                    <div class="program-item">文化遗产旅游</div>
+                                    <div class="program-item">文物鉴定与评估</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">博士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">考古学理论与方法</div>
+                                    <div class="program-item">区域考古学研究</div>
+                                    <div class="program-item">文物保护科学</div>
+                                    <div class="program-item">文化遗产保护规划</div>
+                                    <div class="program-item">博物馆学理论</div>
+                                    <div class="program-item">考古信息技术</div>
+                                    <div class="program-item">古代文明比较研究</div>
+                                    <div class="program-item">文化遗产数字化保护</div>
+                                    <div class="program-item">考古发掘与文物修复</div>
+                                    <div class="program-item">文化遗产政策与管理</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">证书项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">考古现场技术认证</div>
+                                    <div class="program-item">文物修复师资格</div>
+                                    <div class="program-item">博物馆讲解员培训</div>
+                                    <div class="program-item">文化遗产调查员证书</div>
+                                    <div class="program-item">考古绘图技术认证</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 自然科学学院 -->
+                        <div class="program-category">
+                            <h2 class="program-category-title">自然科学学院</h2>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">本科项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">物理学导论</div>
+                                    <div class="program-item">化学基础</div>
+                                    <div class="program-item">生物学原理</div>
+                                    <div class="program-item">数学分析</div>
+                                    <div class="program-item">地质学基础</div>
+                                    <div class="program-item">环境科学导论</div>
+                                    <div class="program-item">天文学概论</div>
+                                    <div class="program-item">统计学基础</div>
+                                    <div class="program-item">计算机科学入门</div>
+                                    <div class="program-item">生物化学基础</div>
+                                    <div class="program-item">地球物理学导论</div>
+                                    <div class="program-item">大气科学基础</div>
+                                    <div class="program-item">海洋科学概论</div>
+                                    <div class="program-item">生态学原理</div>
+                                    <div class="program-item">材料科学基础</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">硕士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">理论物理研究</div>
+                                    <div class="program-item">应用化学</div>
+                                    <div class="program-item">分子生物学</div>
+                                    <div class="program-item">应用数学</div>
+                                    <div class="program-item">地质资源勘探</div>
+                                    <div class="program-item">环境工程</div>
+                                    <div class="program-item">天体物理研究</div>
+                                    <div class="program-item">统计建模与分析</div>
+                                    <div class="program-item">计算机应用技术</div>
+                                    <div class="program-item">生物化学与分子生物学</div>
+                                    <div class="program-item">地球物理探测技术</div>
+                                    <div class="program-item">大气环境监测</div>
+                                    <div class="program-item">海洋资源开发</div>
+                                    <div class="program-item">生态保护与修复</div>
+                                    <div class="program-item">材料工程应用</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">博士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">物理学前沿理论</div>
+                                    <div class="program-item">化学创新研究</div>
+                                    <div class="program-item">细胞生物学与遗传学</div>
+                                    <div class="program-item">数学建模与优化</div>
+                                    <div class="program-item">地质过程与资源</div>
+                                    <div class="program-item">环境科学与工程</div>
+                                    <div class="program-item">天文学与天体物理</div>
+                                    <div class="program-item">统计理论与方法</div>
+                                    <div class="program-item">计算机科学与技术</div>
+                                    <div class="program-item">生物化学前沿研究</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">证书项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">实验室安全操作认证</div>
+                                    <div class="program-item">环境监测技术资格</div>
+                                    <div class="program-item">数据统计分析证书</div>
+                                    <div class="program-item">地质勘探技术培训</div>
+                                    <div class="program-item">实验仪器操作认证</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 社会科学与公共管理学院 -->
+                        <div class="program-category">
+                            <h2 class="program-category-title">社会科学与公共管理学院</h2>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">本科项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">政治学原理</div>
+                                    <div class="program-item">经济学基础</div>
+                                    <div class="program-item">管理学导论</div>
+                                    <div class="program-item">心理学概论</div>
+                                    <div class="program-item">法学基础</div>
+                                    <div class="program-item">公共行政学</div>
+                                    <div class="program-item">社会工作导论</div>
+                                    <div class="program-item">传播学原理</div>
+                                    <div class="program-item">国际关系概论</div>
+                                    <div class="program-item">人力资源管理</div>
+                                    <div class="program-item">教育管理学</div>
+                                    <div class="program-item">公共政策分析</div>
+                                    <div class="program-item">社会心理学</div>
+                                    <div class="program-item">法律实务基础</div>
+                                    <div class="program-item">媒体传播实务</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">硕士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">政治理论与实践</div>
+                                    <div class="program-item">应用经济学</div>
+                                    <div class="program-item">工商管理</div>
+                                    <div class="program-item">临床心理学</div>
+                                    <div class="program-item">法学理论与应用</div>
+                                    <div class="program-item">公共管理硕士</div>
+                                    <div class="program-item">社会工作硕士</div>
+                                    <div class="program-item">传播学研究</div>
+                                    <div class="program-item">国际关系与外交</div>
+                                    <div class="program-item">人力资源开发与管理</div>
+                                    <div class="program-item">教育管理与政策</div>
+                                    <div class="program-item">公共政策制定与分析</div>
+                                    <div class="program-item">组织心理学</div>
+                                    <div class="program-item">国际法研究</div>
+                                    <div class="program-item">数字媒体传播</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">博士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">政治学理论构建</div>
+                                    <div class="program-item">经济学理论与政策</div>
+                                    <div class="program-item">管理科学与工程</div>
+                                    <div class="program-item">心理学理论与应用</div>
+                                    <div class="program-item">法学理论研究</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">证书项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">公共管理职业资格</div>
+                                    <div class="program-item">心理咨询师培训</div>
+                                    <div class="program-item">人力资源管理师认证</div>
+                                    <div class="program-item">社会工作者资格</div>
+                                    <div class="program-item">媒体传播技能证书</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 工程技术学院 -->
+                        <div class="program-category">
+                            <h2 class="program-category-title">工程技术学院</h2>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">本科项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">电气工程及其自动化</div>
+                                    <div class="program-item">机械设计制造及其自动化</div>
+                                    <div class="program-item">计算机科学与技术</div>
+                                    <div class="program-item">土木工程</div>
+                                    <div class="program-item">材料科学与工程</div>
+                                    <div class="program-item">通信工程</div>
+                                    <div class="program-item">自动化</div>
+                                    <div class="program-item">电子信息工程</div>
+                                    <div class="program-item">软件工程</div>
+                                    <div class="program-item">环境工程</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">硕士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">电气工程</div>
+                                    <div class="program-item">机械工程</div>
+                                    <div class="program-item">计算机应用技术</div>
+                                    <div class="program-item">土木工程建造与管理</div>
+                                    <div class="program-item">材料工程</div>
+                                    <div class="program-item">通信与信息系统</div>
+                                    <div class="program-item">控制科学与工程</div>
+                                    <div class="program-item">电子与通信工程</div>
+                                    <div class="program-item">软件工程技术</div>
+                                    <div class="program-item">环境工程与管理</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">博士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">电气工程前沿技术</div>
+                                    <div class="program-item">机械工程理论与应用</div>
+                                    <div class="program-item">计算机科学理论</div>
+                                    <div class="program-item">土木工程材料与结构</div>
+                                    <div class="program-item">材料科学与工程研究</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">证书项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">电气工程师职业资格</div>
+                                    <div class="program-item">机械设计工程师认证</div>
+                                    <div class="program-item">软件技术认证</div>
+                                    <div class="program-item">建筑工程施工员证书</div>
+                                    <div class="program-item">环境工程检测资格</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 医学与生命科学学院 -->
+                        <div class="program-category">
+                            <h2 class="program-category-title">医学与生命科学学院</h2>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">本科项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">临床医学导论</div>
+                                    <div class="program-item">基础医学</div>
+                                    <div class="program-item">公共卫生学</div>
+                                    <div class="program-item">护理学基础</div>
+                                    <div class="program-item">药学导论</div>
+                                    <div class="program-item">生物学</div>
+                                    <div class="program-item">医学检验技术</div>
+                                    <div class="program-item">预防医学</div>
+                                    <div class="program-item">康复治疗学</div>
+                                    <div class="program-item">口腔医学基础</div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-level">
+                                <h3 class="program-level-title">硕士项目</h3>
+                                <div class="program-list">
+                                    <div class="program-item">临床医学</div>
+                                    <div class="program-item">基础医学研究</div>
+                                    <div class="program-item">公共卫生与预防医学</div>
+                                    <div class="program-item">护理学</div>
+                                    <div class="program-item">药学</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 特色书籍页面 -->
+            <div id="courses-page" class="page-content">
+                <div class="news-section">
+                    <h2 class="section-title">特色书籍</h2>
+                    <p>密撕卡托尼克大学图书馆收藏了大量珍贵文献，以下为部分可公开借阅的书籍。</p>
+                    
+                    <div class="books-grid">
+                        <!-- 特色书籍卡片将在这里动态生成 -->
+                    </div>
+                    
+                    <p style="margin-top: 20px; font-style: italic; color: #666;">仅展示部分可公开书籍，还有部分书籍暂不对外借阅。</p>
+                </div>
+            </div>
+            
+            <!-- 关于我们页面 -->
+            <div id="about-page" class="page-content">
+                <div class="news-section">
+                    <h2 class="section-title">关于密撕卡托尼克大学</h2>
+                    
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>欢迎来到马萨诸塞州常春藤盟校密撕卡托尼克大学。本校始建于1690年，坐落于山清水秀，人杰地灵的城镇阿卡姆。本校在考古学，神秘学，历史学，心理学等专业领域均处于世界前沿。教学设施先进，师资力量雄厚。</p>
+                            
+                            <p>本校曾组织赞助多起探索搜寻活动。学校探险队足迹遍布全球。校内图书馆以馆藏丰富在马塞诸塞州享有盛名。校建博物馆藏品丰富，并定期举办展览。</p>
+                            
+                            <p>如果您是一位励志探寻世界真相的求知者，本校是您不二选择，各个领域的专家教授期待为您指引前进方向。</p>
+                        </div>
+                        
+                        <div class="about-highlights">
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <h3 class="highlight-title">悠久历史</h3>
+                                <p>成立于1690年，拥有超过300年的教育传统</p>
+                            </div>
+                            
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h3 class="highlight-title">丰富馆藏</h3>
+                                <p>图书馆馆藏丰富，在马萨诸塞州享有盛名</p>
+                            </div>
+                            
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h3 class="highlight-title">全球探索</h3>
+                                <p>组织赞助多起全球探索活动，足迹遍布世界</p>
+                            </div>
+                            
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-gem"></i>
+                                </div>
+                                <h3 class="highlight-title">专业优势</h3>
+                                <p>考古学、神秘学、历史学、心理学等领域处于世界前沿</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 教职员工页面 -->
+            <div id="faculty-page" class="page-content">
+                <div class="news-section">
+                    <h2 class="section-title">教职员工</h2>
+                    <p>认识密撕卡托尼克大学优秀的教职员工团队。</p>
+                    
+                    <div class="faculty-grid">
+                        <!-- 教职员工卡片将在这里动态生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 校园活动页面 -->
+            <div id="events-page" class="page-content">
+                <div class="news-section">
+                    <h2 class="section-title">校园活动</h2>
+                    <p>参与丰富多彩的校园活动，丰富您的大学体验。</p>
+                    
+                    <div class="timeline">
+                        <!-- 活动时间线将在这里动态生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 新闻公告页面 -->
+            <div id="news-page" class="page-content">
+                <div class="news-section">
+                    <h2 class="section-title">新闻公告</h2>
+                    
+                    <div id="news-list">
+                        <!-- 新闻列表将在这里动态生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 底部 -->
+            <div class="footer">
+                <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+                <p>Copyright© xukaiwen. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 弹窗 -->
+    <div class="modal" id="applicationModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h2 class="modal-title">系统提示</h2>
+            <p class="modal-text">未到入学时间，系统关闭中。</p>
+            <button class="modal-close" id="closeModal">确定</button>
+        </div>
+    </div>
+
+    <script>
+        // 特色书籍数据（只包含Open Shelf状态的书籍）
+        const booksData = [
+            { title: "《阿卡姆地区古代文明遗存》", author: "密斯卡托尼克大学考古系", category: "地方史研究" },
+            { title: "《量子物理与神秘现象交叉研究》", author: "麦肯齐・麦克劳德", category: "跨学科研究" },
+            { title: "《密斯卡托尼克大学校园神秘事件实录》", author: "斯科特・盖布尔（编）", category: "校园史" },
+            { title: "《东西方神秘咒文集成》", author: "环球神秘学研究会", category: "神秘学" },
+            { title: "《匈牙利神秘现象调查报告》", author: "L. 多斯・扎", category: "区域神秘史" },
+            { title: "《爱尔兰民间传说研究》", author: "科林・邓拉普", category: "民俗学" },
+            { title: "《澳洲原住民精神文化研究》", author: "艾伦・马歇尔", category: "土著文化" },
+            { title: "《冰岛萨迦中的神秘元素研究》", author: "托尔芬・埃纳尔松", category: "北欧文学" },
+            { title: "《罗马尼亚民间吸血鬼传说研究》", author: "布拉姆・斯托克（补注）", category: "民俗传说" },
+            { title: "《朝鲜半岛古代咒术研究》", author: "金富轼（补编）", category: "东亚巫术" },
+            { title: "《西伯利亚萨满教文化研究》", author: "弗拉基米尔・科罗廖夫", category: "北亚宗教" },
+            { title: "《阿拉伯古代香料贸易与宗教文化》", author: "穆罕默德・胡斯尼", category: "阿拉伯史" },
+            { title: "《保加利亚民间驱邪仪式指南》", author: "瓦西尔・列夫斯基", category: "东欧民俗" },
+            { title: "《超心理学研究手册》", author: "克里斯・杰罗姆", category: "超心理学" },
+            { title: "《神秘学基础理论》", author: "迈克尔・C・拉博西埃", category: "基础神秘学" },
+            { title: "《神秘学杂集》", author: "威廉・A・巴顿", category: "神秘学" },
+            { title: "《20 世纪英国神秘事件史》", author: "安东尼・沃伦", category: "现代神秘史" },
+            { title: "《灵异建筑研究》", author: "R・J・克里斯坦森", category: "建筑神秘学" },
+            { title: "《灵异地形研究》", author: "劳伦斯・金", category: "地理学" },
+            { title: "《超自然身份认同研究》", author: "林恩・哈迪", category: "心理学" },
+            { title: "《校园灵异事件记录》", author: "S・L・爱德华兹", category: "校园史" },
+            { title: "《奥斯卡・布鲁姆神秘试炼记录》", author: "查克・里根", category: "个人实录" },
+            { title: "《普通人超自然体验实录》", author: "玛丽・伯曼", category: "社会实录" },
+            { title: "《炼金术传说与故事》", author: "H・P・洛夫克拉夫特", category: "文学" },
+            { title: "《乌尔塔尔地区民间生物传说》", author: "H・P・洛夫克拉夫特", category: "民俗学" },
+            { title: "《深海部落崇拜史》", author: "H・P・洛夫克拉夫特", category: "宗教史" },
+            { title: "《北极星文化研究》", author: "H・P・洛夫克拉夫特", category: "天文文化" },
+            { title: "《塞缪尔・约翰逊博士超自然体验记录》", author: "H・P・洛夫克拉夫特", category: "个人实录" },
+            { title: "《灵异街道文化研究》", author: "H・P・洛夫克拉夫特", category: "城市文化" },
+            { title: "《特殊植物研究》", author: "H・P・洛夫克拉夫特", category: "植物学" },
+            { title: "《量子物理与巫术交叉讲义》", author: "麦肯齐・麦克劳德", category: "跨学科教学" },
+            { title: "《神秘学历史年表》", author: "密斯卡托尼克图书馆编", category: "历史文献" },
+            { title: "《洛夫克拉夫特书信集神秘学研究》", author: "霍华德・菲利普・洛夫克拉夫特", category: "文献研究" },
+            { title: "《远古遗迹探险装备指南》", author: "密斯卡托尼克探险队", category: "探险手册" },
+            { title: "《密斯卡托尼克大学与阿卡姆镇关系史》", author: "亨利・阿米蒂奇", category: "地方史" },
+            { title: "《古代天文记录解读》", author: "密斯卡托尼克天文系", category: "天文考古" },
+            { title: "《传统巫术与现代医学对比研究》", author: "密斯卡托尼克医学院", category: "医学伦理" },
+            { title: "《神秘学相关艺术品鉴赏》", author: "密斯卡托尼克艺术系", category: "艺术研究" },
+            { title: "《密斯卡托尼克大学神秘学学位论文集》", author: "研究生院编", category: "学术论文" },
+            { title: "《密斯卡托尼克大学植物园药用植物志》", author: "生物系编", category: "植物学" },
+            { title: "《古代神秘文献翻译指南》", author: "密斯卡托尼克语言学系", category: "翻译研究" },
+            { title: "《密斯卡托尼克大学与神秘学府交流史》", author: "国际交流处", category: "校际交流" },
+            { title: "《神秘学相关地名辞典》", author: "密斯卡托尼克地理系", category: "地理学" },
+            { title: "《密斯卡托尼克大学神秘学讲座汇编》", author: "继续教育学院", category: "普及读物" },
+            { title: "《阿卡姆镇民间传说研究》", author: "密斯卡托尼克民俗学系", category: "民俗学" },
+            { title: "《阿卡姆地区超自然新闻汇编》", author: "新闻系编", category: "新闻档案" },
+            { title: "《神秘学人物关系研究》", author: "文献学系编", category: "人物研究" },
+            { title: "《学生神秘学社团管理指南》", author: "学生事务处", category: "社团管理" },
+            { title: "《传统占卜与统计学对比》", author: "统计学系编", category: "交叉研究" },
+            { title: "《神秘学奖学金申请指南》", author: "招生办编", category: "奖学金管理" },
+            { title: "《国际神秘学研讨会论文集》", author: "国际交流处编", category: "会议论文" }
+        ];
+
+        // 教职员工数据
+        const facultyData = [
+            { name: "亨利·阿米蒂奇", title: "博士", department: "图书馆", specialty: "图书馆长", quote: "知识既是力量，也是危险。" },
+            { name: "费尔南德·C·阿什利", title: "教授", department: "历史学院", specialty: "古历史", quote: "历史并非总是由胜利者书写，有时它由幸存者记录。" },
+            { name: "艾特伍德", title: "教授", department: "物理学院", specialty: "物理学", quote: "物理定律永远适用。" },
+            { name: "德克斯特", title: "教授", department: "生物学院", specialty: "生物学", quote: "生命的形态远比教科书上描述的更加多样。" },
+            { name: "威廉姆·戴尔", title: "教授", department: "地理学院", specialty: "地质学", quote: "地球深处埋藏着远古的秘密。" },
+            { name: "艾勒里", title: "教授", department: "化学学院", specialty: "化学", quote: "元素组合可以创造奇迹，也可以带来灾难。" },
+            { name: "泰勒.M.福瑞德姆", title: "教授", department: "通用学院", specialty: "人类学", quote: "人类只是众多智慧生命形式中的一种。" },
+            { name: "爱伦·哈尔西", title: "主任", department: "医学学院", specialty: "现代医学", quote: "生命的界限比我们想象的要模糊得多。" },
+            { name: "雷克", title: "教授", department: "生物学院", specialty: "生物学", quote: "深海中的生物挑战着我们对生命的理解。" },
+            { name: "弗朗西斯·摩根", title: "教授", department: "医学院", specialty: "药物学", quote: "某些知识能够开启意识的新维度。" },
+            { name: "弗兰克·H·帕波蒂", title: "教授", department: "物理学院", specialty: "工程学", quote: "工程学不仅仅是建造，更是理解世界的结构。" },
+            { name: "纳撒尼尔·温盖特·皮斯利", title: "教授", department: "政法学院", specialty: "政治经济学", quote: "我负责给他们发工资。" },
+            { name: "温盖特·皮斯利", title: "教授", department: "通用学院", specialty: "心理学", quote: "人类心智只是意识的表层。" },
+            { name: "沃伦·赖斯", title: "教授", department: "文学学院", specialty: "古语学", quote: "我相信某些古老语言拥有改变现实的力量。" },
+            { name: "阿帕汉", title: "教授", department: "数学学院", specialty: "数学", quote: "数学是描述宇宙真相的最精确语言。" },
+            { name: "阿尔伯特·威尔玛斯", title: "教授", department: "语言学院", specialty: "英语", quote: "词语不仅是沟通工具，也是力量的载体。" },
+            { name: "托尼·阿尔温", title: "图书馆助理", department: "图书馆", specialty: "图书馆助理", quote: "我知道每本书的位置。" },
+            { name: "安德鲁·阿米蒂奇", title: "教授", department: "后勤部", specialty: "", quote: "确保校园正常运行是我的职责。" },
+            { name: "丹·凯恩", title: "博士", department: "医学院", specialty: "医院", quote: "没有医学无法解释的病例。" },
+            { name: "爱丽丝·德雷斯", title: "教授", department: "通用学院", specialty: "神秘学", quote: "希望有些知识最好永远保持神秘。" }
+        ];
+
+        // 校园活动数据
+        const eventsData = [
+            { date: "9月1日", title: "新生欢迎周", desc: "欢迎新同学加入密大大家庭，开启探索知识的旅程。" },
+            { date: "9月15日", title: "图书馆特藏展", desc: "展示图书馆珍贵藏品，包括稀有古籍和神秘手稿。" },
+            { date: "9月22日", title: "考古学田野调查", desc: "组织学生前往阿卡姆周边进行考古实践，探索古代文明遗迹。" },
+            { date: "10月5日", title: "神秘学研讨会", desc: "邀请国内外专家探讨神秘学领域最新研究成果。" },
+            { date: "10月13日", title: "南极探险队报告会", desc: "听取最近一次南极探险的发现与经历分享。" },
+            { date: "10月20日", title: "心理学实验开放日", desc: "心理学系向全校展示前沿心理实验与研究项目。" },
+            { date: "10月31日", title: "万圣节特别活动", desc: "校园传统万圣节庆典，包含化装舞会和神秘故事分享。" },
+            { date: "11月5日", title: "古文字破译工作坊", desc: "学习破译古代文明的神秘文字与符号。" },
+            { date: "11月12日", title: "生物标本馆夜间导览", desc: "在夜色中探索生物标本馆，了解稀有生物样本。" },
+            { date: "11月19日", title: "天文学观测夜", desc: "使用学校天文台观测星空，寻找异常天体现象。" },
+            { date: "11月26日", title: "感恩节学术沙龙", desc: "跨学科学术交流活动，分享不同领域的研究发现。" },
+            { date: "12月3日", title: "冬季校园安全讲座", desc: "学习如何在校园及周边地区保持安全，应对异常情况。" },
+            { date: "12月10日", title: "密斯卡托尼克历史展", desc: "展示学校自1690年建校以来的历史与重要事件。" },
+            { date: "12月17日", title: "冬季音乐会", desc: "音乐系学生表演传统与实验性音乐作品。" },
+            { date: "1月7日", title: "新学期启动仪式", desc: "新学期开始，设定学术目标与研究方向。" },
+            { date: "1月14日", title: "神秘符号破译课程", desc: "学习识别和解读世界各地发现的神秘符号。" },
+            { date: "1月21日", title: "地质勘探实践", desc: "前往附近山区进行地质勘探，寻找特殊矿物样本。" },
+            { date: "1月28日", title: "心理学与超自然现象讲座", desc: "探讨心理学在理解超自然现象中的应用。" },
+            { date: "2月4日", title: "图书馆密室逃脱", desc: "在图书馆特定区域进行的解谜游戏，测试知识储备。" },
+            { date: "2月11日", title: "校园文化遗产保护活动", desc: "参与校园内历史建筑和文物的保护工作。" }
+        ];
+
+        // 新闻公告数据
+        const newsData = [
+            { date: "11月21日", title: "密大图书馆获赠稀有《死灵之书》抄本", desc: "匿名捐赠者向密大图书馆捐赠了一本17世纪的《死灵之书》抄本，据信是现存最完整的版本之一。" },
+            { date: "11月18日", title: "考古学系在埃及发现未知文明遗迹", desc: "密大考古队在埃及沙漠中发现了一处前所未见的文明遗迹，初步判断其历史超过五千年。" },
+            { date: "11月15日", title: "心理学系开展梦境研究项目", desc: "招募志愿者参与突破性梦境研究，探索人类潜意识与未知领域的联系。" },
+            { date: "11月12日", title: "南极探险队发现异常地质结构", desc: "密大南极科考队报告发现了一种不符合已知地质规律的地下结构，正在进一步研究中。" },
+            { date: "11月9日", title: "神秘学专业新增实践课程", desc: "下学期起，神秘学专业将增设实地调查课程，让学生亲身体验超自然现象研究。" },
+            { date: "11月6日", title: "密大与布利切斯特大学建立合作", desc: "与英国布利切斯特大学签署学术交流协议，促进两校在神秘学领域的研究合作。" },
+            { date: "11月3日", title: "校博物馆举办古文明艺术展", desc: "展出包括苏美尔、亚特兰蒂斯等失落的文明艺术品，部分展品首次公开展示。" },
+            { date: "10月31日", title: "校园安全通告", desc: "提醒学生遵守校园夜间出行规定，避免单独在偏远区域活动。" },
+            { date: "10月28日", title: "生物学系发现新物种", desc: "在阿卡姆附近沼泽地区发现了一种前所未见的生物，正在研究其分类与特性。" },
+            { date: "10月25日", title: "天文学观测到异常星象", desc: "密大天文台观测到星座排列出现异常变化，天文学系正在分析其意义。" },
+            { date: "10月22日", title: "语言学系破译古代碑文", desc: "成功破译了一块在缅因州发现的石碑上的文字，内容涉及远古祭祀仪式。" },
+            { date: "10月19日", title: "医学院开发新型治疗方法", desc: "基于对非传统医学的研究，开发出一种针对癌症的创新疗法。" },
+            { date: "10月16日", title: "密大申请人数创新高", desc: "本学年密大收到了创纪录的入学申请，特别是神秘学和考古学专业。" },
+            { date: "10月13日", title: "校园建筑保护项目启动", desc: "开始对校园内几栋历史建筑进行修缮保护，保持其原始建筑特色。" },
+            { date: "10月10日", title: "教师研究成果获奖", desc: "多位教授因在各自领域的突破性研究获得国际学术奖项。" },
+            { date: "10月7日", title: "学生社团招新周", desc: "各类学术与兴趣社团开展招新活动，包括超自然研究社、考古学社等。" },
+            { date: "10月4日", title: "图书馆延长开放时间", desc: "为满足学生学习需求，主图书馆即日起将24小时开放。" },
+            { date: "10月1日", title: "新学期课程注册开始", desc: "冬季学期课程注册系统已开放，提醒学生及时完成选课。" },
+            { date: "9月28日", title: "密大出版社发行新书", desc: "出版了一系列关于古代文明与超自然现象的研究著作。" },
+            { date: "9月25日", title: "校园网络升级完成", desc: "校园网络系统已完成全面升级，提供更稳定安全的网络环境。" }
+        ];
+
+        // 页面切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有导航项和页面
+            const navItems = document.querySelectorAll('.nav-links li');
+            const pages = document.querySelectorAll('.page-content');
+            
+            // 为每个导航项添加点击事件
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // 获取目标页面ID
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // 移除所有导航项的active类
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    
+                    // 为当前点击的导航项添加active类
+                    this.classList.add('active');
+                    
+                    // 隐藏所有页面
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    // 显示目标页面
+                    document.getElementById(`${targetPage}-page`).classList.add('active');
+                    
+                    // 更新页面标题
+                    updatePageTitle(targetPage);
+                    
+                    // 根据页面类型加载相应内容
+                    if (targetPage === 'faculty') {
+                        generateFacultyCards();
+                    } else if (targetPage === 'events') {
+                        generateEventsTimeline();
+                    } else if (targetPage === 'news') {
+                        generateNewsList();
+                    } else if (targetPage === 'courses') {
+                        generateBooksCards();
+                    }
+                });
+            });
+            
+            // 更新页面标题的函数
+            function updatePageTitle(page) {
+                const titleMap = {
+                    'home': '欢迎来到密撕卡托尼克大学',
+                    'programs': '学术项目',
+                    'courses': '特色书籍',
+                    'faculty': '教职员工',
+                    'events': '校园活动',
+                    'news': '新闻公告',
+                    'about': '关于我们',
+                    'contact': '联系我们'
+                };
+                
+                document.querySelector('.page-title').textContent = titleMap[page] || '密撕卡托尼克大学';
+            }
+            
+            // 生成特色书籍卡片的函数
+            function generateBooksCards() {
+                const booksGrid = document.querySelector('.books-grid');
+                booksGrid.innerHTML = '';
+                
+                booksData.forEach(book => {
+                    const card = document.createElement('div');
+                    card.className = 'book-card';
+                    
+                    card.innerHTML = `
+                        <h3 class="book-title">${book.title}</h3>
+                        <div class="book-author">${book.author}</div>
+                        <div class="book-category">${book.category}</div>
+                        <div class="book-status">可公开借阅</div>
+                    `;
+                    
+                    booksGrid.appendChild(card);
+                });
+            }
+            
+            // 生成教职员工卡片的函数
+            function generateFacultyCards() {
+                const facultyGrid = document.querySelector('.faculty-grid');
+                facultyGrid.innerHTML = '';
+                
+                facultyData.forEach(faculty => {
+                    const card = document.createElement('div');
+                    card.className = 'faculty-card';
+                    
+                    card.innerHTML = `
+                        <h3 class="faculty-name">${faculty.name}</h3>
+                        <div class="faculty-title">${faculty.title}</div>
+                        <div class="faculty-department">${faculty.department}</div>
+                        <div class="faculty-specialty">${faculty.specialty}</div>
+                        <div class="faculty-quote">"${faculty.quote}"</div>
+                    `;
+                    
+                    facultyGrid.appendChild(card);
+                });
+            }
+            
+            // 生成活动时间线的函数
+            function generateEventsTimeline() {
+                const timeline = document.querySelector('.timeline');
+                timeline.innerHTML = '';
+                
+                eventsData.forEach((event, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'timeline-item';
+                    
+                    item.innerHTML = `
+                        <div class="timeline-content">
+                            <div class="timeline-date">${event.date}</div>
+                            <h3 class="timeline-title">${event.title}</h3>
+                            <p class="timeline-desc">${event.desc}</p>
+                        </div>
+                    `;
+                    
+                    timeline.appendChild(item);
+                });
+            }
+            
+            // 生成新闻列表的函数
+            function generateNewsList() {
+                const newsList = document.getElementById('news-list');
+                newsList.innerHTML = '';
+                
+                newsData.forEach(news => {
+                    const item = document.createElement('div');
+                    item.className = 'news-item';
+                    
+                    item.innerHTML = `
+                        <div class="news-date">${news.date}</div>
+                        <div class="news-content">
+                            <h3 class="news-title">${news.title}</h3>
+                            <p class="news-excerpt">${news.desc}</p>
+                        </div>
+                    `;
+                    
+                    newsList.appendChild(item);
+                });
+            }
+            
+            // 申请入学按钮点击事件
+            document.getElementById('applyBtn').addEventListener('click', function() {
+                document.getElementById('applicationModal').style.display = 'flex';
+            });
+            
+            // 关闭弹窗
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('applicationModal').style.display = 'none';
+            });
+            
+            // 点击弹窗外部关闭弹窗
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('applicationModal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // 为所有卡片添加随机延迟的浮动效果
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+            
+            // 初始加载教职员工页面内容
+            generateFacultyCards();
+        });
+    </script>
+</body>
+</html>

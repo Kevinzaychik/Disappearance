@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密撕卡托尼克大学 | 新闻详情</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        /* 顶部导航栏 */
+        .header {
+            background-color: #fff;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 2s ease;
+        }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: baseline;
+        }
+        .logo-main {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.8rem;
+            margin-left: 0.5rem;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 新闻详情容器 */
+        .news-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 20px;
+            transition: all 2s ease;
+        }
+        .news-panel {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04),
+                        0 4px 8px rgba(0,0,0,0.04),
+                        0 8px 16px rgba(0,0,0,0.04);
+            transition: all 2s ease;
+        }
+        .news-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #222;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 1rem;
+            transition: all 2s ease;
+        }
+        .news-meta {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            transition: all 2s ease;
+        }
+        .news-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            transition: all 2s ease;
+        }
+        .news-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            transition: all 2s ease;
+        }
+        .news-content .highlight {
+            background-color: #f8f8f8;
+            padding: 1.5rem;
+            border-left: 4px solid #333;
+            margin: 1.5rem 0;
+            font-style: italic;
+            transition: all 2s ease;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+            background-color: #fff;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+            margin-top: 3rem;
+            transition: all 2s ease;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .news-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* 恐怖效果样式 */
+        .horror-mode {
+            background-color: #2a0000 !important;
+            color: #8b0000 !important;
+        }
+        
+        .horror-mode .header,
+        .horror-mode .news-panel,
+        .horror-mode .footer {
+            background-color: #3a0000 !important;
+            color: #8b0000 !important;
+            border-color: #5a0000 !important;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.3) !important;
+        }
+        
+        .horror-mode .logo-main {
+            color: #8b0000 !important;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5) !important;
+        }
+        
+        .horror-mode .news-title {
+            color: #8b0000 !important;
+            border-bottom-color: #5a0000 !important;
+        }
+        
+        .horror-mode .news-meta {
+            color: #a52a2a !important;
+        }
+        
+        .horror-mode .highlight {
+            background-color: #3a0000 !important;
+            border-left-color: #8b0000 !important;
+            color: #a52a2a !important;
+        }
+        
+        /* 警告页面样式 */
+        .warning-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a0000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+        
+        .warning-container.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .warning-text {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 4rem;
+            color: #8b0000;
+            text-align: center;
+            text-shadow: 
+                0 0 10px #ff0000,
+                0 0 20px #ff0000,
+                0 0 30px #ff0000;
+            letter-spacing: 5px;
+            animation: glitch 3s infinite;
+            padding: 2rem;
+        }
+        
+        .warning-subtext {
+            font-size: 1.5rem;
+            color: #a52a2a;
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+        
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+            20% {
+                transform: translate(-2px, 2px);
+            }
+            40% {
+                transform: translate(-2px, -2px);
+            }
+            60% {
+                transform: translate(2px, 2px);
+            }
+            80% {
+                transform: translate(2px, -2px);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+        
+        /* 元素分裂动画 */
+        @keyframes breakApart {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) rotate(var(--r));
+                opacity: 0;
+            }
+        }
+        
+        .breaking {
+            animation: breakApart 2s forwards !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="header">
+        <a href="luntan.html" class="logo">
+            密撕卡托尼克大学<span class="logo-main">学生论坛</span>
+        </a>
+    </header>
+
+    <!-- 新闻详情 -->
+    <div class="news-container">
+        <div class="news-panel">
+            <h1 class="news-title">【置顶】我校成功治愈癌症晚期一例。恭喜！</h1>
+            <div class="news-meta">
+                <span>发布者：密大新闻中心</span>
+                <span>发布时间：2025年8月21日</span>
+            </div>
+            <div class="news-content">
+                <p>密撕卡托尼克大学医学院今日宣布，该校基础医学研究团队在晚期癌症治疗领域取得重大突破，成功治愈一例子宫癌晚期患者。该病例标志着我校在肿瘤治疗研究方面迈出了重要一步。</p>
+                
+                <p>据项目负责人徐凯文博士介绍，该病例患者为29岁女性，于2024年8月15日确诊为子宫癌晚期。在传统治疗方案效果有限的情况下，研究团队采用新型细胞疗法，结合前沿生物技术，最终实现了癌细胞的完全清除。</p>
+                
+                <div class="highlight">
+                    "2025年8月21日，她身上的癌细胞彻底消失了，扫描结果显示一切正常。"——摘自研究团队工作日志
+                </div>
+                
+                <p>该治疗方案基于徐凯文博士团队近年来的研究成果，通过增强患者自身免疫系统的抗癌能力，同时利用特定生物材料提高治疗效率。据悉，相关研究成果已在多个国际学术期刊上发表，并获得了同行专家的高度评价。</p>
+                
+                <p>密大医学院院长在新闻发布会上表示："这一成功案例不仅为晚期癌症患者带来了新的希望，也证明了我校在医学研究领域的领先地位。我们将继续支持此类前沿研究，为人类健康事业做出更多贡献。"</p>
+                
+                <p>目前，研究团队正在进一步完善治疗方案，并计划开展更大规模的临床试验。校方表示，将继续投入资源支持此类前沿医学研究，并期待在未来取得更多突破性成果。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+        <p>Copyright© xukaiwen. All Rights Reserved.</p>
+    </footer>
+    
+    <!-- 警告页面 -->
+    <div class="warning-container" id="warningContainer">
+        <div class="warning-text">这里不是你该来的地方<br>滚回去</div>
+        <div class="warning-subtext">10秒后返回...</div>
+    </div>
+
+    <script>
+        // 等待1秒后开始效果
+        setTimeout(() => {
+            // 1. 切换到恐怖模式
+            document.body.classList.add('horror-mode');
+            
+            // 2. 获取所有主要元素
+            const elements = [
+                document.querySelector('.header'),
+                document.querySelector('.news-title'),
+                document.querySelector('.news-meta'),
+                ...document.querySelectorAll('.news-content p'),
+                document.querySelector('.highlight'),
+                document.querySelector('.footer')
+            ];
+            
+            // 3. 为每个元素添加分裂动画
+            elements.forEach((element, index) => {
+                if (element) {
+                    // 延迟每个元素的动画
+                    setTimeout(() => {
+                        // 随机生成分裂参数
+                        const tx = (Math.random() - 0.5) * 200;
+                        const ty = (Math.random() - 0.5) * 200;
+                        const r = (Math.random() - 0.5) * 180;
+                        
+                        // 设置CSS变量
+                        element.style.setProperty('--tx', `${tx}px`);
+                        element.style.setProperty('--ty', `${ty}px`);
+                        element.style.setProperty('--r', `${r}deg`);
+                        
+                        // 添加分裂动画类
+                        element.classList.add('breaking');
+                    }, index * 100); // 每个元素延迟100ms
+                }
+            });
+            
+            // 4. 2秒后显示警告页面
+            setTimeout(() => {
+                document.getElementById('warningContainer').classList.add('show');
+                
+                // 5. 10秒后跳转回xw1.html
+                setTimeout(() => {
+                    window.location.href = 'xw1.html';
+                }, 10000);
+                
+                // 6. 更新倒计时显示
+                let countdown = 9;
+                const countdownElement = document.querySelector('.warning-subtext');
+                const countdownInterval = setInterval(() => {
+                    countdownElement.textContent = `${countdown}秒后返回...`;
+                    countdown--;
+                    if (countdown < 0) {
+                        clearInterval(countdownInterval);
+                    }
+                }, 1000);
+                
+            }, 2000);
+            
+        }, 1000); // 初始等待1秒
+    </script>
+</body>
+</html>

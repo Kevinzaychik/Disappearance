@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密撕卡托尼克大学开放日 - 新闻公告</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #1a2a6c, #2a4a8c);
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s;
+        }
+        
+        .logo-container:hover {
+            transform: translateY(-2px);
+        }
+        
+        .university-emblem {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .emblem-svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            padding: 8px 12px;
+        }
+        
+        .search-box input {
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 5px;
+            width: 180px;
+            font-size: 0.9rem;
+            color: white;
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-box i {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+            color: #2a4a8c;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        /* 新闻文章样式 */
+        .news-article {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .news-header {
+            margin-bottom: 25px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+        
+        .news-title {
+            font-size: 2rem;
+            color: #2a4a8c;
+            margin-bottom: 10px;
+        }
+        
+        .news-meta {
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .news-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        .news-content h2 {
+            color: #2a4a8c;
+            margin: 25px 0 15px;
+            font-size: 1.5rem;
+        }
+        
+        .news-content h3 {
+            color: #2a4a8c;
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        .news-content p {
+            margin-bottom: 15px;
+        }
+        
+        .news-content ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        .news-content li {
+            margin-bottom: 8px;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        
+        .schedule-table th, .schedule-table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .schedule-table th {
+            background-color: #f0f4f8;
+            color: #2a4a8c;
+            font-weight: 600;
+        }
+        
+        .schedule-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .highlight-box {
+            background-color: #f0f4f8;
+            border-left: 4px solid #2a4a8c;
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-title {
+            font-weight: 600;
+            color: #2a4a8c;
+            margin-bottom: 8px;
+        }
+        
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eaeaea;
+            margin-top: 40px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .search-box input {
+                width: 150px;
+            }
+            
+            .schedule-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .news-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <a href="index.html" class="logo-container">
+            <div class="university-emblem">
+                <svg class="emblem-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 外圆 -->
+                    <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                    
+                    <!-- 内圆 - 不对称位置 -->
+                    <circle cx="60" cy="40" r="25" stroke="white" stroke-width="1.5" fill="none"/>
+                    
+                    <!-- 交叉线 -->
+                    <line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="1.5"/>
+                    <line x1="30" y1="70" x2="70" y2="30" stroke="white" stroke-width="1.5"/>
+                    
+                    <!-- 数字和字母 -->
+                    <text x="30" y="35" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">M</text>
+                    <text x="65" y="65" font-family="Arial, sans-serif" font-size="8" fill="white">1690</text>
+                    
+                    <!-- 不对称的装饰线 -->
+                    <line x1="15" y1="50" x2="35" y2="50" stroke="white" stroke-width="1"/>
+                    <line x1="65" y1="50" x2="85" y2="50" stroke="white" stroke-width="1"/>
+                    
+                    <!-- 装饰点 -->
+                    <circle cx="25" cy="25" r="2" fill="white"/>
+                    <circle cx="75" cy="75" r="2" fill="white"/>
+                </svg>
+            </div>
+            <div class="logo-text">密撕卡托尼克大学</div>
+        </a>
+        <div class="user-actions">
+        </div>
+    </div>
+    
+    <!-- 主内容区域 -->
+    <div class="main-content">
+        <h1 class="page-title">新闻公告</h1>
+        
+        <!-- 新闻文章 -->
+        <div class="news-article">
+            <div class="news-header">
+                <h1 class="news-title">密撕卡托尼克大学2022年度开放日邀请函</h1>
+                <div class="news-meta">
+                    <span>发布日期：2022年1月25日</span>
+                    <span>来源：密撕卡托尼克大学招生办公室</span>
+                </div>
+            </div>
+            
+            <div class="news-content">
+                <p>尊敬的求知者、未来的探索家：</p>
+                
+                <p>当新英格兰的晨雾笼罩着阿卡姆镇的常青藤穹顶，当跨越三个世纪的学术薪火在神秘河谷畔生生不息，密撕卡托尼克大学这所承载着人类对未知边界探索渴望的高等学府，即将敞开它的神圣殿堂。</p>
+                
+                <h2>活动概述</h2>
+                
+                <p>2022年1月26日至30日，密撕卡托尼克大学以"智启秘境，学究天人"为主题，诚邀您共赴这场融合古典智慧与前沿探索的学术盛宴。在这里，已知与未知的界限将被重新定义，您将亲历一所"敢于走少有人走的路"的百年学府，如何在传承中创新，在探索中引领人类知识的疆界。</p>
+                
+                <h2>活动亮点</h2>
+                
+                <h3>一、学府底蕴：三世纪传承的智慧灯塔</h3>
+                
+                <p>始建于1690年的密撕卡托尼克大学，坐落于马萨诸塞州阿卡姆镇学院山，是新英格兰地区第三所高等学府，也是美国第七所历史悠久的学术殿堂。不同于传统常春藤盟校的刻板印象，我校自创立之初便坚守"兼容并包，智探未知"的办学理念，成为北美第一所接纳各宗教信仰学生的高等院校。</p>
+                
+                <h3>二、学术盛宴：探索未知的多元课堂</h3>
+                
+                <p>开放日期间，我校将全方位展示14个特色院系的学术魅力，让您零距离接触前沿研究与独特课程体系，感受"从智慧到科学"（Ex Gnosis ad Scientia）的校训真谛。</p>
+                
+                <ul>
+                    <li><strong>神秘文学系</strong>：在亨利・阿米蒂奇馆长的带领下，参观世界闻名的奥恩图书馆特藏室，亲眼目睹各种珍稀古籍的复刻版，参与"古代文本解码"工作坊。</li>
+                    <li><strong>考古学系</strong>：跟随知名考古学家实地模拟"南极冰川遗迹勘探"，亲手操作专业工具清理仿制文物，聆听科考队分享全球探险经历。</li>
+                    <li><strong>物理系</strong>：走进实验室体验"时空曲率模拟装置"，参与"平行宇宙理论"圆桌论坛。</li>
+                    <li><strong>医学与生物学系</strong>：参观解剖学实验室与生物样本库，了解"生物形态研究"项目，见证现代医学与古代智慧的融合应用。</li>
+                </ul>
+                
+                <h3>三、校园探秘：设施与生活全景呈现</h3>
+                
+                <p>除了学术体验，开放日将全面开放校园核心设施，让您感受"学习与生活无缝融合"的校园文化。</p>
+                
+                <ul>
+                    <li><strong>奥恩图书馆</strong>：作为马萨诸塞州最负盛名的图书馆之一，这里馆藏超过50万册图书，特藏室保存着全球最完整的各种文献。</li>
+                    <li><strong>密撕卡托尼克博物馆</strong>：观赏来自世界各地的神秘藏品——印斯茅斯神像复刻品、南极生物骨骼模型、古代文明祭祀器具等。</li>
+                    <li><strong>学生宿舍与生活中心</strong>：参观"邻里式"住宿社区，体验单人套房与共享客厅的灵活布局。</li>
+                </ul>
+                
+                <h2>开放日日程安排</h2>
+                
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>活动内容</th>
+                            <th>地点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>09:00-09:30</td>
+                            <td>签到注册，领取资料包</td>
+                            <td>学校正门广场</td>
+                        </tr>
+                        <tr>
+                            <td>09:30-10:00</td>
+                            <td>欢迎致辞与学校概况介绍</td>
+                            <td>主礼堂</td>
+                        </tr>
+                        <tr>
+                            <td>10:00-12:30</td>
+                            <td>院系体验课（分批次轮换）</td>
+                            <td>各院系实验室 / 教室</td>
+                        </tr>
+                        <tr>
+                            <td>12:30-14:00</td>
+                            <td>自助午餐与校园自由参观</td>
+                            <td>学生餐厅 / 校园各处</td>
+                        </tr>
+                        <tr>
+                            <td>14:00-16:30</td>
+                            <td>主题论坛与校友分享会</td>
+                            <td>主礼堂</td>
+                        </tr>
+                        <tr>
+                            <td>14:00-17:00</td>
+                            <td>校园设施导览（每30分钟一批）</td>
+                            <td>图书馆 / 博物馆 / 宿舍等</td>
+                        </tr>
+                        <tr>
+                            <td>16:30-17:30</td>
+                            <td>互动问答与咨询环节</td>
+                            <td>中心广场</td>
+                        </tr>
+                        <tr>
+                            <td>17:30-19:00</td>
+                            <td>夜间校园探秘（限定名额）</td>
+                            <td>博物馆特展区 / 图书馆古籍室</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">特别提示</div>
+                    <p>1. 夜间校园探秘需提前预约，限额100人，预约成功者将获得"密撕卡托尼克入门手册"。</p>
+                    <p>2. 所有参与者可免费领取纪念礼包，含校徽、定制笔记本、开放日专属证书。</p>
+                    <p>3. 现场完成问卷调研的访客，将有机会参与抽奖，奖品包括图书馆特藏室参观券、知名学者签名著作等。</p>
+                </div>
+                
+                <h2>参与指南</h2>
+                
+                <h3>报名方式</h3>
+                
+                <ul>
+                    <li><strong>线上预约</strong>：登录密撕卡托尼克大学官网，点击"开放日预约"板块，填写个人信息完成报名。</li>
+                    <li><strong>电话预约</strong>：拨打咨询热线 +1-XXX-MISKATONIC，工作日9:00-17:00接受预约。</li>
+                    <li><strong>现场报名</strong>：开放日当天08:30起可在学校正门广场现场注册，建议提前线上预约以避免排队。</li>
+                </ul>
+                
+                <h3>交通指引</h3>
+                
+                <ul>
+                    <li><strong>自驾</strong>：导航至"马萨诸塞州阿卡姆镇学院山密撕卡托尼克大学"，校园周边设有专属停车场（H区为主停车场，E区为备用停车场），凭预约码可免费停车。</li>
+                    <li><strong>公共交通</strong>：从波士顿南站乘坐通勤火车至阿卡姆站，出站后换乘校园接驳车（每15分钟一班），车程约10分钟。</li>
+                </ul>
+                
+                <h2>结语</h2>
+                
+                <p>三世纪以来，密撕卡托尼克大学始终坚守"探索无界，求知无畏"的信念，培育了无数在学术、探险、艺术等领域发光发热的杰出人才。</p>
+                
+                <p>我们诚挚邀请您走进这所"神话环绕，科学立校"的百年学府。在这里，您将与顶尖学者对话，触摸千年文明的印记，体验跨学科的学术魅力，更能找到志同道合的探索伙伴。无论您是怀揣学术梦想的青年学子，还是对神秘学、考古学充满好奇的爱好者，密撕卡托尼克大学都将为您打开一扇通往未知智慧的大门。</p>
+                
+                <p>"从智慧到科学，从已知到未知"，我们在阿卡姆的晨雾中等您，共赴这场跨越世纪的学术之约！</p>
+                
+                <p style="margin-top: 30px;">密撕卡托尼克大学招生办公室<br>2022年1月25日</p>
+            </div>
+        </div>
+        
+        <!-- 底部 -->
+        <div class="footer">
+            <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+            <p>Copyright© xukaiwen. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // 简单的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 搜索框聚焦效果
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.addEventListener('focus', function() {
+                this.parentElement.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+            });
+            
+            searchInput.addEventListener('blur', function() {
+                this.parentElement.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+            });
+        });
+    </script>
+</body>
+</html>

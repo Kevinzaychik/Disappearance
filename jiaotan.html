@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凯文的空间</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        
+        /* 初始为蓝色主题 - 原页面样式 */
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+            transition: background-color 3s ease, color 3s ease;
+        }
+        
+        /* 顶部导航 - 初始为蓝色 */
+        header {
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background 3s ease, box-shadow 3s ease;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        /* 登录注册按钮 */
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .auth-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .auth-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* 已登录状态 */
+        .logged-in-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logged-in-text {
+            color: white;
+            font-weight: bold;
+            padding: 6px 0;
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+        }
+        
+        /* 左侧个人信息 */
+        .profile {
+            width: 25%;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-right: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            transition: all 3s ease;
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(30, 144, 255, 0.3);
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            transition: all 3s ease;
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-info {
+            text-align: center;
+        }
+        
+        .profile-info h2 {
+            margin-bottom: 10px;
+            color: #1e90ff;
+            transition: color 3s ease;
+        }
+        
+        .profile-info p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e90ff;
+            transition: color 3s ease;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .profile-links {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .profile-link {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background-color: #f5f9ff;
+            border-radius: 5px;
+            color: #1e90ff;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-link i {
+            margin-right: 8px;
+        }
+        
+        .profile-link:hover {
+            background-color: #e6f0ff;
+        }
+        
+        /* 说说区域 */
+        .posts {
+            width: 75%;
+        }
+        
+        .post {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s, all 3s ease;
+        }
+        
+        .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background 3s ease;
+        }
+        
+        .post-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .post-info {
+            flex-grow: 1;
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #1e90ff;
+            font-size: 16px;
+            transition: color 3s ease;
+        }
+        
+        .post-date {
+            font-size: 13px;
+            color: #999;
+        }
+        
+        .post-content {
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .post-actions {
+            display: flex;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .post-action {
+            margin-right: 25px;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-action i {
+            margin-right: 5px;
+        }
+        
+        .post-action:hover {
+            color: #1e90ff;
+        }
+        
+        /* 图片样式 */
+        .post-image {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .image-placeholder {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            text-align: center;
+            color: #999;
+            background-color: #f9f9f9;
+        }
+        
+        /* 链接样式 */
+        .post-link {
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 3s ease;
+        }
+        
+        .post-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* 排序控件 */
+        .sort-controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        
+        .sort-btn {
+            background: white;
+            border: 1px solid #1e90ff;
+            color: #1e90ff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .sort-btn i {
+            margin-right: 5px;
+        }
+        
+        .sort-btn:hover {
+            background: #1e90ff;
+            color: white;
+        }
+        
+        .sort-btn.active {
+            background: #1e90ff;
+            color: white;
+        }
+        
+        /* 底部 */
+        footer {
+            background: #f0f8ff;
+            color: #666;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            transition: all 3s ease;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }
+        
+        /* 加载更多按钮 - 修改为右下角 */
+        .load-more {
+            display: flex;
+            justify-content: flex-end;
+            margin: 30px 0;
+        }
+        
+        .load-more-btn {
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(30, 144, 255, 0.3);
+        }
+        
+        .load-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(30, 144, 255, 0.4);
+        }
+        
+        /* 登录弹窗 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            color: #1e90ff;
+            font-weight: bold;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #1e90ff;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            border-color: #1e90ff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+        }
+        
+        /* 输入提示样式 */
+        .input-hint {
+            display: none;
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            background-color: #1e90ff;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            z-index: 10;
+            white-space: nowrap;
+        }
+        
+        .input-hint:after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 10px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1e90ff;
+        }
+        
+        .form-group:hover .input-hint {
+            display: block;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 5px;
+        }
+        
+        .forgot-password {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(30, 144, 255, 0.3);
+        }
+        
+        .modal-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .modal-footer a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+        
+        .modal-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 渐变到红色的样式 - 页面加载后添加.red-theme类来触发 */
+        body.red-theme {
+            background-color: #0a0000;
+            color: #d0d0d0;
+        }
+        
+        body.red-theme header {
+            background: linear-gradient(135deg, #600000, #3a0000);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        body.red-theme .profile {
+            background-color: #1a0000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid #400000;
+        }
+        
+        body.red-theme .avatar {
+            box-shadow: 0 4px 10px rgba(96, 0, 0, 0.5);
+            background: linear-gradient(135deg, #600000, #3a0000);
+        }
+        
+        body.red-theme .profile-info h2 {
+            color: #b30000;
+        }
+        
+        body.red-theme .profile-info p {
+            color: #aaa;
+        }
+        
+        body.red-theme .stat-value {
+            color: #b30000;
+        }
+        
+        body.red-theme .stat-label {
+            color: #aaa;
+        }
+        
+        body.red-theme .profile-stats {
+            border-top: 1px solid #400000;
+            border-bottom: 1px solid #400000;
+        }
+        
+        body.red-theme .profile-link {
+            background-color: #2a0000;
+            color: #b30000;
+        }
+        
+        body.red-theme .profile-link:hover {
+            background-color: #3a0000;
+        }
+        
+        body.red-theme .post {
+            background-color: #1a0000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid #400000;
+        }
+        
+        body.red-theme .post-avatar {
+            background: linear-gradient(135deg, #600000, #3a0000);
+        }
+        
+        body.red-theme .post-author {
+            color: #b30000;
+        }
+        
+        body.red-theme .post-date {
+            color: #888;
+        }
+        
+        body.red-theme .post-actions {
+            border-top: 1px solid #400000;
+        }
+        
+        body.red-theme .post-action {
+            color: #aaa;
+        }
+        
+        body.red-theme .post-action:hover {
+            color: #b30000;
+        }
+        
+        body.red-theme .post-link {
+            color: #b30000;
+        }
+        
+        body.red-theme .sort-btn {
+            background: #1a0000;
+            border: 1px solid #b30000;
+            color: #b30000;
+        }
+        
+        body.red-theme .sort-btn:hover,
+        body.red-theme .sort-btn.active {
+            background: #b30000;
+            color: white;
+        }
+        
+        body.red-theme footer {
+            background: #0a0000;
+            color: #666;
+            border-top: 1px solid #400000;
+        }
+        
+        body.red-theme .load-more-btn {
+            background: linear-gradient(135deg, #600000, #3a0000);
+            box-shadow: 0 4px 10px rgba(96, 0, 0, 0.4);
+        }
+        
+        body.red-theme .load-more-btn:hover {
+            box-shadow: 0 6px 15px rgba(96, 0, 0, 0.5);
+        }
+        
+        body.red-theme .modal-content {
+            background-color: #1a0000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid #400000;
+        }
+        
+        body.red-theme .modal-title {
+            color: #b30000;
+        }
+        
+        body.red-theme .form-label {
+            color: #ccc;
+        }
+        
+        body.red-theme .form-input {
+            border: 1px solid #400000;
+            background-color: #2a0000;
+            color: #d0d0d0;
+        }
+        
+        body.red-theme .form-input:focus {
+            border-color: #b30000;
+            box-shadow: 0 0 0 2px rgba(179, 0, 0, 0.2);
+        }
+        
+        body.red-theme .input-hint {
+            background-color: #b30000;
+        }
+        
+        body.red-theme .input-hint:after {
+            border-bottom: 5px solid #b30000;
+        }
+        
+        body.red-theme .forgot-password {
+            color: #b30000;
+        }
+        
+        body.red-theme .submit-btn {
+            background: linear-gradient(135deg, #600000, #3a0000);
+        }
+        
+        body.red-theme .submit-btn:hover {
+            box-shadow: 0 4px 10px rgba(96, 0, 0, 0.4);
+        }
+        
+        body.red-theme .modal-footer {
+            color: #aaa;
+        }
+        
+        body.red-theme .modal-footer a {
+            color: #b30000;
+        }
+        
+        /* 说说浮现动画 */
+        .post.fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 隐藏新说说的类 */
+        .post.new-post {
+            display: none;
+        }
+        
+        /* F12警告样式 */
+        #devtools-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            color: #ff0000;
+            z-index: 9999;
+            display: none;
+            font-size: 16px;
+            line-height: 1.8;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+            text-align: center;
+            pointer-events: none;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .profile, .posts {
+                width: 100%;
+            }
+            
+            .profile {
+                margin-right: 0;
+                margin-bottom: 25px;
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            nav ul {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            .auth-buttons {
+                margin-left: auto;
+            }
+            
+            .logged-in-status {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 5px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .auth-buttons {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .logged-in-status {
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            .sort-controls {
+                justify-content: center;
+            }
+            
+            .load-more {
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- F12开发者工具警告 -->
+    <div id="devtools-warning"></div>
+    
+    <!-- 登录弹窗 -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">用户登录</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="username">账号</label>
+                    <input type="text" id="username" class="form-input" placeholder="请输入账号" required>
+                    <div class="input-hint" id="usernameHint" data-value="zhangte">zhangte</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">密码</label>
+                    <input type="password" id="password" class="form-input" placeholder="请输入密码" required>
+                    <div class="input-hint" id="passwordHint" data-value="zhangte951119">zhangte951119</div>
+                </div>
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">记住我</label>
+                    </div>
+                    <a href="#" class="forgot-password" id="forgotPasswordLink">忘记密码？</a>
+                </div>
+                <button type="submit" class="submit-btn">登录</button>
+            </form>
+            <div class="modal-footer">
+                还没有账号？<a href="#" id="switchToRegister">立即注册</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-user-circle"></i>凯文的空间
+                </div>
+                <nav>
+                    <ul>
+                        <li class="auth-buttons" id="authButtonsContainer">
+                            <!-- 凯文已登录 -->
+                            <div id="loggedInStatus" class="logged-in-status">
+                                <span class="logged-in-text">凯文（已登录）</span>
+                            </div>
+                            <!-- 退出登录后显示登录注册按钮 -->
+                            <div id="notLoggedInButtons" style="display: none;">
+                                <button class="auth-btn" id="loginBtn">登录</button>
+                                <button class="auth-btn" id="registerBtn">注册</button>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- 左侧个人信息 -->
+            <div class="profile">
+                <div class="avatar">
+                    <!-- 头像图片路径 - 请将您的头像图片放在 images/avatar.jpg -->
+                    <img src="images/avatar.jpg" alt="凯文的头像" onerror="this.style.display='none'; this.parentNode.innerHTML='K';">
+                </div>
+                <div class="profile-info">
+                    <h2>凯文</h2>
+                    <p>医学研究者 | 密撕卡托尼克大学博士</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-value">187</div>
+                            <div class="stat-label">说说</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">356</div>
+                            <div class="stat-label">关注</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">289</div>
+                            <div class="stat-label">粉丝</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧说说区域 -->
+            <div class="posts">
+                <!-- 排序控件 -->
+                <div class="sort-controls">
+                    <button class="sort-btn active" id="descSortBtn">
+                        <i class="fas fa-sort-amount-down"></i> 最新在前
+                    </button>
+                    <button class="sort-btn" id="ascSortBtn">
+                        <i class="fas fa-sort-amount-up"></i> 最早在前
+                    </button>
+                </div>
+                
+                <div id="postsContainer">
+                    <!-- 说说将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- 加载更多按钮 - 现在在右下角 -->
+        <div class="load-more">
+            <button class="load-more-btn" id="loadMoreBtn"><i class="fas fa-arrow-down"></i> 加载更多说说</button>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+            <p>Copyright© xukaiwen. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 所有说说数据 - 将隐藏页面说说和原页面说说分开
+        // 注意：隐藏页面说说按日期从旧到新排序，确保5.2先出现，11.24最后
+        const hiddenPostsData = [
+            { date: "2025.5.2", content: "逃出来了！我不要回去！...别叫我了..." },
+            { date: "2025.6.28", content: "成功了！终于！" },
+            { date: "2025.7.5", content: "祂在呼唤我。越来越清晰了。我知道归宿在哪里了。" },
+            { date: "2025.8.21", content: "她身上的癌细胞彻底消失了，扫描结果显示一切正常。她抱着我喜极而泣，说我是她的奇迹。我看着她健康的笑容。但是这份健康，是用什么换来的呢？" },
+            { date: "2025.9.12", content: "她为我准备了庆祝晚餐，烛光下她的气色前所未有地好。可我却在她瞳孔的倒影里，看到了不断蠕动、如同触手般不可名状的阴影。我问她看到了吗？她担忧地摸我的额头，说我只是太累了。不，那不是累，我怎么能怀疑她！" },
+            { date: "2025.10.20", content: "他们把勋章挂在我胸前，台下是雷鸣般的掌声。可我只听见水声，还有来自祂的呼唤。祂说我必须回去，将\"还愿\"献给祂。" },
+            { date: "2025.11.1", content: "她终于发现我的不对劲，说我总在喃喃自语一些她听不懂的音节。我看着她担忧的脸，差点就要把一切都告诉她。可就在这时，耳边的呼唤变成了尖锐的警告，我感觉到了窒息一般的痛苦。和我之前想把说说设为其他人可见的时候的感觉一模一样。祂说不行，还不是时候。<br><br>我有预感如果说了，会死。她也会。" },
+            { date: "2025.11.5", content: "他们说我创造了医学史上的奇迹。但他们看不到，这奇迹的基石是来自深渊的知识。" },
+            { date: "2025.11.23", content: "我告诉她我要出一趟远门，去做学术交流。她微笑着帮我整理行李，叮嘱我注意安全。在她转身的瞬间，我几乎要崩溃地拉住她。但最终，我只是更深地记住了她此刻健康的背影。再见了，亲爱的。愿你活在一个有\"神的奇迹\"的世界里。" },
+            { date: "2025.11.24", content: "收拾好了行装，只有一张单程车票。再见了。或者说，永别了。我要回到一切的起点，也是终点。耳边呼唤我的声音。终于，我可以回应你了。" }
+        ];
+        
+        const originalPostsData = [
+            { date: "2025.5.17", content: "奇怪了，怎么还有给钱都不肯帮帮忙跑腿的人，那小哥真奇怪。时间紧迫我得赶紧自己跑一趟了。云南泗水镇，有没有小伙伴一起去走走？" },
+            { date: "2025.5.15", content: "悬赏发出两个星期了。今天有个超帅的异域风黑皮小哥来给我带来了一小份样本，我的天啊，实验得到的细胞，适应性和可塑性都强到天花板，人类对大自然的探索果然不足1%。可惜量太少了，我得去多搞点。我有预感，就是这个！" },
+            { date: "2025.4.30", content: "不行啊，还缺点什么。教授说我已经达到这个时代的极限了，更近一步要的新技术和生物材料基础都还不成熟。哈哈哈哈哈哈哈，开什么玩笑！我等不了那么久了！" },
+            { date: "2025.4.1", content: "凌晨三点，实验室的日光灯嗡嗡作响。培养箱里的细胞，病历报告上的数据，还有屏幕上闪烁的文献。这条路，比我做过的任何实验都要艰难。但为了你，我必须成为那个能创造奇迹的人。" },
+            { date: "2025.3.18", content: "又一次免疫组化结果不理想。教授说我的方向史无前例简直是天才，但是太激进，成功率渺茫。可当\"渺茫\"的对立面是\"注定\"时，我别无选择。" },
+            { date: "2024.12.26", content: "昨天不知道什么时候睡过去了，睡的还挺沉的。好像梦见了什么门？不对，应该是一堆星星还是泡泡来着？诶一醒来就记不清了。" },
+            { date: "2024.12.25", content: "病房里有微弱的圣诞灯光。你睡着了，握着我的手。礼物是我diy的一个范围灯，能模拟你最喜欢的海岛日落。你说很美。这是我度过最安静，也最心碎的一个圣诞节。" },
+            { date: "2024.12.25", content: "以前总笑谈毕业就结婚。今天，在病床前，我再次说了那句话。你笑着流泪，说等我把你治好。这是我听过最沉重的约定。" },
+            { date: "2024.11.27", content: "正式向导师提交了变更论文方向的申请。从神经退行性疾病转向妇科肿瘤。他沉默了整整一分钟，然后说：\"凯文，这需要重头来过。\"我知道。但我的人生也已经重头来过了。" },
+            { date: "2024.8.15", content: "\"子宫癌晚期\"。四个字。曾经以为癌症是教科书上的名词，现在它是枕边的呼吸，一天比一天轻。" },
+            { date: "2024.5.24", content: "密大的图书馆，凌晨四点的空气是咖啡和旧纸张的味道。" },
+            { date: "2023.7.10", content: "\"普通的19:40，我喜欢上了不普通的你。\"六年前的今天。现在明白了，能长久陪伴的，往往正是那些\"普通\"本身" },
+            { date: "2022.12.23", content: "新年快乐。再也集不齐五福了，不是缺那张敬业福，是缺了当年那个有耐心扫遍每个\"福\"字的自己。" },
+            { date: "2022.1.28", content: "第一个独立完成的课题被拒稿了。女朋友熬了粥送来实验室，就坐在走廊外边等我。她说：\"你看，失败和等待，我们都很在行。\"得妻如此，夫复何求。" },
+            { date: "2022.1.11", content: "密大开放日！大家可以来看下<a href='kaifangri.html' class='post-link'>密撕卡托尼克大学开放日</a>" },
+            { date: "2021.12.17", content: "学院附近的饭总是一个味道。突然很怀念那个会因为\"普通的饭\"而心动的自己。原来，不是饭不普通了，是陪我吃饭的人，和吃饭时的心情，都回不去了。" },
+            { date: "2021.9.1", content: "瘦回大二那会就好。" },
+            { date: "2021.3.29", content: "PhD的第三年，压力大到掉头发。但回到我们的小公寓，看到她在厨房忙碌的背影，就觉得一切值得。这大概就是平凡生活里的英雄梦想。" },
+            { date: "2020.2.14", content: "因为疫情，被困在实验室里整整两周。她隔着玻璃给我看手机上的字：\"等你出来，我们去吃遍所有想吃的。\" 那瞬间，觉得什么困难都能熬过去。" },
+            { date: "2019.8.28", content: "硕士顺利转博。导师说，未来的路很长。和女朋友在学校旁边的餐馆庆祝" },
+            { date: "2018.6.22", content: "大早上离开了大学，再见了临床学院，昨晚真的很开心。<br><img src='images/jvhui.jpg' alt='聚会图片' class='post-image'>" },
+            { date: "2018.3.5", content: "等一等咯。" },
+            { date: "2017.10.26", content: "能和你聊真的很开心/羞涩" },
+            { date: "2017.7.17", content: "无聊看了几年前的说说。真是年轻啊，发的都是什么奇怪的东西/激动。删了一批太中二的。" },
+            { date: "2017.3.21", content: "一切事情，你都可以在现在想的非常好，想象以后自己轻松甜蜜的生活，但是现实点吧，以后都会变的，毕竟计划赶不上变化。" },
+            { date: "2017.2.17", content: "男生们好好问问自己是想脱单还是想和喜欢的人在一起" },
+            { date: "2017.1.28", content: "新年快乐！！！！" },
+            { date: "2017.1.18", content: "有大佬赐我一张敬业福吗" },
+            { date: "2016.12.17", content: "普通的天气，普通的夜晚，普通的电影，普通的吃着饭，普通的19:40，我喜欢上了不普通的你。" },
+            { date: "2016.8.3", content: "我的车技越来越稳了" },
+            { date: "2016.7.21", content: "7点。。开始工作" },
+            { date: "2016.6.9", content: "讲个笑话，我一个海岛人还是动不动就晕船，呕。。。" },
+            { date: "2016.6.8", content: "我爱你 就是这么喜欢温柔时的你。" },
+            { date: "2016.5.22", content: "出卖我的爱，giligili eye，最后知道真相的我，giligili mind。出卖我的爱，giligili eye，就算付出再多感情也giligili mind。当初是你要分开，giligili eye，现在又要用真爱，giligili mind。爱情不是你想买，giligili eye，让我看透让我明白，giligili mind。" },
+            { date: "2016.5.20", content: "有病啊，大雨天还上体育课" },
+            { date: "2016.5.14", content: "来自朋友的神解释，美队三就是两个九旬老汉当街殴打一个美国富豪的故事。。。" },
+            { date: "2016.5.9", content: "恨今天的雨，为什么要让我看见他和她在一起，最喜欢的人和好朋友。。。只能祝福吧，两个人我都不可能去伤害。。。。" },
+            { date: "2016.5.6", content: "这天气有毒，我去上课他大太阳，下课他暴雨，回到寝室又是大太阳(ಥ_ಥ)，你让我这个淋雨回寝室的怎么想" },
+            { date: "2016.5.3", content: "右腿疼，疼的要命，一阵一阵的/难过" },
+            { date: "2016.4.1", content: "快来人向我告白(ಥ_ಥ)" },
+            { date: "2016.3.24", content: "她怎么就不懂呢(ಥ_ಥ)" },
+            { date: "2016.3.17", content: "看恋爱小说却莫名心口闷" },
+            { date: "2016.2.13", content: "又是一年情人节，哪位美女来拯救我/激动 /激动 /激动" },
+            { date: "2016.2.8", content: "通宵的感觉。。。就是没啥感觉。。哎呦！我的眼睛好痛。。" },
+            { date: "2016.1.22", content: "想你 老夫去也！" },
+            { date: "2016.1.2", content: "继续等待你的醒来，没听你说吃饱了睡不着 /嘿嘿" },
+            { date: "2015.12.13", content: "注孤生 哼叽哼叽" },
+            { date: "2015.11.22", content: "坑爹 解刨学课没听过，然而，居然要明天第一节课考试" },
+            { date: "2015.10.26", content: "心塞 心酸与欢喜，忧愁与祝福，感谢有你" },
+            { date: "2015.10.22", content: "赖床分子 赶紧呗" },
+            { date: "2015.10.19", content: "心塞 这是！这是！心头一箭！" },
+            { date: "2015.9.30", content: "我爱你 虽然就七天，但是一定要亲口和你说再见。" },
+            { date: "2015.9.24", content: "上吧骚年，大学不能再怂了！" },
+            { date: "2015.8.17", content: "年轻即出发 感觉半个月前减下来的体重又回来了，所以回归晨跑界吧。" },
+            { date: "2015.8.10", content: "又有一个老同学去日本了，我也好想去，想去秋叶原逛啊。不知现在做护照办签证还来不来得及。" },
+            { date: "2015.8.9", content: "我也无言以对" },
+            { date: "2015.7.12", content: "次奥，我还没去吃了，我的免单" },
+            { date: "2015.7.11", content: "追了整整37集假面骑士drive，现在才发现敌方二号干部居然是武媚娘的日本节度使，被范爷下棋完虐那个/呲牙 ，结果在假面里面居然演个超级大逗比" },
+            { date: "2015.4.26", content: "谢谢，谢谢各位记得我的生日，感动到cry /大哭 /大哭 /大哭。我的心里也暖烘烘的(๑•̀ㅂ•́)و✧" },
+            { date: "2015.1.30", content: "年夜饭也可以像酒店一样，而且是高档大酒店！！帝王蟹+北极虾！！！虾是生吃的！！" },
+            { date: "2014.2.18", content: "为什么都说妹纸是腿细好看，明明感觉有肉感（粗点）好看啊。" },
+            { date: "2014.11.12", content: "早上陪舅妈洗衣服，手一伸下去，阿，水好凉，舅妈说过去没冰箱时，水果都是放在这冰的/呲牙/呲牙" },
+            { date: "2014.10.4", content: "都结束了" },
+            { date: "2014.8.9", content: "妈蛋，我爸都住院了还让我去浪！！！！/发怒/发怒" },
+            { date: "2014.8.8", content: "父上转驾上海医院了，我也跟去，要服侍他一礼拜 /大哭父上赶紧好起来吧/大哭/大哭" },
+            { date: "2014.8.7", content: "父上咳血被检查出来胃出血，母上哭了，难道胃出血能要人命吗？我好难受。/大哭/大哭" },
+            { date: "2014.7.26", content: "死狗一样，语文A数学B地理B,妈的，政治，历史英语生物都C" },
+            { date: "2014.5.18", content: "dian nao da zi fa mei le....." },
+            { date: "2014.5.2", content: "纳尼，那今天结婚还这么多" },
+            { date: "2014.4.18", content: "最恨那些什么都不做，最后还和努力劳动的人抢吃的，还一点都不留的人，恶心死！！！！！！/吐/吐/吐/吐" },
+            { date: "2014.4.15", content: "hehe" },
+            { date: "2014.3.19", content: "回到家，一看我妈不在，一定是在学校等我，我义无反顾再次冲进雨幕/酷/酷" },
+            { date: "2014.2.13", content: "惊现进击的巨人，2005年的片居然有这货，莫非是巨人母体！！！" },
+            { date: "2014.2.4", content: "擦，谁有支付宝，急救！！！" },
+            { date: "2014.2.3", content: "曾小贤那个表情我笑了一晚上/呲牙/偷笑" },
+            { date: "2014.2.2", content: "复习海贼王，从第一集看到538了，坚持啊！！！！" },
+            { date: "2014.2.2", content: "鼻子上长了颗痘痘，我这是要向哥布林发展的节奏吗？？" },
+            { date: "2014.1.31", content: "刚看完了《绝世唐门》更新的一章，里面爱神的问题好土：你有爱人吗？ 如果没有，那你有爱过的人吗？ 如果你的死能换取他\\她的生，你愿意去死吗? 不过现在想想，这些问题值得深思呀。" },
+            { date: "2014.1.28", content: "本想下个魔兽世界玩玩，后来发现安装不了，一看大小，22GB，瞬间吓尿。。。。。" },
+            { date: "2013.10.27", content: "纠结呀，到底说不说啊。。。。" },
+            { date: "2013.10.20", content: "咳咳，失误了，还是在酝酿一段日子吧，有点对她太突然了。。。。" },
+            { date: "2013.10.20", content: "运动会时要表白，兄弟们顶我呀！！！！" },
+            { date: "2013.7.9", content: "dota食尸鬼47杀2死1助攻，求赞呀！！！！！！" },
+            { date: "2013.7.6", content: "饿" },
+            { date: "2013.5.5", content: "额，怎么每天早上起床，我被子都会调个个呀。。。" },
+            { date: "2013.3.13", content: "我的反复无常，谁愿意陪着我......" },
+            { date: "2013.3.7", content: "我的不好，你都告诉我吧..." },
+            { date: "2013.3.6", content: "再和你表白，你会说好吗？" },
+            { date: "2013.2.13", content: "我正在手机上用 #微不信#，可以语音对讲，挺好玩的。扫描下面的二维码就能和我微不信打招呼啦。【图片已过期】" },
+            { date: "2013.1.15", content: "啊......该怎么约你出来麻......！" },
+            { date: "2013.1.2", content: "他不理你了你只想尽力挽回 而我默默地帮你 背叛着自己 我又何曾对你坏过 你无论哭或笑我都和你在一起 我不奢望得到你 我愿意远远的看着你幸福 一个人，看着你 我真的很爱你......" },
+            { date: "2012.11.15", content: "划船啦" },
+            { date: "2012.10.27", content: "蛋疼，踩到猫屎了" },
+            { date: "2012.9.22", content: "这是哪，咋么越看越像小日本～～<br><div class='image-placeholder'>图片已损坏</div>" },
+            { date: "2012.9.22", content: "没想到,小弟我的体育身材达标可能是100" }
+        ];
+
+        // 当前显示的说说数量
+        let currentPostsCount = 10;
+        const postsPerLoad = 10;
+        let sortOrder = 'desc'; // 'desc' 为最新在前，'asc' 为最早在前
+        let showHiddenPosts = false; // 是否显示隐藏页面说说
+        let allPostsData = []; // 存储所有说说数据（包括隐藏页面说说和原页面说说）
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 合并所有说说数据
+            allPostsData = [...originalPostsData];
+            
+            // 初始状态：显示凯文已登录
+            document.getElementById('loggedInStatus').style.display = 'flex';
+            document.getElementById('notLoggedInButtons').style.display = 'none';
+            
+            // 初始渲染：只显示原页面说说
+            renderPosts();
+            
+            // 2秒后开始渐变效果
+            setTimeout(() => {
+                // 添加红色主题类，触发颜色渐变
+                document.body.classList.add('red-theme');
+                
+                // 开始显示隐藏页面说说
+                showHiddenPosts = true;
+                startShowingHiddenPosts();
+                
+                // 更新说说总数显示
+                updatePostCount();
+            }, 2000);
+            
+            // 加载更多按钮事件
+            document.getElementById('loadMoreBtn').addEventListener('click', function() {
+                currentPostsCount += postsPerLoad;
+                renderPosts();
+                
+                // 为新加载的说说添加淡入效果
+                setTimeout(() => {
+                    const newPosts = document.querySelectorAll('.post:not(.fade-in)');
+                    newPosts.forEach((post, index) => {
+                        setTimeout(() => {
+                            post.classList.add('fade-in');
+                        }, index * 100);
+                    });
+                }, 100);
+                
+                // 如果已经显示所有说说，隐藏加载更多按钮
+                if (currentPostsCount >= originalPostsData.length) {
+                    this.style.display = 'none';
+                }
+            });
+            
+            // 排序按钮事件
+            document.getElementById('descSortBtn').addEventListener('click', function() {
+                if (sortOrder !== 'desc') {
+                    sortOrder = 'desc';
+                    updateSortButtons();
+                    currentPostsCount = 10; // 重置显示数量
+                    renderPosts();
+                    document.getElementById('loadMoreBtn').style.display = 'block'; // 显示加载更多按钮
+                    
+                    // 为新排序的说说添加淡入效果
+                    setTimeout(() => {
+                        const posts = document.querySelectorAll('.post');
+                        posts.forEach((post, index) => {
+                            post.classList.remove('fade-in');
+                            setTimeout(() => {
+                                post.classList.add('fade-in');
+                            }, index * 100);
+                        });
+                    }, 100);
+                }
+            });
+            
+            document.getElementById('ascSortBtn').addEventListener('click', function() {
+                if (sortOrder !== 'asc') {
+                    sortOrder = 'asc';
+                    updateSortButtons();
+                    
+                    // 当点击"最早在前"时，需要合并所有数据并重新排序
+                    // 合并所有说说数据（包括隐藏页面说说）
+                    const allData = [...originalPostsData];
+                    if (showHiddenPosts) {
+                        allData.push(...hiddenPostsData);
+                    }
+                    
+                    // 按照时间升序排序（年份早的在前面）
+                    allData.sort((a, b) => {
+                        // 将日期字符串转换为可比较的格式
+                        const dateA = a.date.replace(/\./g, '-');
+                        const dateB = b.date.replace(/\./g, '-');
+                        return new Date(dateA) - new Date(dateB);
+                    });
+                    
+                    // 渲染排序后的所有说说
+                    renderSortedPosts(allData);
+                    document.getElementById('loadMoreBtn').style.display = 'none'; // 隐藏加载更多按钮，因为显示所有说说了
+                    
+                    // 为新排序的说说添加淡入效果
+                    setTimeout(() => {
+                        const posts = document.querySelectorAll('.post');
+                        posts.forEach((post, index) => {
+                            post.classList.remove('fade-in');
+                            setTimeout(() => {
+                                post.classList.add('fade-in');
+                            }, index * 100);
+                        });
+                    }, 100);
+                }
+            });
+            
+            // 登录弹窗相关事件
+            const loginModal = document.getElementById('loginModal');
+            const loginBtn = document.getElementById('loginBtn');
+            const closeModal = document.getElementById('closeModal');
+            const loginForm = document.getElementById('loginForm');
+            const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+            
+            // 打开登录弹窗
+            loginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+            });
+            
+            // 关闭登录弹窗
+            closeModal.addEventListener('click', function() {
+                loginModal.style.display = 'none';
+            });
+            
+            // 点击弹窗外部关闭
+            loginModal.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            });
+            
+            // 处理登录表单提交
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // 验证账号密码
+                if (username === 'xukevin' && password === 'kevin960426') {
+                    // 跳转到bbkongjianyingcang.html
+                    window.location.href = 'bbkongjianyingcang.html';
+                } else if (username === 'zhangte' && password === 'zhangte951119') {
+                    // 隐藏登录弹窗
+                    loginModal.style.display = 'none';
+                    
+                    // 隐藏登录注册按钮，显示已登录状态
+                    document.getElementById('notLoggedInButtons').style.display = 'none';
+                    document.getElementById('loggedInStatus').style.display = 'flex';
+                    
+                    // 清空表单
+                    loginForm.reset();
+                } else {
+                    // 其他情况弹出错误提示
+                    alert('密码错误，请检查后重新填写。');
+                }
+            });
+            
+            // 忘记密码链接点击事件
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'wangjimima.html';
+            });
+            
+            // 注册按钮点击事件
+            document.getElementById('registerBtn').addEventListener('click', function() {
+                alert('注册功能即将开放，敬请期待！');
+            });
+            
+            // 切换到注册链接
+            document.getElementById('switchToRegister').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('注册功能即将开放，敬请期待！');
+            });
+            
+            // 为输入提示添加点击事件
+            document.getElementById('usernameHint').addEventListener('click', function() {
+                document.getElementById('username').value = this.getAttribute('data-value');
+            });
+            
+            document.getElementById('passwordHint').addEventListener('click', function() {
+                document.getElementById('password').value = this.getAttribute('data-value');
+            });
+        });
+
+        // 开始显示隐藏页面说说
+        function startShowingHiddenPosts() {
+            const postsContainer = document.getElementById('postsContainer');
+            let hiddenPostIndex = 0;
+            
+            // 每隔0.5秒显示一条隐藏页面说说
+            const showNextHiddenPost = () => {
+                if (hiddenPostIndex < hiddenPostsData.length) {
+                    const post = hiddenPostsData[hiddenPostIndex];
+                    
+                    // 创建说说元素
+                    const postElement = document.createElement('div');
+                    postElement.className = 'post fade-in';
+                    postElement.style.opacity = '0';
+                    
+                    postElement.innerHTML = `
+                        <div class="post-header">
+                            <div class="post-avatar">
+                                <img src="images/avatar_small.jpg" alt="凯文的头像" onerror="this.style.display='none'; this.parentNode.innerHTML='K';">
+                            </div>
+                            <div class="post-info">
+                                <div class="post-author">凯文</div>
+                                <div class="post-date">${post.date}</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            ${post.content}
+                        </div>
+                        <div class="post-actions">
+                            <div class="post-action"><i class="fas fa-thumbs-up"></i> 赞</div>
+                            <div class="post-action"><i class="fas fa-comment"></i> 评论</div>
+                            <div class="post-action"><i class="fas fa-share"></i> 转发</div>
+                        </div>
+                    `;
+                    
+                    // 插入到说说列表的最前面（因为是最新的说说）
+                    // 注意：由于hiddenPostsData已经按时间从旧到新排序，所以最后插入的11.24会在最前面
+                    if (postsContainer.firstChild) {
+                        postsContainer.insertBefore(postElement, postsContainer.firstChild);
+                    } else {
+                        postsContainer.appendChild(postElement);
+                    }
+                    
+                    // 触发淡入动画
+                    setTimeout(() => {
+                        postElement.style.opacity = '1';
+                    }, 50);
+                    
+                    hiddenPostIndex++;
+                    
+                    // 0.5秒后显示下一条
+                    setTimeout(showNextHiddenPost, 500);
+                }
+            };
+            
+            // 开始显示第一条（2025.5.2）
+            setTimeout(showNextHiddenPost, 0);
+        }
+
+        // 更新排序按钮状态
+        function updateSortButtons() {
+            const descBtn = document.getElementById('descSortBtn');
+            const ascBtn = document.getElementById('ascSortBtn');
+            
+            if (sortOrder === 'desc') {
+                descBtn.classList.add('active');
+                ascBtn.classList.remove('active');
+            } else {
+                descBtn.classList.remove('active');
+                ascBtn.classList.add('active');
+            }
+        }
+
+        // 更新说说总数显示
+        function updatePostCount() {
+            // 更新左侧个人信息的说说数量
+            const postCountElement = document.querySelector('.stat-value:first-child');
+            if (postCountElement) {
+                const originalCount = 187; // 原页面说说总数
+                const hiddenCount = hiddenPostsData.length; // 隐藏页面说说数量
+                postCountElement.textContent = originalCount + hiddenCount;
+            }
+        }
+
+        // 渲染排序后的所有说说
+        function renderSortedPosts(sortedData) {
+            const postsContainer = document.getElementById('postsContainer');
+            
+            // 清空容器
+            postsContainer.innerHTML = '';
+            
+            // 渲染所有排序后的说说
+            for (let i = 0; i < sortedData.length; i++) {
+                const post = sortedData[i];
+                
+                // 创建说说元素
+                const postElement = document.createElement('div');
+                postElement.className = 'post fade-in';
+                
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <img src="images/avatar_small.jpg" alt="凯文的头像" onerror="this.style.display='none'; this.parentNode.innerHTML='K';">
+                        </div>
+                        <div class="post-info">
+                            <div class="post-author">凯文</div>
+                            <div class="post-date">${post.date}</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        ${post.content}
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-action"><i class="fas fa-thumbs-up"></i> 赞</div>
+                        <div class="post-action"><i class="fas fa-comment"></i> 评论</div>
+                        <div class="post-action"><i class="fas fa-share"></i> 转发</div>
+                    </div>
+                `;
+                
+                postsContainer.appendChild(postElement);
+            }
+        }
+
+        // 渲染说说
+        function renderPosts() {
+            const postsContainer = document.getElementById('postsContainer');
+            
+            // 清空容器，但保留已经显示的隐藏页面说说
+            const existingPosts = postsContainer.querySelectorAll('.post');
+            const hiddenPosts = Array.from(existingPosts).filter(post => {
+                const dateElement = post.querySelector('.post-date');
+                if (dateElement) {
+                    const date = dateElement.textContent;
+                    // 检查是否是隐藏页面说说的日期
+                    return hiddenPostsData.some(hiddenPost => hiddenPost.date === date);
+                }
+                return false;
+            });
+            
+            // 清空容器
+            postsContainer.innerHTML = '';
+            
+            // 重新添加隐藏页面说说（如果已经开始显示）
+            if (showHiddenPosts && hiddenPosts.length > 0) {
+                hiddenPosts.forEach(post => {
+                    postsContainer.appendChild(post);
+                });
+            }
+            
+            // 根据排序方式准备数据
+            let displayData = [...originalPostsData]; // 创建数据副本
+            
+            if (sortOrder === 'desc') {
+                // 最新在前 - 保持原始顺序
+            } else {
+                // 最早在前 - 反转数组
+                displayData = displayData.reverse();
+            }
+            
+            for (let i = 0; i < Math.min(currentPostsCount, displayData.length); i++) {
+                const post = displayData[i];
+                
+                // 创建说说元素
+                const postElement = document.createElement('div');
+                postElement.className = 'post fade-in';
+                
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <img src="images/avatar_small.jpg" alt="凯文的头像" onerror="this.style.display='none'; this.parentNode.innerHTML='K';">
+                        </div>
+                        <div class="post-info">
+                            <div class="post-author">凯文</div>
+                            <div class="post-date">${post.date}</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        ${post.content}
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-action"><i class="fas fa-thumbs-up"></i> 赞</div>
+                        <div class="post-action"><i class="fas fa-comment"></i> 评论</div>
+                        <div class="post-action"><i class="fas fa-share"></i> 转发</div>
+                    </div>
+                `;
+                
+                postsContainer.appendChild(postElement);
+            }
+        }
+    </script>
+</body>
+</html>

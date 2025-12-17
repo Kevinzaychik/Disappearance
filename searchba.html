@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索结果-泗水吧 - 千度贴吧</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Sans Serif", Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #e8f0e8;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4jWNgYGD4T0cwwsLwMKP5QhIYJQwLQ8M0VhgaJYwShgUA6oYEBXh2BpUAAAAASUVORK5CYII=');
+        }
+        
+        .container {
+            width: 980px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(to bottom, #2e8b57, #1e6b47);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0a4d2e;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .bar-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border: 2px solid white;
+            border-radius: 4px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .bar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+        
+        .logo-subtitle {
+            font-size: 14px;
+            margin-left: 10px;
+            opacity: 0.8;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .search-container:focus-within {
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3) inset;
+        }
+        
+        .search-input {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            color: white;
+            width: 200px;
+            font-size: 14px;
+            outline: none;
+            border-radius: 16px 0 0 16px;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-button {
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 0 16px 16px 0;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+        
+        .search-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .user-info {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2e8b57;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        /* 搜索结果样式 */
+        .search-results {
+            padding: 20px;
+        }
+        
+        .search-header {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .search-query {
+            font-size: 18px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .result-count {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .result-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #e5e5e5;
+        }
+        
+        .result-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2e8b57;
+            margin-bottom: 5px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .result-title:hover {
+            text-decoration: underline;
+        }
+        
+        .result-preview {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        .result-meta {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .no-results {
+            padding: 40px 20px;
+            text-align: center;
+            color: #666;
+        }
+        
+        .no-results h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .no-results p {
+            font-size: 14px;
+        }
+        
+        /* 底部样式 */
+        footer {
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .main-content {
+            padding: 20px;
+        }
+        
+        /* 隐藏用户头像的样式 */
+        .user-avatar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="sishuiba.html" style="text-decoration: none; color: inherit;">
+                <div class="logo-container">
+                    <div class="bar-logo">
+                        <img src="images/xishuitouxiang.jpg" alt="泗水吧头像">
+                    </div>
+                    <div>
+                        <div class="logo">泗水吧<span class="logo-subtitle">千度贴吧</span></div>
+                    </div>
+                </div>
+            </a>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="搜索贴吧内容">
+                    <button class="search-button" id="search-button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.7422 10.3439C12.5329 9.2673 13 7.9382 13 6.5C13 2.91015 10.0899 0 6.5 0C2.91015 0 0 2.91015 0 6.5C0 10.0899 2.91015 13 6.5 13C7.93858 13 9.26801 12.5327 10.3448 11.7415L10.3439 11.7422C10.3734 11.7822 10.4062 11.8204 10.4424 11.8566L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L11.8566 10.4424C11.8204 10.4062 11.7822 10.3734 11.7422 10.3439ZM12 6.5C12 9.53757 9.53757 12 6.5 12C3.46243 12 1 9.53757 1 6.5C1 3.46243 3.46243 1 6.5 1C9.53757 1 12 3.46243 12 6.5Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">张</div>
+                    <span>张特 (已登录)</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="search-results">
+                <div class="search-header">
+                    <div class="search-query" id="search-query">搜索关键词：</div>
+                    <div class="result-count" id="result-count">找到 0 条结果</div>
+                </div>
+                
+                <div id="results-container">
+                    <!-- 搜索结果将在这里动态显示 -->
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+            <p>Copyright© xukaiwen. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取URL参数中的搜索关键词
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchTerm = urlParams.get('q') || '';
+            
+            // 显示搜索关键词
+            document.getElementById('search-query').textContent = '搜索关键词：' + (searchTerm || '(空)');
+            
+            // 设置搜索框的值
+            document.getElementById('search-input').value = searchTerm;
+            
+            // 执行搜索
+            performSearch(searchTerm);
+            
+            // 搜索功能
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            
+            function performSearch(term) {
+                const resultsContainer = document.getElementById('results-container');
+                const resultCount = document.getElementById('result-count');
+                
+                // 清空之前的结果
+                resultsContainer.innerHTML = '';
+                
+                if (!term.trim()) {
+                    resultCount.textContent = '找到 0 条结果';
+                    resultsContainer.innerHTML = `
+                        <div class="no-results">
+                            <h3>请输入搜索内容</h3>
+                            <p>请在搜索框中输入关键词进行搜索</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // 模拟搜索结果数据
+                const searchResults = simulateSearch(term);
+                
+                if (searchResults.length > 0) {
+                    resultCount.textContent = `找到 ${searchResults.length} 条结果`;
+                    
+                    searchResults.forEach(result => {
+                        const resultItem = document.createElement('div');
+                        resultItem.className = 'result-item';
+                        resultItem.innerHTML = `
+                            <a href="${result.url}" class="result-title">${result.title}</a>
+                            <div class="result-preview">${result.preview}</div>
+                            <div class="result-meta">${result.meta}</div>
+                        `;
+                        resultsContainer.appendChild(resultItem);
+                    });
+                } else {
+                    resultCount.textContent = '找到 0 条结果';
+                    resultsContainer.innerHTML = `
+                        <div class="no-results">
+                            <h3>抱歉，没有找到与"${term}"相关的结果。</h3>
+                            <p>建议您：检查输入是否正确、使用更简单的关键词、尝试其他相关关键词</p>
+                        </div>
+                    `;
+                }
+            }
+            
+            // 模拟搜索函数 - 根据文档中的四个条目
+            function simulateSearch(term) {
+                const results = [];
+                const lowerTerm = term.toLowerCase();
+                
+                // 定义四个可搜索选项
+                const searchOptions = [
+                    {
+                        keywords: ['母神'],
+                        result: {
+                            title: '半夜在镇医院看到的怪事',
+                            preview: '凌晨送来一个浑身是伤的男人......',
+                            meta: '我不是庸医 - 2025-5-23',
+                            url: 'yiyuanguairen.html'
+                        }
+                    },
+                    {
+                        keywords: ['黑水'],
+                        result: {
+                            title: '标题五个字',
+                            preview: '泗水附近的一些山是不是有问题？最近动物都怪怪的。',
+                            meta: '夜雨江湖 - 2025-2-22',
+                            url: 'dongwu.html'
+                        }
+                    },
+                    {
+                        keywords: ['泗源山'],
+                        result: {
+                            title: '泗源山里那声响动，有人知道详情吗？',
+                            preview: '昨晚山里那声巨响，有人知道详情吗？',
+                            meta: '山猫子 - 2025-5-23',
+                            url: 'baozha.html'
+                        }
+                    },
+                    {
+                        keywords: ['泗水地方水文地质与生态共融研究社区共建会'],
+                        result: {
+                            title: '[广告]"泗水地方水文地质与生态共融研究社区共建会"招募新成员暨春季活动预告',
+                            preview: '各位乡亲邻里好。',
+                            meta: '泗水地方水文地质与生态共融研究社区共建会 - 2024-6-5',
+                            url: 'yichuanhanzixiehui.html'
+                        }
+                    }
+                ];
+                
+                // 检查匹配的关键词数量
+                let matchedKeywords = 0;
+                let matchedResult = null;
+                
+                for (const option of searchOptions) {
+                    // 检查每个关键词
+                    for (const keyword of option.keywords) {
+                        if (lowerTerm.includes(keyword.toLowerCase())) {
+                            matchedKeywords++;
+                            matchedResult = option.result;
+                            break;
+                        }
+                    }
+                }
+                
+                // 仅当只有一个关键词匹配时才返回结果
+                if (matchedKeywords === 1 && matchedResult) {
+                    results.push(matchedResult);
+                }
+                
+                return results;
+            }
+            
+            // 搜索按钮点击事件
+            searchButton.addEventListener('click', function() {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    // 跳转到searchba.html，并传递搜索关键词作为参数
+                    window.location.href = `searchba.html?q=${encodeURIComponent(searchTerm)}`;
+                } else {
+                    alert('请输入搜索内容！');
+                }
+            });
+            
+            // 按回车键搜索
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const searchTerm = searchInput.value.trim();
+                    if (searchTerm) {
+                        window.location.href = `searchba.html?q=${encodeURIComponent(searchTerm)}`;
+                    } else {
+                        alert('请输入搜索内容！');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

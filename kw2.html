@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密撕卡托尼克大学 | 论坛帖子</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        /* 顶部导航栏 */
+        .header {
+            background-color: #fff;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: baseline;
+        }
+        .logo-main {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.8rem;
+            margin-left: 0.5rem;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 论坛帖子容器 */
+        .forum-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        .forum-panel {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04),
+                        0 4px 8px rgba(0,0,0,0.04),
+                        0 8px 16px rgba(0,0,0,0.04);
+            margin-bottom: 1.5rem;
+        }
+        .post-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #222;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 1rem;
+        }
+        .post-meta {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .post-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e6e6e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            overflow: hidden;
+        }
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .author-info {
+            flex: 1;
+        }
+        .author-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        .author-badge {
+            display: inline-block;
+            background-color: #e6f7ff;
+            color: #1890ff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+        .post-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            padding-left: 0.5rem;
+        }
+        .post-content p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .post-quote {
+            background-color: #f9f9f9;
+            padding: 1.2rem;
+            border-left: 4px solid #d0d0d0;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #555;
+        }
+        .post-tags {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tag {
+            background-color: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        /* 评论区 */
+        .comment-section {
+            margin-top: 2rem;
+        }
+        .comment-header {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .comment-count {
+            color: #888;
+            font-weight: normal;
+            font-size: 1rem;
+        }
+        .comment-list {
+            margin-bottom: 2rem;
+        }
+        .comment-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+        .comment-author {
+            font-weight: 600;
+            color: #333;
+        }
+        .comment-time {
+            color: #888;
+            font-size: 0.85rem;
+        }
+        .comment-floor {
+            background-color: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            color: #666;
+        }
+        .comment-content {
+            line-height: 1.7;
+            color: #333;
+        }
+        .comment-content p {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* 回复样式 */
+        .comment-reply {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            border-left: 3px solid #ddd;
+        }
+        .reply-to {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .reply-to span {
+            color: #1890ff;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+            background-color: #fff;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+            margin-top: 3rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 1.5rem;
+            }
+            .forum-container {
+                padding: 0 15px;
+            }
+            .forum-panel {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* 链接样式 */
+        .external-link {
+            color: #1890ff;
+            text-decoration: underline;
+        }
+        .external-link:hover {
+            color: #40a9ff;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="header">
+        <a href="luntan.html" class="logo">
+            密撕卡托尼克大学<span class="logo-main">学生论坛</span>
+        </a>
+    </header>
+
+    <!-- 论坛帖子 -->
+    <div class="forum-container">
+        <!-- 帖子主体 -->
+        <div class="forum-panel">
+            <h1 class="post-title">【求助】云南泗水镇有人去过吗？求当地情况</h1>
+            <div class="post-meta">
+                <span>发布者：凯文_徐</span>
+                <span>发布时间：2025年5月17日 15:24</span>
+            </div>
+            
+            <div class="post-author">
+                <div class="author-avatar">
+                    <img src="images/avatar.jpg" alt="凯文_徐头像" onerror="this.style.display='none'; this.parentElement.style.backgroundColor='#e6e6e6'; this.parentElement.innerHTML='凯';">
+                </div>
+                <div class="author-info">
+                    <div>
+                        <span class="author-name">凯文_徐</span>
+                        <span class="author-badge">博士在读</span>
+                    </div>
+                    <div style="color: #888; font-size: 0.9rem; margin-top: 0.2rem;">
+                        基础医学专业 | 在线时长: 1024小时
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-content">
+                <p>如题，我最近在做一个很重要的研究，需要一些特殊的物质。听说云南泗水镇那边有些独特的生态资源，找不到人帮我跑腿。时间紧迫。就想去实地考察一下，顺便散散心。</p>
+                
+                <p>我前段时间悬赏找一种特殊的生物样本，结果真有个小哥联系我，给我带来了一份样本，我测了一下简直惊了，确实是我想要的东西。但量太少了，所以想赶紧亲自去产地看看能不能多搞点。</p>
+                
+                <p>实验室压力太大了，最近做实验做到头秃，导师说我方向太激进成功率渺茫，但我觉得就差临门一脚了。正好借这个机会出去走走，换个环境说不定有灵感。</p>
+                
+                <p>所以想问下论坛里有没有老哥去过泗水镇？求点当地攻略，比如交通、住宿、有啥需要注意的？听说那边比较偏，不知道网络信号咋样，我还得远程处理一些实验数据。</p>
+                
+                <p>哦对了，我试着搜了一下相关信息，找到一个<a href="sishuikaiping.html" class="external-link" target="_blank">泗水镇贴吧</a>，但里面帖子不多，而且感觉有点年代了，不知道现在变化大不大。</p>
+                
+                <p>要是能找个当地向导就更好了，主要我要找的东西可能在比较原生态的地方，比如山林、溪流附近。听说那边有个什么潭还是什么泉的，水质好像有点特殊。</p>
+                
+                <p>最近精神状态有点不好，总是做奇怪的梦，梦见一堆星星还是泡泡什么的，一醒来就记不清了。所以也想出去走走清醒一下。</p>
+                
+                <p>有去过的或者有相关经验的老哥，求指点！小弟跪谢！</p>
+            </div>
+            
+            <div class="post-tags">
+                <span class="tag">求助</span>
+                <span class="tag">云南</span>
+                <span class="tag">泗水镇</span>
+                <span class="tag">生物样本</span>
+                <span class="tag">实地考察</span>
+            </div>
+        </div>
+        
+        <!-- 评论区 -->
+        <div class="forum-panel comment-section">
+            <h2 class="comment-header">
+                评论 <span class="comment-count">(共 8 条)</span>
+            </h2>
+            
+            <div class="comment-list">
+                <!-- 评论 1 -->
+                <div class="comment-item">
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-floor">#1</span>
+                            <span class="comment-author">生物狗不狗</span>
+                        </div>
+                        <span class="comment-time">2025年5月17日 16:08</span>
+                    </div>
+                    <div class="comment-content">
+                        <p>沙发！徐大佬又发现新大陆了？上次听你报告就觉得你这研究方向太野了，不过确实牛批！</p>
+                        <p>云南那边我去过几次，但不是泗水镇。那边山区多，建议带点防蚊虫的，还有雨具。信号的话，镇上应该还行，进山就别想了。</p>
+                    </div>
+                </div>
+                
+                <!-- 评论 2 -->
+                <div class="comment-item">
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-floor">#2</span>
+                            <span class="comment-author">滇西浪人</span>
+                        </div>
+                        <span class="comment-time">2025年5月17日 17:32</span>
+                    </div>
+                    <div class="comment-content">
+                        <p>卧槽，居然有人问泗水镇！我老家就在那附近！</p>
+                        <p>老铁听我一句劝，那地方现在没啥人了，年轻人都跑出来了。你要去的话最好找个当地人带路，山里容易迷路。</p>
+                    </div>
+                </div>
+                
+                <!-- 评论 3 -->
+                <div class="comment-item">
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-floor">#3</span>
+                            <span class="comment-author">仿生猹会梦见电子闰土吗</span>
+                        </div>
+                        <span class="comment-time">2025年5月17日 19:15</span>
+                    </div>
+                    <div class="comment-content">
+                        <p>你上次那个悬赏我也看到了，还想着能不能接呢，结果被截胡了哈哈哈</p>
+                        <p>不过说真的，什么东西这么神奇？没见过你这么急。方便透露下吗？</p>
+                    </div>
+                    
+                    <!-- 楼主回复 -->
+                    <div class="comment-reply">
+                        <div class="reply-to">回复 <span>#3 仿生猹会梦见电子闰土吗</span>:</div>
+                        <div class="comment-content">
+                            <p>具体细节暂时保密，等数据出来了再分享。不过可以告诉你的是，这种物质似乎可以让细胞充满无限的生机，活力和适应性。我也不确定，还需要进一步研究。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 评论 4 -->
+                <div class="comment-item">
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-floor">#4</span>
+                            <span class="comment-author">扫地僧</span>
+                        </div>
+                        <span class="comment-time">2025年5月17日 21:44</span>
+                    </div>
+                    <div class="comment-content">
+                        <p>我记得图书馆有些老档案提到过云南一些偏远地区有特殊的民俗信仰。你去找样本的话，注意下当地人的禁忌，有些地方他们不让外人进的。</p>
+                    </div>
+                </div>
+                
+                <!-- 评论 5 -->
+                <div class="comment-item">
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-floor">#5</span>
+                            <span class="comment-author"> fieldwork_hero </span>
+                        </div>
+                        <span class="comment-time">2025年5月18日 09:12</span>
+                    </div>
+                    <div class="comment-content">
+                        <p>几年前我去云南做过田野调查，好像路过过。那地方风景是真的好，但也是真的偏。住宿的话只有一家老招待所，条件一般。吃的倒是很有特色，各种菌子。</p>
+                        <p>楼主如果去的话，建议带足装备，那边买不到什么专业设备。还有，如果进山，一定要告诉当地派出所你去哪了，安全第一。</p>
+                    </div>
+                </div>
+                
+                <!-- 评论 6 -->
+                <div class="comment-item">
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-floor">#6</span>
+                            <span class="comment-author">剑桥折刀</span>
+                        </div>
+                        <span class="comment-time">2025年5月18日 14:36</span>
+                    </div>
+                    <div class="comment-content">
+                        <p>插眼，有什么研究成果记得踢我。</p>
+                    </div>
+                    
+                    <!-- 楼主回复 -->
+                    <div class="comment-reply">
+                        <div class="reply-to">回复 <span>#6 剑桥折刀</span>:</div>
+                        <div class="comment-content">
+                            <p>哈哈哈哈好的。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 评论 7 -->
+                <div class="comment-item">
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-floor">#7</span>
+                            <span class="comment-author">滇西浪人</span>
+                        </div>
+                        <span class="comment-time">2025年5月19日 10:05</span>
+                    </div>
+                    <div class="comment-content">
+                        <p>楼主如果真要去，我可以帮你问问家里人有没有认识那边的。不过我小时候听说，泗水那边有些老一辈特别忌讳外人侵扰他们的水土，说是动了会惊扰"山神"还是什么。</p>
+                        <p>现在年轻人可能不信这些了，但你如果遇到老人，最好尊重下他们的习俗。</p>
+                    </div>
+                </div>
+                
+                <!-- 评论 8 -->
+                <div class="comment-item">
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-floor">#8</span>
+                            <span class="comment-author">凯文_徐</span>
+                            <span class="author-badge" style="font-size: 0.7rem; padding: 1px 6px; margin-left: 0.3rem;">楼主</span>
+                        </div>
+                        <span class="comment-time">2025年5月20日 08:45</span>
+                    </div>
+                    <div class="comment-content">
+                        <p>感谢各位老铁的建议！特别感谢@滇西浪人 的实用信息。</p>
+                        <p>我已经订了下周的车票，打算去待一周左右。主要是找我要的材料，顺便看看风景。最近实验室压力太大了，搞得我神经紧绷。</p>
+                        <p>希望这趟能找到我需要的东西。如果实验成功了，可能真的能帮到很多人。</p>
+                        <p>再次感谢大家！回来请你们喝奶茶！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p style="font-size: 0.85rem; color: #999; line-height: 1.4;">本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+        <p style="font-size: 0.85rem; color: #999; margin-top: 0.5rem;">Copyright&copy; xukaiwen. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

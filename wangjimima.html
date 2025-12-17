@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>找回密码 - 凯文的空间</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 顶部导航 */
+        header {
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        
+        /* 返回按钮 */
+        .back-to-home {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-to-home:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+        
+        /* 找回密码表单容器 */
+        .password-recovery-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+        
+        .password-recovery-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .password-recovery-header h1 {
+            color: #1e90ff;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .password-recovery-header p {
+            color: #666;
+            font-size: 15px;
+        }
+        
+        .recovery-icon {
+            font-size: 48px;
+            color: #1e90ff;
+            margin-bottom: 20px;
+        }
+        
+        /* 表单 */
+        .recovery-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            border-color: #1e90ff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2);
+        }
+        
+        .form-input.error {
+            border-color: #ff4757;
+            box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2);
+        }
+        
+        .error-message {
+            color: #ff4757;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .success-message {
+            color: #2ed573;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        /* 步骤指示器 */
+        .steps-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .steps-indicator::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background-color: #eee;
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #eee;
+            color: #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+        
+        .step.active .step-number {
+            background-color: #1e90ff;
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background-color: #2ed573;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 13px;
+            color: #999;
+            text-align: center;
+        }
+        
+        .step.active .step-label {
+            color: #1e90ff;
+            font-weight: 500;
+        }
+        
+        /* 按钮 */
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: #f1f8ff;
+            color: #1e90ff;
+            border: 1px solid #1e90ff;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e6f0ff;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* 步骤内容 */
+        .step-content {
+            display: none;
+        }
+        
+        .step-content.active {
+            display: block;
+        }
+        
+        /* 密码提示信息 */
+        .password-hint {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #1e90ff;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .password-hint strong {
+            color: #1e90ff;
+        }
+        
+        /* 底部 */
+        footer {
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .footer-link {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .password-recovery-container {
+                padding: 25px;
+                margin: 20px;
+            }
+            
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            nav ul {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            .form-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .step-label {
+                font-size: 11px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .password-recovery-container {
+                padding: 20px;
+            }
+            
+            .password-recovery-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-user-circle"></i>凯文的空间
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="back-to-home"><i class="fas fa-arrow-left"></i> 返回登录</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <div class="main-content">
+        <div class="container">
+            <div class="password-recovery-container">
+                <!-- 步骤指示器 -->
+                <div class="steps-indicator">
+                    <div class="step active" id="step1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">验证账号</div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">验证邮箱</div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">重置密码</div>
+                    </div>
+                </div>
+                
+                <!-- 步骤1：验证账号 -->
+                <div class="step-content active" id="step1-content">
+                    <div class="password-recovery-header">
+                        <div class="recovery-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h1>找回密码</h1>
+                        <p>请输入您的账号，我们将帮助您找回密码</p>
+                    </div>
+                    
+                    <form class="recovery-form" id="identityForm">
+                        <div class="form-group">
+                            <label class="form-label" for="username">账号</label>
+                            <input type="text" id="username" class="form-input" placeholder="请输入您的账号" required>
+                            <div class="error-message" id="username-error">账号不存在</div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" id="cancelBtn">取消</button>
+                            <button type="submit" class="btn btn-primary">下一步</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- 步骤2：验证邮箱 -->
+                <div class="step-content" id="step2-content">
+                    <div class="password-recovery-header">
+                        <div class="recovery-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h1>验证邮箱</h1>
+                        <p>请输入您账号绑定的邮箱地址</p>
+                    </div>
+                    
+                    <form class="recovery-form" id="emailForm">
+                        <div class="form-group">
+                            <label class="form-label" for="email">邮箱地址</label>
+                            <input type="email" id="email" class="form-input" placeholder="请输入您绑定的邮箱" required>
+                            <div class="success-message" id="email-success">已发送验证邮件</div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" id="backToStep1">上一步</button>
+                            <button type="submit" class="btn btn-primary">发送验证邮件</button>
+                        </div>
+                    </form>
+                    
+                    <!-- 密码找回提示 -->
+                    <div class="password-hint">
+                        <strong>密码找回提示：</strong>生日。
+                    </div>
+                </div>
+                
+                <!-- 步骤3：重置密码（用户无法到达此步骤） -->
+                <div class="step-content" id="step3-content">
+                    <div class="password-recovery-header">
+                        <div class="recovery-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h1>重置密码</h1>
+                        <p>请输入新密码</p>
+                    </div>
+                    
+                    <form class="recovery-form" id="resetForm">
+                        <div class="form-group">
+                            <label class="form-label" for="newPassword">新密码</label>
+                            <input type="password" id="newPassword" class="form-input" placeholder="请输入新密码" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="confirmPassword">确认新密码</label>
+                            <input type="password" id="confirmPassword" class="form-input" placeholder="请再次输入新密码" required>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" id="backToStep2">上一步</button>
+                            <button type="submit" class="btn btn-primary">重置密码</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p style="font-size: 12px; margin-bottom: 5px;">本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+            <p style="font-size: 12px;">Copyright© xukaiwen. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 当前步骤
+            let currentStep = 1;
+            
+            // 获取所有步骤元素
+            const steps = document.querySelectorAll('.step');
+            const stepContents = document.querySelectorAll('.step-content');
+            
+            // 表单元素
+            const identityForm = document.getElementById('identityForm');
+            const emailForm = document.getElementById('emailForm');
+            
+            // 按钮元素
+            const cancelBtn = document.getElementById('cancelBtn');
+            const backToStep1Btn = document.getElementById('backToStep1');
+            
+            // 切换步骤
+            function goToStep(step) {
+                // 更新当前步骤
+                currentStep = step;
+                
+                // 更新步骤指示器
+                steps.forEach((stepElement, index) => {
+                    if (index + 1 < step) {
+                        stepElement.classList.remove('active');
+                        stepElement.classList.add('completed');
+                    } else if (index + 1 === step) {
+                        stepElement.classList.add('active');
+                        stepElement.classList.remove('completed');
+                    } else {
+                        stepElement.classList.remove('active');
+                        stepElement.classList.remove('completed');
+                    }
+                });
+                
+                // 显示对应步骤内容
+                stepContents.forEach((content, index) => {
+                    if (index + 1 === step) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            }
+            
+            // 显示错误信息
+            function showError(inputId, message) {
+                const errorElement = document.getElementById(`${inputId}-error`);
+                const inputElement = document.getElementById(inputId);
+                
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+                inputElement.classList.add('error');
+            }
+            
+            // 清除错误信息
+            function clearError(inputId) {
+                const errorElement = document.getElementById(`${inputId}-error`);
+                const inputElement = document.getElementById(inputId);
+                
+                errorElement.style.display = 'none';
+                inputElement.classList.remove('error');
+            }
+            
+            // 显示成功信息
+            function showSuccess(inputId, message) {
+                const successElement = document.getElementById(`${inputId}-success`);
+                const inputElement = document.getElementById(inputId);
+                
+                successElement.textContent = message;
+                successElement.style.display = 'block';
+                inputElement.classList.remove('error');
+            }
+            
+            // 清除成功信息
+            function clearSuccess(inputId) {
+                const successElement = document.getElementById(`${inputId}-success`);
+                
+                successElement.style.display = 'none';
+            }
+            
+            // 步骤1表单提交 - 仅验证账号
+            identityForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 获取账号值
+                const username = document.getElementById('username').value.trim();
+                
+                // 清除之前的错误信息
+                clearError('username');
+                
+                // 验证账号（仅接受kevinxu或zhangte）
+                if (username === 'kevinxu' || username === 'zhangte') {
+                    // 账号正确，进入步骤2
+                    setTimeout(() => {
+                        goToStep(2);
+                    }, 500);
+                } else {
+                    // 账号错误，显示错误信息
+                    showError('username', '账号不存在');
+                }
+            });
+            
+            // 步骤2表单提交 - 任意邮箱都显示"已发送验证邮件"
+            emailForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 获取邮箱值
+                const email = document.getElementById('email').value.trim();
+                
+                // 清除之前的成功信息
+                clearSuccess('email');
+                
+                // 验证邮箱格式（简单验证）
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (emailRegex.test(email)) {
+                    // 显示成功信息
+                    showSuccess('email', '已发送验证邮件');
+                    
+                    // 在实际应用中，这里会发送验证邮件
+                    // 但根据要求，用户不会进入第三步
+                    // 所以这里不执行任何跳转
+                } else {
+                    // 邮箱格式不正确，仍然显示成功信息（根据要求）
+                    showSuccess('email', '已发送验证邮件');
+                }
+                
+                // 不跳转到第三步，永远停留在第二步
+            });
+            
+            // 返回步骤1
+            backToStep1Btn.addEventListener('click', function() {
+                goToStep(1);
+            });
+            
+            // 取消按钮 - 返回登录
+            cancelBtn.addEventListener('click', function() {
+                if (confirm('确定要取消密码找回吗？')) {
+                    // 在实际应用中，这里会跳转到登录页面
+                    alert('已取消密码找回');
+                    window.location.href = 'bbkongjian.html';
+                }
+            });
+            
+            // 返回登录按钮
+            document.querySelector('.back-to-home').addEventListener('click', function(e) {
+                e.preventDefault();
+                // 在实际应用中，这里会跳转到登录页面
+                window.location.href = 'bbkongjian.html';
+            });
+            
+            // 实时验证输入
+            document.getElementById('username').addEventListener('input', function() {
+                clearError('username');
+            });
+            
+            document.getElementById('email').addEventListener('input', function() {
+                clearSuccess('email');
+            });
+        });
+    </script>
+</body>
+</html>

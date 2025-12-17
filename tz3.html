@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[讨论]伙界们，泗非哪家的羊汤好喝啊 - 泗水吧 - 千度贴吧</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Sans Serif", Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #e8f0e8;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4jWNgYGD4T0cwwsLwMKP5w9DwjRWGRgkjhCEF6O4oCQAAAABJRU5ErkJggg==');
+        }
+        
+        .container {
+            width: 980px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(to bottom, #2e8b57, #1e6b47);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0a4d2e;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .bar-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border: 2px solid white;
+            border-radius: 4px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .bar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+        
+        .logo-subtitle {
+            font-size: 14px;
+            margin-left: 10px;
+            opacity: 0.8;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .search-container:focus-within {
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3) inset;
+        }
+        
+        .search-input {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            color: white;
+            width: 200px;
+            font-size: 14px;
+            outline: none;
+            border-radius: 16px 0 0 16px;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-button {
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 0 16px 16px 0;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+        
+        .search-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .user-info {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2e8b57;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        /* 帖子详情样式 */
+        .post-detail {
+            padding: 20px;
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .post-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e8b57;
+            margin-bottom: 15px;
+        }
+        
+        .post-content {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .post-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #2e8b57;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info {
+            font-size: 14px;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            color: #2e8b57;
+        }
+        
+        .post-time {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+        
+        .action-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 5px 15px;
+            margin-left: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .action-btn:hover {
+            background-color: #e5e5e5;
+        }
+        
+        .gift-btn {
+            background-color: #ffd700;
+            border-color: #ffc400;
+        }
+        
+        /* 评论区样式 */
+        .comments-section {
+            margin-top: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .comment {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #e5e5e5;
+        }
+        
+        .comment-avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #3a9a66;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        
+        .comment-content {
+            flex: 1;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: #2e8b57;
+        }
+        
+        .comment-time {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .comment-text {
+            margin-bottom: 8px;
+        }
+        
+        .comment-reply {
+            color: #2e8b57;
+            font-size: 12px;
+            cursor: default; /* 改为默认光标，表示不可点击 */
+        }
+        
+        .nested-reply {
+            margin-left: 30px;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f5f9f5;
+            border-radius: 4px;
+            border-left: 2px solid #2e8b57;
+        }
+        
+        .nested-reply-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .nested-reply-author {
+            font-weight: bold;
+            color: #3a9a66;
+        }
+        
+        .nested-reply-time {
+            color: #999;
+            font-size: 11px;
+        }
+        
+        .nested-reply-text {
+            margin-bottom: 5px;
+        }
+        
+        .reply-form {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        
+        .reply-form textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+        
+        .reply-form button {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .reply-form button:hover {
+            background-color: #1e6b47;
+        }
+        
+        /* 底部样式 */
+        footer {
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .main-content {
+            padding: 20px;
+        }
+        
+        .post-detail-container {
+            width: 100%;
+        }
+        
+        .highlight {
+            background-color: #f0fff0;
+            border-left: 3px solid #2e8b57;
+        }
+        
+        /* 隐藏用户头像的样式 */
+        .user-avatar, .comment-avatar, .author-avatar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="sishuiba.html" style="text-decoration: none; color: inherit;">
+                <div class="logo-container">
+                    <div class="bar-logo">
+                        <img src="images/xishuitouxiang.jpg" alt="泗水吧头像">
+                    </div>
+                    <div>
+                        <div class="logo">泗水吧<span class="logo-subtitle">千度贴吧</span></div>
+                    </div>
+                </div>
+            </a>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="搜索贴吧内容">
+                    <button class="search-button" id="search-button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.7422 10.3439C12.5329 9.2673 13 7.9382 13 6.5C13 2.91015 10.0899 0 6.5 0C2.91015 0 0 2.91015 0 6.5C0 10.0899 2.91015 13 6.5 13C7.93858 13 9.26801 12.5327 10.3448 11.7415L10.3439 11.7422C10.3734 11.7822 10.4062 11.8204 10.4424 11.8566L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L11.8566 10.4424C11.8204 10.4062 11.7822 10.3734 11.7422 10.3439ZM12 6.5C12 9.53757 9.53757 12 6.5 12C3.46243 12 1 9.53757 1 6.5C1 3.46243 3.46243 1 6.5 1C9.53757 1 12 3.46243 12 6.5Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">张</div>
+                    <span>张特 (已登录)</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="post-detail-container">
+                <div class="post-detail">
+                    <div class="post-header">
+                        <div class="post-title">伙界们，泗非哪家的羊汤好喝啊</div>
+                    </div>
+                    
+                    <div class="post-author">
+                        <div class="author-avatar">镰</div>
+                        <div class="author-info">
+                            <div class="author-name">镰刀锤子的键盘</div>
+                            <div class="post-time">IP属地:云南 1楼 2025-10-27 11:33</div>
+                        </div>
+                    </div>
+                    
+                    <div class="post-content">
+                        <p>一年回不了几天泗水，每次回去，就想吃点小时候的味道。伙计们，泗水哪家的羊汤馆好喝，哪家的火烧好吃呀。</p>
+                    </div>
+                    
+                    <div class="post-actions">
+                    </div>
+                </div>
+                
+                <div class="comments-section">
+                    <div class="section-title">全部回复(3)</div>
+                    
+                    <!-- 2楼 -->
+                    <div class="comment">
+                        <div class="comment-avatar">北</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <div class="comment-author">北城瓷</div>
+                                <div class="comment-time">IP属地:云南 2楼 2025-11-03 16:56</div>
+                            </div>
+                            <div class="comment-text">回去都待不了几天 一天三顿喝你能喝多少 差不多就行了 那有特别突出的好喝的</div>
+                            <div class="comment-reply">回复</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3楼 -->
+                    <div class="comment">
+                        <div class="comment-avatar">宋</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <div class="comment-author">宋一手理疗</div>
+                                <div class="comment-time">IP属地:云南 3楼 2025-11-05 10:11</div>
+                            </div>
+                            <div class="comment-text">羊汤，泗水一中向南二百米路西陈二羊汤。<br>火烧，老步行街彦芳火烧。</div>
+                            <div class="comment-reply">收起回复</div>
+                            
+                            <!-- 嵌套回复1 -->
+                            <div class="nested-reply">
+                                <div class="nested-reply-header">
+                                    <div class="nested-reply-author">镰刀锤子的键盘</div>
+                                    <div class="nested-reply-time">2025-11-05 15:20</div>
+                                </div>
+                                <div class="nested-reply-text">谢谢！陈二羊汤是不是开了很多年那个？我记得小时候就在。</div>
+                            </div>
+                            
+                            <!-- 嵌套回复2 -->
+                            <div class="nested-reply">
+                                <div class="nested-reply-header">
+                                    <div class="nested-reply-author">宋一手理疗</div>
+                                    <div class="nested-reply-time">2025-11-05 16:05</div>
+                                </div>
+                                <div class="nested-reply-text">回复 镰刀锤子的键盘: 对，老店了。不过......最近半年感觉汤的味道有点不一样了，说不上来，鲜还是鲜，但后味有点厚，喝了身上暖烘烘的时间特别长。我有个老客开玩笑说，像加了"补药"。</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 4楼 -->
+                    <div class="comment">
+                        <div class="comment-avatar">贴</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <div class="comment-author">贴吧用户_JAWZJSK</div>
+                                <div class="comment-time">IP属地:云南 4楼 2025-12-02 22:42</div>
+                            </div>
+                            <div class="comment-text">陈二羊汤。彦芳火烧据说还行。但我得说一句，自从陈二羊汤换了新的水源------听说是从城西老水站那边直接拉的山泉水------生意是火了，可有些人喝完反应怪怪的。</div>
+                            <div class="comment-reply">回复</div>
+                        </div>
+                    </div>
+                    
+                    <div class="reply-form">
+                        <textarea id="reply-textarea" placeholder="发表你的回复..."></textarea>
+                        <button id="reply-button">发表回复</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+            <p>Copyright© xukaiwen. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取回复按钮和文本框
+            const replyButton = document.getElementById('reply-button');
+            const replyTextarea = document.getElementById('reply-textarea');
+            const commentsSection = document.querySelector('.comments-section');
+            const sectionTitle = document.querySelector('.section-title');
+            
+            // 为回复按钮添加点击事件
+            replyButton.addEventListener('click', function() {
+                const replyContent = replyTextarea.value.trim();
+                
+                if (replyContent === '') {
+                    alert('请输入回复内容！');
+                    return;
+                }
+                
+                // 创建新的回复元素
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                
+                // 获取当前时间（时间部分）
+                const now = new Date();
+                const year = now.getFullYear();
+                // 日期固定为12月8号
+                const month = "12";
+                const day = "08";
+                // 时间部分读取当前系统时间
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                
+                // 计算新的楼层号
+                const currentComments = document.querySelectorAll('.comment');
+                const newFloor = currentComments.length + 2; // 因为已经有1个主帖
+                
+                // 设置新回复的HTML内容
+                newComment.innerHTML = `
+                    <div class="comment-avatar">张</div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <div class="comment-author">张特</div>
+                            <div class="comment-time">IP属地:四川 ${newFloor}楼 ${year}-${month}-${day} ${hours}:${minutes}</div>
+                        </div>
+                        <div class="comment-text">${replyContent}</div>
+                        <div class="comment-reply">回复</div>
+                    </div>
+                `;
+                
+                // 在回复表单前插入新回复
+                const replyForm = document.querySelector('.reply-form');
+                commentsSection.insertBefore(newComment, replyForm);
+                
+                // 更新回复数量
+                const currentCount = parseInt(sectionTitle.textContent.match(/全部回复\((\d+)\)/)[1]);
+                sectionTitle.textContent = `全部回复(${currentCount + 1})`;
+                
+                // 清空回复框
+                replyTextarea.value = '';
+                
+                // 显示成功消息
+                alert('回复成功！');
+            });
+            
+            // 搜索功能
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    // 跳转到searchba.html，并传递搜索关键词作为参数
+                    window.location.href = `searchba.html?q=${encodeURIComponent(searchTerm)}`;
+                } else {
+                    alert('请输入搜索内容！');
+                }
+            }
+            
+            // 搜索按钮点击事件
+            searchButton.addEventListener('click', performSearch);
+            
+            // 按回车键搜索
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // 移除"回复"按钮的点击事件 - 现在点击不会有任何反应
+            // 我们只需要确保没有事件监听器附加到这些元素上
+            const replyLinks = document.querySelectorAll('.comment-reply');
+            replyLinks.forEach(link => {
+                // 移除所有可能的事件监听器
+                link.replaceWith(link.cloneNode(true));
+                // 设置光标样式为默认，表示不可点击
+                link.style.cursor = 'default';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泗水吧 - 千度贴吧</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Sans Serif", Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #e8f0e8;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4jWNgYGD4T0cwwsLwMKP5QhIYJQwLw8M0VhgaJYwShgUA6oYEBXh2BpUAAAAASUVORK5CYII=');
+        }
+        
+        .container {
+            width: 980px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(to bottom, #2e8b57, #1e6b47);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0a4d2e;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .bar-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border: 2px solid white;
+            border-radius: 4px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .bar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+        
+        .logo-subtitle {
+            font-size: 14px;
+            margin-left: 10px;
+            opacity: 0.8;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .search-container:focus-within {
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3) inset;
+        }
+        
+        .search-input {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            color: white;
+            width: 200px;
+            font-size: 14px;
+            outline: none;
+            border-radius: 16px 0 0 16px;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-button {
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 0 16px 16px 0;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+        
+        .search-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .user-info {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2e8b57;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: #3a9a66;
+            padding: 8px 20px;
+            border-bottom: 1px solid #2e8b57;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-right: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        nav ul li a:hover {
+            background-color: #2e8b57;
+        }
+        
+        /* 主要内容区域 */
+        .main-content {
+            display: flex;
+            padding: 20px;
+        }
+        
+        .posts {
+            flex: 3;
+            margin-right: 20px;
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* 帖子样式 */
+        .post {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 5px;
+        }
+        
+        .post-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .post-title a {
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .post-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .post-content {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .post-footer {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* 侧边栏样式 */
+        .sidebar-section {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            color: #2e8b57;
+        }
+        
+        .bar-info {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .bar-master {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .friend-bars {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .friend-bar {
+            width: 50%;
+            margin-bottom: 10px;
+        }
+        
+        /* 底部样式 */
+        footer {
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .post-image {
+            max-width: 200px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .page-nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .page-nav a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            background-color: #2e8b57;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        
+        .page-nav a:hover {
+            background-color: #1e6b47;
+        }
+        
+        .highlight {
+            background-color: #f0fff0;
+            border-left: 3px solid #2e8b57;
+        }
+        
+        /* 隐藏用户头像的样式 */
+        .user-avatar, .comment-avatar, .author-avatar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="sishuiba.html" style="text-decoration: none; color: inherit;">
+                <div class="logo-container">
+                    <div class="bar-logo">
+                        <img src="images/xishuitouxiang.jpg" alt="泗水吧头像">
+                    </div>
+                    <div>
+                        <div class="logo">泗水吧<span class="logo-subtitle">千度贴吧</span></div>
+                    </div>
+                </div>
+            </a>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="搜索贴吧内容">
+                    <button class="search-button" id="search-button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.7422 10.3439C12.5329 9.2673 13 7.9382 13 6.5C13 2.91015 10.0899 0 6.5 0C2.91015 0 0 2.91015 0 6.5C0 10.0899 2.91015 13 6.5 13C7.93858 13 9.26801 12.5327 10.3448 11.7415L10.3439 11.7422C10.3734 11.7822 10.4062 11.8204 10.4424 11.8566L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L11.8566 10.4424C11.8204 10.4062 11.7822 10.3734 11.7422 10.3439ZM12 6.5C12 9.53757 9.53757 12 6.5 12C3.46243 12 1 9.53757 1 6.5C1 3.46243 3.46243 1 6.5 1C9.53757 1 12 3.46243 12 6.5Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">张</div>
+                    <span>张特 (已登录)</span>
+                </div>
+            </div>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#" onclick="alert('这里似乎没有什么值得注意的'); return false;">精华</a></li>
+                <li><a href="#" onclick="alert('这里的垃圾信息和广告太多了，你直到看晕了也没找到什么'); return false;">图片</a></li>
+                <li><a href="#" onclick="alert('这里的垃圾信息和广告太多了，你直到看晕了也没找到什么'); return false;">视频</a></li>
+            </ul>
+        </nav>
+        
+        <div class="main-content">
+            <div class="posts">
+                <!-- 帖子列表 -->
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: 贴吧吧主小管家</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz1.html">[公告]关于撤销 一溜大下沿 吧主管理权限的说明</a>
+                    </div>
+                    <div class="post-content">
+                        根据相关规定，撤销一溜大下沿吧主管理权限。
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-24</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: zoom</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz2.html">欲出老镇独院</a>
+                    </div>
+                    <div class="post-content">
+                        城区欲出老镇独院，能过户的，有意联系
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 12-03</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: 镰刀锤子的键盘</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz3.html">伙界们，泗非哪家的羊汤好喝啊。</a>
+                    </div>
+                    <div class="post-content">
+                        一年回不了几天泗水，每次回去，就想吃点小时候的味道。伙计们，泗水哪家的羊汤馆好喝，哪家的火烧好吃呀。
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 12-02</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: 15313537936</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz4.html">泗水周边有人收购糯米酒吗</a>
+                    </div>
+                    <div class="post-content">
+                        如题，哪里收购呀，能大量收购的，谢谢啦
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-25</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: 无奈的我笑了i</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz5.html">泗水县有没有有名的老中医</a>
+                    </div>
+                    <div class="post-content">
+                        脸上起痘痘，听说中医调理比较好，。我们这有吗
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-18</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: 贴吧用户_JP76UAD</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz6.html">求助泗水哪里有好玩的</a>
+                    </div>
+                    <div class="post-content">
+                        泗水哪里有好玩的 介绍给弄俩盒烟
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-14</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: 贴吧用户_7RNQEDb</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz7.html">[求助]泗水锦城是不是回迁房？孩子上学都归哪个学区？</a>
+                    </div>
+                    <div class="post-content">
+                        我相中一套最前排B2-2-301送车储的毛坯房子问的销售62万我想问问各位亲人这价格是不是高了？另外，这小区以前听说是回迁地，底下埋过东西，真的假的？孩子上学划片是哪个学校？
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-13</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: 糖醋蒜子</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz8.html">[求助]泗水有没有浴室？</a>
+                    </div>
+                    <div class="post-content">
+                        冬天有点冷，想找个浴室，最好有单间。浴场就算了，谢谢。
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-06</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: 贴吧用户_GbM8WNA</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz9.html">[求助]以前土龙嘴神婆搬到什么地方了？</a>
+                    </div>
+                    <div class="post-content">
+                        以前土龙嘴神婆搬到什么地方了？
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 09-28</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: 青石巷听雨</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="tz10.html">最近泗水有啥瓜</a>
+                    </div>
+                    <div class="post-content">
+                        有没有什么八卦吃一吃
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 09-22</span>
+                    </div>
+                </div>
+                
+                <div class="page-nav">
+                    <a href="#">首页</a>
+                    <a href="#">上一页</a>
+                    <a href="#">1</a>
+                    <a href="#" onclick="alert('这里的垃圾信息和广告太多了，你直到看晕了也没找到什么'); return false;">2</a>
+                    <a href="#" onclick="alert('这里的垃圾信息和广告太多了，你直到看晕了也没找到什么'); return false;">3</a>
+                    <a href="#" onclick="alert('这里的垃圾信息和广告太多了，你直到看晕了也没找到什么'); return false;">4</a>
+                    <a href="#" onclick="alert('这里的垃圾信息和广告太多了，你直到看晕了也没找到什么'); return false;">5</a>
+                    <a href="#" onclick="alert('这里的垃圾信息和广告太多了，你直到看晕了也没找到什么'); return false;">下一页</a>
+                    <a href="#" onclick="alert('这里的垃圾信息和广告太多了，你直到看晕了也没找到什么'); return false;">尾页</a>
+                </div>
+                
+            </div>
+            
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">吧主信息</div>
+                    <div class="bar-master">
+                        <div>
+                            <div><strong>爱上山寨机</strong></div>
+                            <div>小吧主共8人</div>
+                        </div>
+                    </div>
+                    <div class="bar-info">
+                        <div>会员: <strong>泗水圣人</strong></div>
+                        <div>目录: <strong>西南地区</strong></div>
+                    </div>
+                    <div>
+                        <a href="#" onclick="alert('这里似乎没有什么值得注意的'); return false;" style="color:#2e8b57;">申请吧主</a> | 
+                        <a href="#" onclick="alert('这里似乎没有什么值得注意的'); return false;" style="color:#2e8b57;">申请小吧主</a>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">友情贴吧</div>
+                    <div class="friend-bars">
+                        <div class="friend-bar">
+                            <a href="#" onclick="alert('这里似乎没有什么值得注意的'); return false;" style="color:#2e8b57;">泉林</a>
+                        </div>
+                        <div class="friend-bar">
+                            <a href="#" onclick="alert('这里似乎没有什么值得注意的'); return false;" style="color:#2e8b57;">泉乡</a>
+                        </div>
+                        <div class="friend-bar">
+                            <a href="#" onclick="alert('这里似乎没有什么值得注意的'); return false;" style="color:#2e8b57;">泗水钓鱼</a>
+                        </div>
+                        <div class="friend-bar">
+                            <a href="#" onclick="alert('这里似乎没有什么值得注意的'); return false;" style="color:#2e8b57;">泗水一中</a>
+                        </div>
+                        <div class="friend-bar">
+                            <a href="#" onclick="alert('这里似乎没有什么值得注意的'); return false;" style="color:#2e8b57;">苗馆</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">本吧统计</div>
+                    <div class="bar-info">
+                        <div>主题数: <strong>303804</strong></div>
+                        <div>贴子数: <strong>7490499</strong></div>
+                        <div>会员数: <strong>289682</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+            <p>Copyright© xukaiwen. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 搜索功能
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    // 跳转到searchba.html，并传递搜索关键词作为参数
+                    window.location.href = `searchba.html?q=${encodeURIComponent(searchTerm)}`;
+                } else {
+                    alert('请输入搜索内容！');
+                }
+            }
+            
+            // 搜索按钮点击事件
+            searchButton.addEventListener('click', performSearch);
+            
+            // 按回车键搜索
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

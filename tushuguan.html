@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密撕卡托尼克大学奥恩图书馆电子图书馆</title>
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #3949ab;
+            --accent-color: #5c6bc0;
+            --dark-color: #0d1430;
+            --light-color: #e8eaf6;
+            --text-color: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow: hidden; /* 初始隐藏滚动 */
+        }
+        
+        /* 登录遮罩层样式 */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(13, 20, 48, 0.95);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-box {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .login-box h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .error-message {
+            color: #e53935;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none; /* 初始隐藏 */
+        }
+        
+        .login-box .btn {
+            width: 100%;
+        }
+        
+        /* 主内容区域，登录前隐藏 */
+        .main-content {
+            display: none;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 20, 48, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .search-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-box h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .search-form {
+            display: flex;
+        }
+        
+        .search-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .search-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card h3 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .collections {
+            background-color: var(--light-color);
+        }
+        
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .collection-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .collection-img {
+            height: 200px;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .collection-content {
+            padding: 20px;
+        }
+        
+        .collection-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .hours-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .hours-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .hours-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .hours-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .hours-table {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .hours-table table {
+            width: 100%;
+        }
+        
+        .hours-table td {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hours-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .staff-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .staff-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+        
+        .staff-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .staff-card p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 10px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .search-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .search-form button {
+                border-radius: 4px;
+                padding: 12px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 开屏登录栏 -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-box">
+            <h2>奥恩图书馆登录</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="error-message" id="error-message">用户名错误</div>
+                <button type="submit" class="btn">登录</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 主内容区域（登录前隐藏） -->
+    <div class="main-content" id="main-content">
+        <header>
+            <div class="container header-content">
+                <div class="logo">
+                    <div class="logo-text">
+                        <h1>密撕卡托尼克大学奥恩图书馆</h1>
+                        <p>探索知识的边界，揭示未知的领域</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#collections">特色馆藏</a></li>
+                        <li><a href="#resources">电子资源</a></li>
+                        <li><a href="#services">服务</a></li>
+                        <li><a href="#hours">开放时间</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h2>欢迎来到奥恩图书馆电子资源中心</h2>
+                <p>探索我们独特的藏书，从古老手稿到前沿学术研究</p>
+                <a href="#collections" class="btn">探索馆藏</a>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="search-box">
+                <h3>搜索我们的电子资源</h3>
+                <form class="search-form">
+                    <input type="text" placeholder="输入关键词、标题或作者...">
+                    <button type="submit"><i class="fas fa-search"></i> 搜索</button>
+                </form>
+            </div>
+        </div>
+
+        <section class="section" id="collections">
+            <div class="container">
+                <h2 class="section-title">特色馆藏</h2>
+                <div class="collection-grid">
+                    <div class="collection-card">
+                        <div class="collection-img">
+                            <i class="fas fa-book-spells"></i>
+                        </div>
+                        <div class="collection-content">
+                            <h3>赫伯特·韦斯特博士收藏</h3>
+                            <p>全国最古老的炼金术与诠释科学手稿收藏[citation:1]</p>
+                            <a href="#" class="btn" style="margin-top: 10px; display: inline-block;">查看详情</a>
+                        </div>
+                    </div>
+                    <div class="collection-card">
+                        <div class="collection-img">
+                            <i class="fas Cthulhu"></i>
+                        </div>
+                        <div class="collection-content">
+                            <h3>克苏鲁神话档案</h3>
+                            <p>包含H.P.洛夫克拉夫特及其他作者的相关作品[citation:2][citation:6]</p>
+                            <a href="#" class="btn" style="margin-top: 10px; display: inline-block;">查看详情</a>
+                        </div>
+                    </div>
+                    <div class="collection-card">
+                        <div class="collection-img">
+                            <i class="fas fa-hat-wizard"></i>
+                        </div>
+                        <div class="collection-content">
+                            <h3>神秘学与超自然研究</h3>
+                            <p>涵盖世界各地神秘传统与超自然现象研究的珍贵文献</p>
+                            <a href="#" class="btn" style="margin-top: 10px; display: inline-block;">查看详情</a>
+                        </div>
+                    </div>
+                    <div class="collection-card">
+                        <div class="collection-img">
+                            <i class="fas fa-comic"></i>
+                        </div>
+                        <div class="collection-content">
+                            <h3>克苏鲁漫画与图形小说</h3>
+                            <p>基于克苏鲁神话的漫画、图形小说和视觉艺术收藏[citation:2]</p>
+                            <a href="#" class="btn" style="margin-top: 10px; display: inline-block;">查看详情</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section collections" id="resources">
+            <div class="container">
+                <h2 class="section-title">电子资源</h2>
+                <div class="features">
+                    <div class="feature-card">
+                        <h3><i class="fas fa-database"></i> 研究数据库</h3>
+                        <p>访问200多个学术数据库，涵盖神秘学、历史、科学和文学等领域。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-book-open"></i> 电子书收藏</h3>
+                        <p>超过50万种电子书，包括珍本和绝版作品的数字化版本。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-newspaper"></i> 电子期刊</h3>
+                        <p>订阅了3,000多种学术期刊，包括《超自然研究》和《神秘学评论》。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-film"></i> 多媒体资源</h3>
+                        <p>丰富的音频、视频资料，包括罕见的口述历史和纪录片。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="services">
+            <div class="container">
+                <h2 class="section-title">图书馆服务</h2>
+                <div class="features">
+                    <div class="feature-card">
+                        <h3><i class="fas fa-search"></i> 研究协助</h3>
+                        <p>我们的学科馆员可帮助您导航我们独特的收藏并进行深入研究。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-exchange-alt"></i> 馆际互借</h3>
+                        <p>从全球其他图书馆获取我们未收藏的资料[citation:5]。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-laptop"></i> 数字学术实验室</h3>
+                        <p>使用先进技术进行文本分析、数据可视化和数字人文项目。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-user-graduate"></i> 研究生学习室</h3>
+                        <p>为研究生和教职员工提供专用学习和研究空间。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="hours">
+            <div class="container">
+                <h2 class="section-title">开放时间</h2>
+                <div class="hours-section">
+                    <div class="hours-container">
+                        <div class="hours-info">
+                            <h3>图书馆访问时间</h3>
+                            <p>奥恩图书馆欢迎密撕卡托尼克大学社区成员使用我们的设施和资源。考试期间、假期和休假期的变更时间也会在图书馆入口处公布[citation:1]。</p>
+                            <p>特藏阅览室可能需要提前预约，请通过电话或电子邮件联系特藏部门[citation:3]。</p>
+                        </div>
+                        <div class="hours-table">
+                            <table>
+                                <tr>
+                                    <td>星期一 - 星期四</td>
+                                    <td>上午 7:00 - 晚上 11:00</td>
+                                </tr>
+                                <tr>
+                                    <td>星期五</td>
+                                    <td>上午 7:00 - 下午 6:00</td>
+                                </tr>
+                                <tr>
+                                    <td>星期六</td>
+                                    <td>上午 10:00 - 下午 5:30</td>
+                                </tr>
+                                <tr>
+                                    <td>星期日</td>
+                                    <td>下午 2:00 - 晚上 10:00</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="container">
+                <h2 class="section-title">我们的团队</h2>
+                <div class="staff-grid">
+                    <div class="staff-card">
+                        <div class="staff-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>亨利·阿米蒂奇博士</h3>
+                        <p>图书馆馆长</p>
+                        <p>电话: (401) 555-2673, 分机 08</p>
+                        <p>邮箱: harmitage@miscol.edu</p>
+                    </div>
+                    <div class="staff-card">
+                        <div class="staff-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>弗吉尼亚·普里斯特</h3>
+                        <p>商业学科馆员</p>
+                        <p>电话: (401) 555-2673, 分机 24</p>
+                        <p>邮箱: vnpriest@miscol.edu</p>
+                    </div>
+                    <div class="staff-card">
+                        <div class="staff-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>杜安·克鲁兹</h3>
+                        <p>早期教育学学科馆员</p>
+                        <p>电话: (401) 555-2673, 分机 22</p>
+                        <p>邮箱: d_cruz2@miscol.edu</p>
+                    </div>
+                    <div class="staff-card">
+                        <div class="staff-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>本杰明·罗宾逊</h3>
+                        <p>文学与文科馆员</p>
+                        <p>电话: (401) 555-2673, 分机 19</p>
+                        <p>邮箱: brrobin3@miscol.edu</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>联系信息</h3>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> 马萨诸塞州，阿卡姆市</li>
+                            <li><i class="fas fa-phone"></i> (401) 555-2673</li>
+                            <li><i class="fas fa-envelope"></i> library@miscol.edu</li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>快速链接</h3>
+                        <ul>
+                            <li><a href="#home">首页</a></li>
+                            <li><a href="#collections">特色馆藏</a></li>
+                            <li><a href="#resources">电子资源</a></li>
+                            <li><a href="#services">服务</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>资源</h3>
+                        <ul>
+                            <li><a href="#">图书馆目录</a></li>
+                            <li><a href="#">数据库 A-Z</a></li>
+                            <li><a href="#">电子期刊</a></li>
+                            <li><a href="#">研究指南</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>新闻与活动</h3>
+                        <ul>
+                            <li><a href="#">特藏展览</a></li>
+                            <li><a href="#">研讨会日程</a></li>
+                            <li><a href="#">图书馆公告</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+                    <p>Copyright© xukaiwen. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 登录功能
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // 阻止表单提交
+            
+            // 显示错误信息
+            document.getElementById('error-message').style.display = 'block';
+            
+            // 这里不进行任何登录验证，始终保持登录遮罩层显示
+            // 实际上，用户无法登录成功
+        });
+        
+        // 简单搜索功能
+        document.querySelector('.search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = document.querySelector('.search-form input').value;
+            if(searchTerm.trim() !== '') {
+                alert(`搜索: ${searchTerm}\n\n此功能在演示中不可用，但在实际网站中将执行搜索。`);
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

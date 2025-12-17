@@ -1,0 +1,2593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泗水地方水文地质与生态共融研究社区共建会</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, #2c5530 0%, #3e7c3e 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: #c1e1c1;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #c1e1c1;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #c1e1c1;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* 主内容区 */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #3e7c3e;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid #3e7c3e;
+            position: relative;
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            border-color: white;
+        }
+        
+        /* 背景图秘密按钮 - 定位在背景图右下角 */
+        .bg-secret-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 1px;
+            height: 1px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            z-index: 5;
+        }
+        
+        /* 部分样式 */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2c5530;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: #3e7c3e;
+        }
+        
+        /* 关于我们 */
+        .about-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            color: #2c5530;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* 研究领域 */
+        .research-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .research-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .research-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .research-icon {
+            font-size: 2.5rem;
+            color: #3e7c3e;
+            margin-bottom: 20px;
+        }
+        
+        .research-card h3 {
+            color: #2c5530;
+            margin-bottom: 15px;
+        }
+        
+        /* 隐藏线索 */
+        .hidden-clue {
+            color: #2c5530;
+            background-color: #f0f7f0;
+            border-left: 4px solid #3e7c3e;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            display: none; /* 初始隐藏，通过特定交互显示 */
+        }
+        
+        .clue-trigger {
+            cursor: pointer;
+            color: #3e7c3e;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        /* 活动时间线 */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #3e7c3e;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: #3e7c3e;
+        }
+        
+        /* 加入表单 */
+        .join-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c5530;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #3e7c3e;
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #3e7c3e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #2c5530;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #2c5530;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #c1e1c1;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #c1e1c1;
+        }
+        
+        .copyright {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .bg-secret-btn {
+                /* 在移动端可能难以点击，但保持位置 */
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        /* 隐藏的邪教线索样式 */
+        .secret-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .secret-content {
+            background-color: #1a1a1a;
+            color: #c1e1c1;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            border: 1px solid #3e7c3e;
+        }
+        
+        .secret-content h3 {
+            color: #c1e1c1;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .secret-content p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #c1e1c1;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .clue-highlight {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        /* 骰子插件样式 - 从模型第四版.html复制过来 */
+        /* 重置样式 */
+        .pixel-dice-plugin * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Sans Serif", Arial, sans-serif;
+        }
+        
+        /* 骰子插件样式 */
+        .pixel-dice-plugin {
+            font-family: 'Courier New', monospace;
+            background-color: #0a0a0a;
+            border: 2px solid #333;
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 320px;
+            color: #e0e0e0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: none; /* 初始隐藏，因为初始状态为最小化 */
+        }
+        
+        /* 页面容器 - 修改为独立页面 */
+        .plugin-pages {
+            display: flex;
+            width: 100%; /* 修改为100% */
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .plugin-page {
+            width: 100%; /* 每个页面占100%宽度 */
+            min-height: 280px; /* 固定高度与插件框相同 */
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0; /* 防止页面被压缩 */
+        }
+        
+        .page-switched .plugin-pages {
+            transform: translateX(-100%); /* 切换到第二个页面 */
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: absolute;
+            top: 5px;
+            background-color: #333;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+        
+        .nav-btn:hover {
+            background-color: #444;
+            border-color: #00ff00;
+        }
+        
+        .collapse-btn {
+            width: 20px;
+            height: 20px;
+            right: 5px;
+        }
+        
+        .next-btn {
+            width: 20px;
+            height: 20px;
+            right: 30px; /* 放在收缩按钮左边 */
+        }
+        
+        .prev-btn {
+            width: 20px;
+            height: 20px;
+            right: 55px; /* 放在next按钮左边 */
+            display: none; /* 初始隐藏 */
+        }
+        
+        /* 页面一：骰子页面样式 */
+        .dice-page {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .item-display {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .dice-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #555;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .dice-icon.activated {
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+        
+        .dice-icon.cooldown {
+            border-color: #ff9900;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px rgba(255, 153, 0, 0.3); }
+            50% { box-shadow: 0 0 15px rgba(255, 153, 0, 0.5); }
+            100% { box-shadow: 0 0 5px rgba(255, 153, 0, 0.3); }
+        }
+        
+        .dice-image {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+        
+        .item-name {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #00ff00;
+            flex-grow: 1;
+        }
+        
+        .cooldown-info {
+            font-size: 0.8rem;
+            color: #ff9900;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+        
+        /* 新增的正方形图片区域 */
+        .dice-image-container {
+            width: 100%;
+            height: 120px; /* 固定高度，可根据需要调整 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #111;
+        }
+        
+        .dice-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .dice-main-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .use-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: #00aa00;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: auto; /* 推到底部 */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .use-btn:hover:not(:disabled) {
+            background-color: #00cc00;
+        }
+        
+        .use-btn:disabled {
+            background-color: #333;
+            color: #777;
+            cursor: not-allowed;
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 153, 0, 0.1) 10px,
+                rgba(255, 153, 0, 0.1) 20px
+            );
+        }
+        
+        .cooldown-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #ff9900;
+            font-weight: bold;
+        }
+        
+        /* 页面二：SAN值页面样式 */
+        .san-page {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .page-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .investigator-info {
+            margin-bottom: 25px;
+        }
+        
+        .info-group {
+            margin-bottom: 15px;
+        }
+        
+        .info-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+        
+        .info-value {
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .info-text {
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .san-display {
+            margin-top: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .san-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #00ff00;
+            font-size: 0.9rem;
+        }
+        
+        .san-value {
+            font-weight: bold;
+            color: #00ff00;
+        }
+        
+        .san-progress-container {
+            width: 100%;
+            height: 20px;
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .san-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #00ff00, #00cc00);
+            width: 100%; /* 初始值100% */
+            transition: width 0.5s ease;
+            position: relative;
+        }
+        
+        .san-progress-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        /* 对话框样式 */
+        .dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .dialog-content {
+            background-color: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #00ff00;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .dialog-text {
+            color: #00ff00;
+            font-size: 1rem;
+            line-height: 1.5;
+            min-height: 60px;
+            white-space: pre-wrap;
+            margin-bottom: 15px;
+        }
+        
+        /* 不同成功等级的文字颜色 */
+        .critical-success-text {
+            color: #00ff00; /* 大成功 - 绿色 */
+            font-weight: bold;
+        }
+        
+        .critical-failure-text {
+            color: #ff0000; /* 大失败 - 红色 */
+            font-weight: bold;
+        }
+        
+        .extreme-success-text {
+            color: #00ccff; /* 极难成功 - 亮蓝色 */
+        }
+        
+        .hard-success-text {
+            color: #0099ff; /* 困难成功 - 蓝色 */
+        }
+        
+        .regular-success-text {
+            color: #00ff00; /* 普通成功 - 绿色 */
+        }
+        
+        .failure-text {
+            color: #ff9900; /* 失败 - 橙色 */
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 6px;
+            height: 1rem;
+            background-color: #00ff00;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .dialog-close {
+            background-color: #00ff00;
+            color: #000;
+            border: none;
+            padding: 6px 15px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            float: right;
+            font-size: 0.9rem;
+        }
+        
+        .dialog-close:hover {
+            background-color: #00cc00;
+        }
+        
+        /* 工具提示样式 */
+        .dice-tooltip {
+            position: fixed;
+            background-color: rgba(10, 10, 10, 0.95);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            border-radius: 6px;
+            max-width: 280px;
+            z-index: 10001;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.3;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+        }
+        
+        .dice-tooltip strong {
+            color: #00ff00;
+        }
+        
+        .epic-text {
+            color: #9370db;
+            font-weight: bold;
+        }
+        
+        .warning-text {
+            color: #00ff00;
+            font-style: italic;
+        }
+        
+        /* 插件容器样式 - 右下角固定定位 */
+        #dicePluginContainer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 320px;
+        }
+        
+        /* 折叠后的圆形图标 */
+        .dice-minimized {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #0a0a0a;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .dice-minimized:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+        
+        .dice-minimized .expand-icon {
+            color: #e0e0e0;
+            font-size: 24px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .dice-minimized:hover .expand-icon {
+            color: #00ff00;
+            transform: scale(1.2);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            #dicePluginContainer {
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: calc(100% - 20px);
+            }
+            
+            .dice-minimized {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-water"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>泗水地方水文地质与生态共融研究社区共建会</h1>
+                    <p>探索自然奥秘，共建和谐家园</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#research">研究领域</a></li>
+                    <li><a href="#activities">活动动态</a></li>
+                    <li><a href="#join">加入我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主横幅 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>探寻泗水之秘，共筑生态家园</h2>
+            <p>我们是由本地热心居民、学者和自然爱好者组成的非营利性研究团体，致力于探索泗水地区独特的水文地质现象，研究生态与社区的和谐共生之道。</p>
+            <a href="#join" class="cta-button">立即加入我们</a>
+        </div>
+        <!-- 背景图右下角秘密按钮 -->
+        <button class="bg-secret-btn" onclick="showSecretModal(event)"></button>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>关于我们</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>我们的使命与愿景</h3>
+                    <p>泗水地方水文地质与生态共融研究社区共建会成立于2018年，是由一群对家乡山水怀有深厚感情的有识之士发起的民间研究组织。</p>
+                    <p>我们专注于研究泗水地区独特的水文地质特征，特别是<span class="clue-trigger" onclick="showClue('clue1')">趋源泉</span>及其周边水系的水质变化、地质构造与生态系统之间的相互影响。通过科学监测与社区参与，我们旨在实现人与自然环境的和谐共融。</p>
+                    <p>近年来，我们注意到一些<span class="clue-trigger" onclick="showClue('clue2')">特殊的自然现象</span>在泗水地区逐渐显现，这激发了我们更深入探索的决心。我们相信，理解这些现象对于保护我们的家园至关重要。</p>
+                    
+                    <div id="clue1" class="hidden-clue">
+                        <p><i class="fas fa-leaf"></i> 趋源泉水质检测显示异常矿物质含量，某些指标与常规泉水显著不同。当地老人称之为"母亲之泪"，传说具有特殊功效。</p>
+                    </div>
+                    
+                    <div id="clue2" class="hidden-clue">
+                        <p><i class="fas fa-leaf"></i> 研究报告#SY-2023-08记录：趋源泉周边植被呈现异常生长态势，部分植物组织检测到未知有机化合物，作用机制不明。</p>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1350&q=80" alt="泗水自然景观">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 研究领域 -->
+    <section class="section" id="research">
+        <div class="container">
+            <div class="section-title">
+                <h2>研究领域</h2>
+            </div>
+            <div class="research-areas">
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>水文地质研究</h3>
+                    <p>系统监测泗水地区地下水文动态，分析趋源泉等特殊水源的地质成因与水质特征，探索其与区域生态系统的关联。</p>
+                    <p class="clue-trigger" onclick="showClue('clue3')" style="margin-top:15px; font-size:0.9em; color:#3e7c3e; cursor:pointer;"><i class="fas fa-search"></i> 查看最新发现</p>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>生态共融研究</h3>
+                    <p>研究人类活动与自然环境的相互作用，探索可持续发展模式，推动社区参与生态保护与修复。</p>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>社区共建实践</h3>
+                    <p>组织社区居民参与环境监测、生态保护活动，收集传统生态知识，促进代际对话与地方认同。</p>
+                    <p class="clue-trigger" onclick="showClue('clue4')" style="margin-top:15px; font-size:0.9em; color:#3e7c3e; cursor:pointer;"><i class="fas fa-search"></i> 了解社区反馈</p>
+                </div>
+            </div>
+            
+            <div id="clue3" class="hidden-clue">
+                <p><i class="fas fa-flask"></i> 2024年第三季度检测报告摘要：趋源泉样本中发现微量未知有机化合物，暂定名"SY-α因子"。初步实验显示其对植物生长有显著促进作用，但对哺乳动物的长期影响尚待研究。</p>
+            </div>
+            
+            <div id="clue4" class="hidden-clue">
+                <p><i class="fas fa-comment-dots"></i> 社区访谈记录#CT-2024-11：多位居民反映饮用趋源泉周边水源后睡眠质量改善，少数人报告"异常清晰的梦境"，内容多与水、洞穴或母性形象相关。需要进一步研究心理效应。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 活动动态 -->
+    <section class="section" id="activities">
+        <div class="container">
+            <div class="section-title">
+                <h2>活动动态</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024年11月</div>
+                        <h3>趋源泉冬季水质监测</h3>
+                        <p>组织会员对趋源泉及其周边水系进行系统性水质采样与检测，记录冬季水文特征变化。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024年10月</div>
+                        <h3>社区生态知识工作坊</h3>
+                        <p>邀请本地长者分享传统生态知识，探讨<span class="clue-trigger" onclick="showClue('clue5')">"泗水地脉"传说</span>与现代地质学的关联。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024年9月</div>
+                        <h3>泗源山植被考察</h3>
+                        <p>深入泗源山区域，记录特殊植被分布，采集样本进行实验室分析，发现多种稀有植物品种。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024年8月</div>
+                        <h3>会员交流分享会</h3>
+                        <p>定期会员聚会，分享研究心得与<span class="clue-trigger" onclick="showClue('clue6')">个人体验</span>，探讨生态共融的实践路径。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="clue5" class="hidden-clue">
+                <p><i class="fas fa-book"></i> 传说记载：泗水地下有"母脉"，流经之处土地肥沃，生灵旺盛。趋源泉被认为是母脉的"眼睛"，其水流具有连接万物的特性。当地有谚语："饮母脉之水，得大地之气"。</p>
+            </div>
+            
+            <div id="clue6" class="hidden-clue">
+                <p><i class="fas fa-user-friends"></i> 分享会记录片段：部分长期接触趋源泉水样的会员报告"感官提升"与"深层连接感"，有人提及"梦境指引"现象。会内鼓励记录这些主观体验作为研究资料。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 加入我们 -->
+    <section class="section" id="join">
+        <div class="container">
+            <div class="section-title">
+                <h2>加入我们</h2>
+            </div>
+            <div class="join-form">
+                <p style="margin-bottom: 25px; text-align: center;">如果您对泗水的水文地质与生态研究感兴趣，欢迎填写以下申请表加入我们的社区。</p>
+                
+                <form id="membershipForm">
+                    <div class="form-group">
+                        <label for="name">姓名 *</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact">联系方式 *</label>
+                        <input type="text" id="contact" class="form-control" required placeholder="电话/微信/邮箱">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">居住区域 *</label>
+                        <input type="text" id="location" class="form-control" required placeholder="例如：泗水镇城东/老镇区/周边乡村">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interest">您对以下哪个研究领域最感兴趣？ *</label>
+                        <select id="interest" class="form-control" required>
+                            <option value="">请选择</option>
+                            <option value="hydrology">水文地质监测</option>
+                            <option value="ecology">生态共融研究</option>
+                            <option value="community">社区共建实践</option>
+                            <option value="all">全部感兴趣</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience">请简要说明您加入本会的原因或相关经历 *</label>
+                        <textarea id="experience" class="form-control" required placeholder="例如：对趋源泉现象感兴趣/有相关专业背景/希望为社区生态保护贡献力量..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="verification">验证信息：请填写三个你知道的泗水镇内的地名 *</label>
+                        <input type="text" id="verification" class="form-control" required placeholder="请填写三个地名">
+                        <small style="color:#666; display:block; margin-top:5px;">用于确认申请者对泗水镇的了解程度</small>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">提交申请</button>
+                </form>
+                
+                <div id="formMessage" style="margin-top: 20px; text-align: center; display: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>本网站的内容为虚构游戏作品，与任何真实的人物、团体或事件无关。</p>
+                <p>Copyright© xukaiwen. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 秘密模态框 -->
+    <div class="secret-modal" id="secretModal">
+        <div class="secret-content">
+            <span class="close-modal" onclick="closeSecretModal()">&times;</span>
+            <h3><i class="fas fa-user-secret"></i> 内部通知</h3>
+            <p>仅限<span class="clue-highlight">受标记者</span>与核心成员查阅。</p>
+            <p>近期观察到<span class="clue-highlight">"母亲"的活性显著增强</span>，趋源泉流量增加37%，SYY-α因子浓度上升至危险阈值。建议全体成员：</p>
+            <ul style="margin-left:20px; margin-bottom:20px;">
+                <li>避免单独前往泗源山核心区</li>
+                <li>记录所有异常梦境与身体变化</li>
+                <li>新成员须通过四级净化仪式方可接触核心样本</li>
+                <li><span class="clue-highlight">朔月之夜集会</span>改在老街东段举行，口令更新为"赞美母神"</li>
+            </ul>
+            <p>注意：有情报称外部人员（疑似<span class="clue-highlight">之前叛逃的徐姓研究员</span>）正在活跃，所有成员保持警惕，勿泄露<span class="clue-highlight">大地子宫</span>位置。</p>
+            <p style="text-align:center; margin-top:25px; font-size:0.9em;">消息等级：<span class="clue-highlight">绝密</span> • 紧急</p>
+        </div>
+    </div>
+
+    <!-- 骰子插件容器 -->
+    <div id="dicePluginContainer"></div>
+
+    <script>
+        // 骰子插件配置和逻辑
+        // 像素骰子插件类
+        class PixelDicePlugin {
+            constructor(containerSelector, options = {}) {
+                // 默认配置
+                this.config = {
+                    userId: 'default_user',
+                    userName: '调查员',
+                    skillName: '灵感',
+                    skillValue: 50,
+                    extraText: '', // 修改为空字符串，不再有默认附加文本
+                    storageKey: 'pixelDiceState',
+                    sanKey: 'pixelDiceSanState',
+                    cooldownKey: 'pixelDiceCooldown', // 冷却时间存储key
+                    ...options
+                };
+                
+                // 容器元素
+                this.container = document.querySelector(containerSelector);
+                if (!this.container) {
+                    console.error('未找到容器元素:', containerSelector);
+                    return;
+                }
+                
+                // 插件状态 - 初始状态设为激活
+                this.isActivated = true; // 修改为默认激活
+                this.isLoaded = false;
+                this.isMinimized = true; // 初始状态为最小化
+                this.currentPage = 1; // 1: 骰子页面, 2: SAN值页面
+                
+                // SAN值相关
+                this.investigatorName = '张三'; // 默认调查员姓名
+                this.sanValue = 100; // 初始SAN值
+                this.maxSanValue = 100; // 最大SAN值
+                
+                // 冷却相关
+                this.cooldownDuration = 300; // 5分钟，单位：秒
+                this.cooldownEndTime = null; // 冷却结束时间戳
+                this.cooldownTimer = null; // 冷却计时器
+                
+                // 隐藏功能相关
+                this.hiddenFeatureClickCount = 0;
+                this.hiddenFeatureStartTime = 0;
+                this.hiddenFeatureTimeout = null;
+                
+                // 成功等级附加文本 - 初始状态（灵感检定）
+                this.successLevelExtraTexts = {
+                    'critical_success': '你填完了他们让你填的信息，邮件发出去了很久以后，仍然没有获得回复。再等下去也没有什么情报，可能这次探索就到这里结束了吧。闲着没事的你扫了一眼这个网页的代码。发现了极为不对劲的一串加密信息。你解析后发现最上面那张贴图的右下角有一个像素点是可以破解并点击的。你成功破解了它',
+                    'extreme_success': '你填完了他们让你填的信息，邮件发出去了很久以后，仍然没有获得回复。再等下去也没有什么情报，可能这次探索就到这里结束了吧。闲着没事的你扫了一眼这个网页的代码。',
+                    'hard_success': '你填完了他们让你填的信息，邮件发出去了很久以后，仍然没有获得回复。再等下去也没有什么情报，可能这次探索就到这里结束了......吗？',
+                    'regular_success': '你填完了他们让你填的信息，邮件发出去了很久以后，仍然没有获得回复。再等下去也没有什么情报，可能这次探索就到这里结束了......吗？',
+                    'failure': '你填完了他们让你填的信息，邮件发出去了很久以后，仍然没有获得回复。',
+                    'critical_failure': '你填完了他们让你填的信息，邮件发出去了很久以后，仍然没有获得回复。骰子冷却时间加长。'
+                };
+                
+                // 冷却时间倍增标志（用于大失败时）
+                this.cooldownMultiplier = 1;
+                
+                // 检定成功标志（用于判断是否需要切换到计算机使用技能）
+                this.hasComputerUseSkill = false;
+                
+                // 初始化插件
+                this.init();
+            }
+            
+            // 初始化插件
+            init() {
+                // 加载保存的状态
+                this.loadState();
+                
+                // 创建插件UI
+                this.createUI();
+                
+                // 绑定事件
+                this.bindEvents();
+                
+                // 启动冷却检查定时器
+                this.startCooldownTimer();
+                
+                this.isLoaded = true;
+                console.log('像素骰子插件已初始化');
+            }
+            
+            // 创建UI
+            createUI() {
+                // 创建插件容器
+                this.pluginEl = document.createElement('div');
+                this.pluginEl.className = 'pixel-dice-plugin';
+                
+                // 创建页面容器
+                const pagesContainer = document.createElement('div');
+                pagesContainer.className = 'plugin-pages';
+                
+                // 创建页面一（骰子页面）- 完全独立
+                this.createDicePage(pagesContainer);
+                
+                // 创建页面二（SAN值页面）- 完全独立
+                this.createSanPage(pagesContainer);
+                
+                // 创建收缩按钮
+                this.createCollapseButton();
+                
+                // 创建导航按钮（> 按钮）
+                this.createNextButton();
+                
+                // 创建返回按钮（< 按钮）
+                this.createPrevButton();
+                
+                // 创建结果对话框
+                this.createResultDialog();
+                
+                // 创建最小化图标
+                this.createMinimizedIcon();
+                
+                // 组装插件
+                this.pluginEl.appendChild(pagesContainer);
+                this.container.appendChild(this.pluginEl);
+                
+                // 初始状态为最小化，显示圆形图标
+                this.minimizedIcon.style.display = 'flex';
+                
+                // 更新UI状态
+                this.updateUI();
+            }
+            
+            // 创建骰子页面 - 完全独立
+            createDicePage(pagesContainer) {
+                const dicePage = document.createElement('div');
+                dicePage.className = 'plugin-page dice-page';
+                
+                // 物品显示区域
+                const itemDisplay = document.createElement('div');
+                itemDisplay.className = 'item-display';
+                
+                // 物品图标
+                this.itemIcon = document.createElement('div');
+                this.itemIcon.className = 'dice-icon activated'; // 添加激活类
+                this.itemIcon.title = '命运骰子 - 已激活';
+                
+                // 使用图片作为图标
+                const img = document.createElement('img');
+                img.src = 'chajian/chajianimages/touzi.png'; // 使用正确的路径
+                img.alt = '骰子';
+                img.className = 'dice-image';
+                this.itemIcon.appendChild(img);
+                
+                // 物品名称
+                const itemName = document.createElement('div');
+                itemName.className = 'item-name';
+                itemName.textContent = '命运骰子';
+                
+                // 冷却信息显示
+                this.cooldownInfo = document.createElement('span');
+                this.cooldownInfo.className = 'cooldown-info';
+                
+                itemName.appendChild(this.cooldownInfo);
+                itemDisplay.appendChild(this.itemIcon);
+                itemDisplay.appendChild(itemName);
+                
+                // 新增的正方形图片区域
+                const diceImageContainer = document.createElement('div');
+                diceImageContainer.className = 'dice-image-container';
+                
+                const diceMainImage = document.createElement('img');
+                diceMainImage.src = 'chajian/touzi.png'; // 修改为指定的图片路径
+                diceMainImage.alt = '骰子图片';
+                diceMainImage.className = 'dice-main-image';
+                diceImageContainer.appendChild(diceMainImage);
+                
+                // 使用按钮
+                this.useBtn = document.createElement('button');
+                this.useBtn.className = 'use-btn';
+                this.useBtn.textContent = '使用';
+                
+                // 冷却覆盖层
+                this.cooldownOverlay = document.createElement('div');
+                this.cooldownOverlay.className = 'cooldown-overlay';
+                this.cooldownOverlay.textContent = '冷却中';
+                this.useBtn.appendChild(this.cooldownOverlay);
+                
+                dicePage.appendChild(itemDisplay);
+                dicePage.appendChild(diceImageContainer); // 添加图片容器
+                dicePage.appendChild(this.useBtn);
+                
+                pagesContainer.appendChild(dicePage);
+            }
+            
+            // 创建SAN值页面 - 完全独立
+            createSanPage(pagesContainer) {
+                const sanPage = document.createElement('div');
+                sanPage.className = 'plugin-page san-page';
+                
+                // 页面标题
+                const pageTitle = document.createElement('div');
+                pageTitle.className = 'page-title';
+                pageTitle.textContent = '调查员状态';
+                sanPage.appendChild(pageTitle);
+                
+                // 调查员信息
+                const investigatorInfo = document.createElement('div');
+                investigatorInfo.className = 'investigator-info';
+                
+                // 调查员姓名
+                const nameGroup = document.createElement('div');
+                nameGroup.className = 'info-group';
+                
+                const nameLabel = document.createElement('div');
+                nameLabel.className = 'info-label';
+                nameLabel.textContent = '调查员姓名:';
+                
+                this.nameDisplay = document.createElement('div');
+                this.nameDisplay.className = 'info-text';
+                this.nameDisplay.textContent = this.investigatorName;
+                
+                nameGroup.appendChild(nameLabel);
+                nameGroup.appendChild(this.nameDisplay);
+                investigatorInfo.appendChild(nameGroup);
+                
+                // SAN值显示
+                const sanDisplay = document.createElement('div');
+                sanDisplay.className = 'san-display';
+                
+                const sanLabel = document.createElement('div');
+                sanLabel.className = 'san-label';
+                sanLabel.innerHTML = '<span>SAN值</span><span class="san-value">' + this.sanValue + '/' + this.maxSanValue + '</span>';
+                
+                this.sanProgressContainer = document.createElement('div');
+                this.sanProgressContainer.className = 'san-progress-container';
+                
+                this.sanProgressBar = document.createElement('div');
+                this.sanProgressBar.className = 'san-progress-bar';
+                this.sanProgressBar.style.width = (this.sanValue / this.maxSanValue) * 100 + '%';
+                
+                this.sanProgressText = document.createElement('div');
+                this.sanProgressText.className = 'san-progress-text';
+                this.sanProgressText.textContent = this.sanValue + '/' + this.maxSanValue;
+                
+                this.sanProgressContainer.appendChild(this.sanProgressBar);
+                this.sanProgressContainer.appendChild(this.sanProgressText);
+                
+                sanDisplay.appendChild(sanLabel);
+                sanDisplay.appendChild(this.sanProgressContainer);
+                
+                sanPage.appendChild(investigatorInfo);
+                sanPage.appendChild(sanDisplay);
+                
+                pagesContainer.appendChild(sanPage);
+            }
+            
+            // 创建收缩按钮
+            createCollapseButton() {
+                this.collapseBtn = document.createElement('div');
+                this.collapseBtn.className = 'nav-btn collapse-btn';
+                this.collapseBtn.innerHTML = '−';
+                this.collapseBtn.title = '最小化';
+                this.pluginEl.appendChild(this.collapseBtn);
+            }
+            
+            // 创建下一页按钮
+            createNextButton() {
+                this.nextBtn = document.createElement('div');
+                this.nextBtn.className = 'nav-btn next-btn';
+                this.nextBtn.innerHTML = '›';
+                this.nextBtn.title = '下一页';
+                this.pluginEl.appendChild(this.nextBtn);
+            }
+            
+            // 创建上一页按钮
+            createPrevButton() {
+                this.prevBtn = document.createElement('div');
+                this.prevBtn.className = 'nav-btn prev-btn';
+                this.prevBtn.innerHTML = '‹';
+                this.prevBtn.title = '上一页';
+                this.pluginEl.appendChild(this.prevBtn);
+            }
+            
+            // 创建结果对话框
+            createResultDialog() {
+                // 对话框遮罩
+                this.dialogOverlay = document.createElement('div');
+                this.dialogOverlay.className = 'dialog-overlay';
+                
+                // 对话框内容
+                this.dialogContent = document.createElement('div');
+                this.dialogContent.className = 'dialog-content';
+                
+                // 对话框文本
+                this.dialogText = document.createElement('div');
+                this.dialogText.className = 'dialog-text';
+                
+                // 关闭按钮
+                this.dialogClose = document.createElement('button');
+                this.dialogClose.className = 'dialog-close';
+                this.dialogClose.textContent = '关闭';
+                
+                this.dialogContent.appendChild(this.dialogText);
+                this.dialogContent.appendChild(this.dialogClose);
+                this.dialogOverlay.appendChild(this.dialogContent);
+                
+                // 添加到body
+                document.body.appendChild(this.dialogOverlay);
+            }
+            
+            // 创建最小化图标
+            createMinimizedIcon() {
+                this.minimizedIcon = document.createElement('div');
+                this.minimizedIcon.className = 'dice-minimized';
+                this.minimizedIcon.title = '骰子插件 (点击展开)';
+                
+                // 加号图标
+                const expandIcon = document.createElement('div');
+                expandIcon.className = 'expand-icon';
+                expandIcon.innerHTML = '+';
+                
+                this.minimizedIcon.appendChild(expandIcon);
+                
+                // 添加到body
+                document.body.appendChild(this.minimizedIcon);
+            }
+            
+            // 绑定事件
+            bindEvents() {
+                // 收缩按钮点击
+                this.collapseBtn.addEventListener('click', () => this.collapse());
+                
+                // 下一页按钮点击
+                this.nextBtn.addEventListener('click', () => this.nextPage());
+                
+                // 上一页按钮点击
+                this.prevBtn.addEventListener('click', () => this.prevPage());
+                
+                // 使用按钮点击
+                this.useBtn.addEventListener('click', () => this.useDice());
+                
+                // 物品图标悬停提示
+                this.itemIcon.addEventListener('mouseenter', () => this.showTooltip());
+                this.itemIcon.addEventListener('mouseleave', () => this.hideTooltip());
+                
+                // 物品图标点击 - 隐藏功能（无UI提示）
+                this.itemIcon.addEventListener('click', (e) => this.handleHiddenFeatureClick(e));
+                
+                // 最小化图标点击
+                this.minimizedIcon.addEventListener('click', () => this.expand());
+                
+                // 关闭对话框
+                this.dialogClose.addEventListener('click', () => this.closeDialog());
+                this.dialogOverlay.addEventListener('click', (e) => {
+                    if (e.target === this.dialogOverlay) {
+                        this.closeDialog();
+                    }
+                });
+                
+                // ESC键关闭对话框
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.dialogOverlay.style.display === 'flex') {
+                        this.closeDialog();
+                    }
+                });
+            }
+            
+            // 处理隐藏功能点击（无UI动画）
+            handleHiddenFeatureClick(e) {
+                e.stopPropagation(); // 防止事件冒泡
+                
+                const now = Date.now();
+                
+                // 如果第一次点击或者超过4秒，重置计数器
+                if (now - this.hiddenFeatureStartTime > 4000) {
+                    this.hiddenFeatureClickCount = 0;
+                    this.hiddenFeatureStartTime = now;
+                }
+                
+                // 增加点击计数
+                this.hiddenFeatureClickCount++;
+                
+                // 清除之前的超时
+                if (this.hiddenFeatureTimeout) {
+                    clearTimeout(this.hiddenFeatureTimeout);
+                }
+                
+                // 设置新的超时，4秒后重置计数器
+                this.hiddenFeatureTimeout = setTimeout(() => {
+                    this.hiddenFeatureClickCount = 0;
+                }, 4000);
+                
+                // 如果达到10次点击
+                if (this.hiddenFeatureClickCount >= 10) {
+                    this.activateHiddenFeature();
+                    this.hiddenFeatureClickCount = 0;
+                }
+            }
+            
+            // 激活隐藏功能（静默完成，无UI提示）
+            activateHiddenFeature() {
+                // 立即完成冷却
+                this.cooldownEndTime = null;
+                this.saveCooldownState();
+                this.updateCooldownDisplay();
+                
+                // 清除超时
+                if (this.hiddenFeatureTimeout) {
+                    clearTimeout(this.hiddenFeatureTimeout);
+                    this.hiddenFeatureTimeout = null;
+                }
+                
+                // 重置计数器
+                this.hiddenFeatureClickCount = 0;
+                
+                // 仅在控制台输出信息（用于调试，用户看不到）
+                console.log('隐藏功能激活：冷却立即完成！');
+            }
+            
+            // 切换到下一页
+            nextPage() {
+                if (this.currentPage === 1) {
+                    this.currentPage = 2;
+                    this.pluginEl.classList.add('page-switched');
+                    this.updateNavButtons();
+                }
+            }
+            
+            // 切换到上一页
+            prevPage() {
+                if (this.currentPage === 2) {
+                    this.currentPage = 1;
+                    this.pluginEl.classList.remove('page-switched');
+                    this.updateNavButtons();
+                }
+            }
+            
+            // 更新导航按钮显示状态
+            updateNavButtons() {
+                if (this.currentPage === 1) {
+                    // 页面一：显示>按钮，隐藏<按钮
+                    this.nextBtn.style.display = 'flex';
+                    this.prevBtn.style.display = 'none';
+                } else if (this.currentPage === 2) {
+                    // 页面二：显示<按钮，隐藏>按钮
+                    this.prevBtn.style.display = 'flex';
+                    this.nextBtn.style.display = 'none';
+                }
+            }
+            
+            // 收缩插件
+            collapse() {
+                this.isMinimized = true;
+                this.pluginEl.style.display = 'none';
+                this.minimizedIcon.style.display = 'flex';
+            }
+            
+            // 展开插件
+            expand() {
+                this.isMinimized = false;
+                this.pluginEl.style.display = 'block';
+                this.minimizedIcon.style.display = 'none';
+            }
+            
+            // 激活骰子
+            activateDice() {
+                if (this.isActivated) return;
+                
+                this.isActivated = true;
+                this.updateUI();
+                this.saveState();
+                
+                // 显示激活反馈
+                this.itemIcon.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.itemIcon.style.transform = 'scale(1)';
+                }, 300);
+                
+                console.log('骰子物品已激活');
+            }
+            
+            // 关闭骰子（供外部调用）
+            deactivateDice() {
+                if (!this.isActivated) return;
+                
+                this.isActivated = false;
+                this.updateUI();
+                this.saveState();
+                
+                console.log('骰子物品已关闭');
+            }
+            
+            // 更新SAN值显示
+            updateSanDisplay() {
+                if (this.sanProgressBar && this.sanProgressText) {
+                    const percentage = (this.sanValue / this.maxSanValue) * 100;
+                    this.sanProgressBar.style.width = percentage + '%';
+                    this.sanProgressText.textContent = this.sanValue + '/' + this.maxSanValue;
+                    
+                    // 更新SAN值标签
+                    const sanLabel = this.sanProgressContainer.parentElement.querySelector('.san-label');
+                    if (sanLabel) {
+                        sanLabel.querySelector('.san-value').textContent = this.sanValue + '/' + this.maxSanValue;
+                    }
+                }
+            }
+            
+            // 设置SAN值
+            setSanValue(value) {
+                const newValue = Math.max(0, Math.min(this.maxSanValue, parseInt(value) || 0));
+                if (this.sanValue !== newValue) {
+                    this.sanValue = newValue;
+                    this.updateSanDisplay();
+                    this.saveSanState();
+                    return true;
+                }
+                return false;
+            }
+            
+            // 使用骰子
+            useDice() {
+                // 检查冷却状态
+                if (this.isInCooldown()) {
+                    const remaining = this.getCooldownRemaining();
+                    alert(`骰子正在冷却中，请等待${Math.ceil(remaining / 60)}分钟${remaining % 60}秒后再使用`);
+                    return;
+                }
+                
+                if (!this.isActivated) {
+                    alert('请先激活骰子物品');
+                    return;
+                }
+                
+                // 获取配置值，优先使用调查员姓名
+                const userName = this.investigatorName || this.config.userName;
+                const skillName = this.config.skillName || '未命名技能';
+                const skillValue = this.config.skillValue || 50;
+                const extraText = this.config.extraText || ''; // 用户附加文本，默认为空
+                
+                // 验证技能值
+                if (skillValue < 0 || skillValue > 100) {
+                    alert('技能数值必须在0-100之间');
+                    return;
+                }
+                
+                // 执行检定
+                const result = this.performD100Check({
+                    userName,
+                    skillName,
+                    skillValue,
+                    extraText
+                });
+                
+                // 显示结果
+                this.showResult(result);
+                
+                // 开始冷却
+                this.startCooldown();
+                
+                // 检查是否需要切换到计算机使用技能
+                this.checkSkillSwitch(result.successLevel);
+                
+                // 检查是否是大失败，需要调整下一次冷却时间
+                this.checkCriticalFailure(result.successLevel);
+            }
+            
+            // D100检定逻辑
+            performD100Check(params) {
+                // 生成两个D10随机数（个位和十位）
+                const rollD10 = () => Math.floor(Math.random() * 10) + 1;
+                const tens = rollD10() - 1; // 0-9
+                const units = rollD10() - 1; // 0-9
+                
+                // 计算总值（两个0表示100）
+                let total;
+                if (tens === 0 && units === 0) {
+                    total = 100;
+                } else {
+                    total = tens * 10 + units;
+                }
+                
+                // 计算成功等级
+                const successInfo = this.calculateSuccessLevel(total, params.skillValue);
+                
+                // 获取成功等级对应的附加文本
+                const successLevelExtraText = this.successLevelExtraTexts[successInfo.successLevel] || '未知的成功等级';
+                
+                // 构建结果文本
+                let resultText = `${params.userName}的"${params.skillName}"检定结果为D100=${total}/${params.skillValue},${successInfo.successLevelText}`;
+                
+                // 添加成功等级附加文本
+                resultText += `\n${successLevelExtraText}`;
+                
+                // 添加用户提供的附加文本（如果有）
+                if (params.extraText && params.extraText.trim() !== '') {
+                    resultText += `\n\n${params.extraText}`;
+                }
+                
+                // 返回结果
+                return {
+                    userName: params.userName,
+                    skillName: params.skillName,
+                    skillValue: params.skillValue,
+                    rollValue: total,
+                    tens,
+                    units,
+                    successLevel: successInfo.successLevel,
+                    successLevelText: successInfo.successLevelText,
+                    resultText,
+                    extraText: params.extraText,
+                    timestamp: new Date().toISOString()
+                };
+            }
+            
+            // 检查是否需要切换到计算机使用技能
+            checkSkillSwitch(successLevel) {
+                // 如果还没有切换到计算机使用技能，且检定成功等级为普通成功及以上
+                if (!this.hasComputerUseSkill && 
+                    (successLevel === 'regular_success' || 
+                     successLevel === 'hard_success' || 
+                     successLevel === 'extreme_success' || 
+                     successLevel === 'critical_success')) {
+                    
+                    // 切换到计算机使用技能
+                    this.config.skillName = '计算机使用';
+                    this.config.skillValue = 80;
+                    this.hasComputerUseSkill = true;
+                    
+                    // 更新成功等级附加文本为计算机使用版本
+                    this.successLevelExtraTexts = {
+                        'critical_success': '你找到了一串加密信息。以你精湛的电脑使用技术，这串加密信息很快就破解了，现在最上面那张贴图的右下角的一个像素可以点击了。你阅读后意识到了这个协会的不正常，你觉得似乎可以用那个口令对刚刚回复你那个人说说看。',
+                        'extreme_success': '你找到了一串加密信息。这串加密信息似乎有点难处理，但是你还是成功破解了，现在最上面那张贴图的右下角的一个像素可以点击了。',
+                        'hard_success': '你找到了一串加密信息。这串加密信息似乎有点难处理，但是你还是成功破解了，现在最上面那张贴图的右下角的一个像素可以点击了。',
+                        'regular_success': '你找到了一串加密信息。这串加密信息似乎有点难处理，但是你还是成功破解了，现在最上面那张贴图的右下角的一个像素可以点击了。',
+                        'failure': '你找到了一串加密信息。这串加密信息好像设置的有点难搞。你尝试破解了5分钟，仍然没有成功。',
+                        'critical_failure': '你找到了一串加密信息。这串加密信息好像设置的有点难搞。你尝试破解了10分钟，仍然没有成功。骰子冷却时间加长。'
+                    };
+                    
+                    // 立即刷新冷却时间
+                    this.cooldownEndTime = null;
+                    this.saveCooldownState();
+                    this.updateCooldownDisplay();
+                    
+                    // 保存状态
+                    this.saveState();
+                    
+                    console.log('已切换到计算机使用技能，冷却已刷新');
+                }
+            }
+            
+            // 检查是否是大失败，需要调整下一次冷却时间
+            checkCriticalFailure(successLevel) {
+                if (successLevel === 'critical_failure') {
+                    // 设置下一次冷却时间倍增
+                    this.cooldownMultiplier = 2;
+                    console.log('大失败！下一次冷却时间将延长为10分钟');
+                } else {
+                    // 重置冷却时间倍增
+                    this.cooldownMultiplier = 1;
+                }
+            }
+            
+            // 获取成功等级对应的CSS类名
+            getSuccessLevelClassName(successLevel) {
+                const classMap = {
+                    'critical_success': 'critical-success-text',
+                    'extreme_success': 'extreme-success-text',
+                    'hard_success': 'hard-success-text',
+                    'regular_success': 'regular-success-text',
+                    'failure': 'failure-text',
+                    'critical_failure': 'critical-failure-text'
+                };
+                return classMap[successLevel] || 'regular-success-text';
+            }
+            
+            // 计算成功等级
+            calculateSuccessLevel(rollValue, skillValue) {
+                // 向下取整
+                const floor = (num) => Math.floor(num);
+                const halfSkill = floor(skillValue / 2);
+                const fifthSkill = floor(skillValue / 5);
+                
+                let successLevel;
+                let successLevelText;
+                
+                // 大成功：小于等于5
+                if (rollValue <= 5) {
+                    successLevel = 'critical_success';
+                    successLevelText = '大成功';
+                }
+                // 大失败：大于等于96
+                else if (rollValue >= 96) {
+                    successLevel = 'critical_failure';
+                    successLevelText = '大失败';
+                }
+                // 极难成功：小于等于技能值的1/5且大于5
+                else if (rollValue <= fifthSkill && rollValue > 5) {
+                    successLevel = 'extreme_success';
+                    successLevelText = '极难成功';
+                }
+                // 困难成功：小于等于技能值的一半且大于技能值的1/5
+                else if (rollValue <= halfSkill && rollValue > fifthSkill) {
+                    successLevel = 'hard_success';
+                    successLevelText = '困难成功';
+                }
+                // 普通成功：小于等于技能值且大于技能值的一半
+                else if (rollValue <= skillValue && rollValue > halfSkill) {
+                    successLevel = 'regular_success';
+                    successLevelText = '普通成功';
+                }
+                // 失败：大于技能值且小于96
+                else {
+                    successLevel = 'failure';
+                    successLevelText = '失败';
+                }
+                
+                return {
+                    successLevel,
+                    successLevelText,
+                    halfSkill,
+                    fifthSkill
+                };
+            }
+            
+            // 显示检定结果
+            showResult(result) {
+                // 显示对话框
+                this.dialogOverlay.style.display = 'flex';
+                
+                // 清空文本
+                this.dialogText.innerHTML = '';
+                
+                // 获取成功等级对应的CSS类名
+                const successClass = this.getSuccessLevelClassName(result.successLevel);
+                
+                // 构建带格式的结果文本
+                let formattedText = '';
+                const lines = result.resultText.split('\n');
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    
+                    // 第一行是检定结果，使用不同颜色
+                    if (i === 0) {
+                        formattedText += `<span class="${successClass}">${line}</span>`;
+                    }
+                    // 第二行是成功等级附加文本
+                    else if (i === 1) {
+                        formattedText += `<span class="${successClass}">${line}</span>`;
+                    }
+                    // 第三行是空行（如果有用户附加文本）
+                    else if (i === 2 && line === '') {
+                        formattedText += '<br>';
+                    }
+                    // 用户提供的附加文本（如果有）
+                    else if (i >= 2 && line.trim() !== '') {
+                        formattedText += line;
+                    }
+                    
+                    if (i < lines.length - 1 && lines[i+1] !== '') {
+                        formattedText += '<br>';
+                    }
+                }
+                
+                // 使用打字机效果显示结果
+                this.typeWriter(formattedText, this.dialogText, 30, true);
+            }
+            
+            // 打字机效果（支持HTML）
+            typeWriter(html, element, speed = 50, isHtml = false) {
+                let i = 0;
+                let fullText = '';
+                
+                // 提取HTML中的所有文本内容
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                const textContent = tempDiv.textContent;
+                
+                function type() {
+                    if (i < textContent.length) {
+                        // 获取当前位置的字符
+                        const char = textContent.charAt(i);
+                        
+                        // 构建到当前位置的文本
+                        const currentText = textContent.substring(0, i + 1);
+                        
+                        // 重建HTML结构，保持格式
+                        let newHtml = '';
+                        let htmlIndex = 0;
+                        let inTag = false;
+                        let currentTag = '';
+                        
+                        for (let j = 0; j < html.length; j++) {
+                            if (html[j] === '<') {
+                                inTag = true;
+                                currentTag = '<';
+                            } else if (html[j] === '>') {
+                                currentTag += '>';
+                                newHtml += currentTag;
+                                inTag = false;
+                                currentTag = '';
+                            } else if (inTag) {
+                                currentTag += html[j];
+                            } else {
+                                // 如果是文本内容
+                                if (htmlIndex < currentText.length) {
+                                    newHtml += currentText.charAt(htmlIndex);
+                                    htmlIndex++;
+                                }
+                            }
+                        }
+                        
+                        element.innerHTML = newHtml;
+                        
+                        // 添加闪烁光标
+                        const cursor = document.createElement('span');
+                        cursor.className = 'cursor';
+                        element.appendChild(cursor);
+                        
+                        i++;
+                        setTimeout(type, speed);
+                    }
+                }
+                
+                type();
+            }
+            
+            // 关闭对话框
+            closeDialog() {
+                this.dialogOverlay.style.display = 'none';
+                this.dialogText.innerHTML = '';
+            }
+            
+            // 显示工具提示
+            showTooltip() {
+                // 创建工具提示元素
+                this.tooltip = document.createElement('div');
+                this.tooltip.className = 'dice-tooltip';
+                
+                // 获取物品信息
+                const itemInfo = {
+                    tooltip: `
+                        <div style="margin-bottom: 8px;"><strong>命运骰子</strong></div>
+                        <div style="margin-bottom: 8px;">神秘的骰子，被世界之外的高维叙事力量所掌控。</div>
+                        <div style="margin-bottom: 8px;">可以进行D100检定，是调查员人生经历，技能和目前状的综合体现。</div>
+                        <div style="margin-bottom: 8px; height: 8px;"></div> <!-- 空行 -->
+                        <div class="warning-text" style="margin-bottom: 8px;">"当你想使用它操纵角色的人生时，请留意暗处操纵骰子的可能并非只有你一个人。若非必要请不要使用它"</div>
+                        <div style="margin-bottom: 8px; height: 8px;"></div> <!-- 空行 -->
+                        <div style="margin-bottom: 4px;">稀有度: <span class="epic-text">史诗</span></div>
+                        <div>冷却时间: 5分钟</div>
+                        <div>使用方式: 单击进行检定。</div>
+                    `
+                };
+                
+                // 设置工具提示内容
+                this.tooltip.innerHTML = itemInfo.tooltip;
+                
+                // 添加到body以便计算尺寸
+                document.body.appendChild(this.tooltip);
+                
+                // 获取图标和工具提示的位置和尺寸
+                const rect = this.itemIcon.getBoundingClientRect();
+                const tooltipWidth = this.tooltip.offsetWidth;
+                const tooltipHeight = this.tooltip.offsetHeight;
+                
+                // 计算位置：工具提示的右下角对齐图标的左上角
+                let left = rect.left - tooltipWidth;
+                let top = rect.top - tooltipHeight;
+                
+                // 如果左边界超出屏幕，则调整到图标右侧
+                if (left < 10) {
+                    left = rect.right + 10;
+                }
+                
+                // 如果上边界超出屏幕，则调整到底部
+                if (top < 10) {
+                    top = rect.bottom + 10;
+                }
+                
+                // 设置工具提示位置
+                this.tooltip.style.position = 'fixed';
+                this.tooltip.style.left = left + 'px';
+                this.tooltip.style.top = top + 'px';
+            }
+            
+            // 隐藏工具提示
+            hideTooltip() {
+                if (this.tooltip && this.tooltip.parentNode) {
+                    this.tooltip.parentNode.removeChild(this.tooltip);
+                    this.tooltip = null;
+                }
+            }
+            
+            // 更新UI状态
+            updateUI() {
+                if (!this.isLoaded) return;
+                
+                // 更新激活状态
+                if (this.isActivated) {
+                    this.itemIcon.classList.add('activated');
+                    this.itemIcon.title = '命运骰子 - 已激活';
+                } else {
+                    this.itemIcon.classList.remove('activated');
+                    this.itemIcon.title = '命运骰子 - 未激活';
+                }
+                
+                // 更新导航按钮
+                this.updateNavButtons();
+            }
+            
+            // 加载保存的状态
+            loadState() {
+                // 加载骰子状态
+                try {
+                    const savedState = localStorage.getItem(this.config.storageKey);
+                    if (savedState) {
+                        const state = JSON.parse(savedState);
+                        // 从本地存储加载激活状态，如果没有则保持默认激活状态
+                        this.isActivated = state.isActivated !== undefined ? state.isActivated : true;
+                        this.config.skillName = state.skillName || '灵感';
+                        this.config.skillValue = state.skillValue || 50;
+                        this.config.extraText = state.extraText || ''; // 确保附加文本为空
+                        console.log('插件状态已加载');
+                    }
+                } catch (e) {
+                    console.error('加载插件状态失败:', e);
+                }
+                
+                // 加载SAN值状态
+                try {
+                    const savedSanState = localStorage.getItem(this.config.sanKey);
+                    if (savedSanState) {
+                        const sanState = JSON.parse(savedSanState);
+                        this.investigatorName = sanState.investigatorName || '张三';
+                        this.sanValue = sanState.sanValue !== undefined ? sanState.sanValue : 100;
+                        console.log('SAN值状态已加载');
+                    }
+                } catch (e) {
+                    console.error('加载SAN值状态失败:', e);
+                }
+                
+                // 加载冷却状态
+                this.loadCooldownState();
+                
+                // 更新SAN值显示
+                this.updateSanDisplay();
+                
+                // 更新冷却显示
+                this.updateCooldownDisplay();
+            }
+            
+            // 保存骰子状态
+            saveState() {
+                try {
+                    const state = {
+                        isActivated: this.isActivated,
+                        skillName: this.config.skillName,
+                        skillValue: this.config.skillValue,
+                        extraText: this.config.extraText,
+                        savedAt: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem(this.config.storageKey, JSON.stringify(state));
+                } catch (e) {
+                    console.error('保存插件状态失败:', e);
+                }
+            }
+            
+            // 保存SAN值状态
+            saveSanState() {
+                try {
+                    const sanState = {
+                        investigatorName: this.investigatorName,
+                        sanValue: this.sanValue,
+                        maxSanValue: this.maxSanValue,
+                        savedAt: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem(this.config.sanKey, JSON.stringify(sanState));
+                } catch (e) {
+                    console.error('保存SAN值状态失败:', e);
+                }
+            }
+            
+            // 冷却相关方法
+            
+            // 加载冷却状态
+            loadCooldownState() {
+                try {
+                    const savedCooldown = localStorage.getItem(this.config.cooldownKey);
+                    if (savedCooldown) {
+                        const cooldownData = JSON.parse(savedCooldown);
+                        this.cooldownEndTime = cooldownData.endTime;
+                        console.log('冷却状态已加载');
+                    }
+                } catch (e) {
+                    console.error('加载冷却状态失败:', e);
+                }
+            }
+            
+            // 保存冷却状态
+            saveCooldownState() {
+                try {
+                    const cooldownData = {
+                        endTime: this.cooldownEndTime,
+                        savedAt: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem(this.config.cooldownKey, JSON.stringify(cooldownData));
+                } catch (e) {
+                    console.error('保存冷却状态失败:', e);
+                }
+            }
+            
+            // 开始冷却
+            startCooldown() {
+                // 设置冷却结束时间（当前时间 + 5分钟 * 倍增系数）
+                const duration = this.cooldownDuration * 1000 * this.cooldownMultiplier;
+                this.cooldownEndTime = Date.now() + duration;
+                
+                // 保存冷却状态
+                this.saveCooldownState();
+                
+                // 更新冷却显示
+                this.updateCooldownDisplay();
+                
+                console.log(`骰子冷却开始，持续${5 * this.cooldownMultiplier}分钟`);
+                
+                // 重置冷却倍增系数（只影响下一次）
+                this.cooldownMultiplier = 1;
+            }
+            
+            // 检查是否在冷却中
+            isInCooldown() {
+                if (!this.cooldownEndTime) return false;
+                
+                const now = Date.now();
+                return now < this.cooldownEndTime;
+            }
+            
+            // 获取剩余冷却时间（秒）
+            getCooldownRemaining() {
+                if (!this.isInCooldown()) return 0;
+                
+                const now = Date.now();
+                const remainingMs = this.cooldownEndTime - now;
+                return Math.max(0, Math.ceil(remainingMs / 1000));
+            }
+            
+            // 格式化剩余时间
+            formatCooldownTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }
+            
+            // 更新冷却显示
+            updateCooldownDisplay() {
+                if (!this.isLoaded) return;
+                
+                const inCooldown = this.isInCooldown();
+                
+                // 更新按钮状态
+                this.useBtn.disabled = inCooldown;
+                
+                // 更新冷却覆盖层显示
+                if (inCooldown) {
+                    const remaining = this.getCooldownRemaining();
+                    this.cooldownOverlay.textContent = `冷却中 (${this.formatCooldownTime(remaining)})`;
+                    this.cooldownOverlay.style.display = 'flex';
+                    
+                    // 更新物品图标状态
+                    this.itemIcon.classList.add('cooldown');
+                    this.itemIcon.classList.remove('activated');
+                    
+                    // 更新冷却信息显示
+                    this.cooldownInfo.textContent = `冷却中 (${this.formatCooldownTime(remaining)})`;
+                } else {
+                    this.cooldownOverlay.style.display = 'none';
+                    
+                    // 恢复物品图标状态
+                    this.itemIcon.classList.remove('cooldown');
+                    if (this.isActivated) {
+                        this.itemIcon.classList.add('activated');
+                    }
+                    
+                    // 清除冷却信息显示
+                    this.cooldownInfo.textContent = '';
+                }
+            }
+            
+            // 启动冷却计时器
+            startCooldownTimer() {
+                // 清除现有的计时器
+                if (this.cooldownTimer) {
+                    clearInterval(this.cooldownTimer);
+                }
+                
+                // 每秒更新一次冷却显示
+                this.cooldownTimer = setInterval(() => {
+                    this.updateCooldownDisplay();
+                }, 1000);
+            }
+            
+            // 公共API方法
+            
+            // 设置用户名
+            setUserName(name) {
+                this.config.userName = name || '调查员';
+                return this;
+            }
+            
+            // 设置调查员姓名
+            setInvestigatorName(name) {
+                this.investigatorName = name || '张三';
+                if (this.nameDisplay) {
+                    this.nameDisplay.textContent = this.investigatorName;
+                }
+                this.saveSanState();
+                return this;
+            }
+            
+            // 设置技能名称
+            setSkillName(name) {
+                this.config.skillName = name || '灵感';
+                this.saveState();
+                return this;
+            }
+            
+            // 设置技能数值
+            setSkillValue(value) {
+                this.config.skillValue = parseInt(value) || 50;
+                this.saveState();
+                return this;
+            }
+            
+            // 设置附加文本
+            setExtraText(text) {
+                this.config.extraText = text || '';
+                this.saveState();
+                return this;
+            }
+            
+            // 设置SAN值
+            setSan(value) {
+                this.setSanValue(value);
+                return this;
+            }
+            
+            // 手动激活骰子
+            activate() {
+                this.activateDice();
+                return this;
+            }
+            
+            // 手动关闭骰子
+            deactivate() {
+                this.deactivateDice();
+                return this;
+            }
+            
+            // 执行检定
+            roll(skillName, skillValue, extraText) {
+                if (skillName) this.setSkillName(skillName);
+                if (skillValue) this.setSkillValue(skillValue);
+                if (extraText) this.setExtraText(extraText);
+                
+                this.useDice();
+                return this;
+            }
+            
+            // 清除冷却
+            clearCooldown() {
+                this.cooldownEndTime = null;
+                localStorage.removeItem(this.config.cooldownKey);
+                this.updateCooldownDisplay();
+                console.log('冷却已清除');
+                return this;
+            }
+            
+            // 销毁插件
+            destroy() {
+                // 清除冷却计时器
+                if (this.cooldownTimer) {
+                    clearInterval(this.cooldownTimer);
+                }
+                
+                // 清除隐藏功能超时
+                if (this.hiddenFeatureTimeout) {
+                    clearTimeout(this.hiddenFeatureTimeout);
+                }
+                
+                // 移除事件监听器
+                this.collapseBtn.removeEventListener('click', () => this.collapse());
+                this.nextBtn.removeEventListener('click', () => this.nextPage());
+                this.prevBtn.removeEventListener('click', () => this.prevPage());
+                this.useBtn.removeEventListener('click', () => this.useDice());
+                this.itemIcon.removeEventListener('click', (e) => this.handleHiddenFeatureClick(e));
+                this.minimizedIcon.removeEventListener('click', () => this.expand());
+                
+                // 移除工具提示
+                this.hideTooltip();
+                
+                // 移除对话框
+                if (this.dialogOverlay && this.dialogOverlay.parentNode) {
+                    this.dialogOverlay.parentNode.removeChild(this.dialogOverlay);
+                }
+                
+                // 移除最小化图标
+                if (this.minimizedIcon && this.minimizedIcon.parentNode) {
+                    this.minimizedIcon.parentNode.removeChild(this.minimizedIcon);
+                }
+                
+                // 移除插件元素
+                if (this.pluginEl && this.pluginEl.parentNode) {
+                    this.pluginEl.parentNode.removeChild(this.pluginEl);
+                }
+                
+                console.log('像素骰子插件已销毁');
+            }
+        }
+        
+        // 显示隐藏线索
+        function showClue(clueId) {
+            const clueElement = document.getElementById(clueId);
+            if (clueElement) {
+                // 隐藏所有线索
+                const allClues = document.querySelectorAll('.hidden-clue');
+                allClues.forEach(clue => {
+                    clue.style.display = 'none';
+                });
+                
+                // 显示选中的线索
+                clueElement.style.display = 'block';
+                
+                // 5秒后自动隐藏
+                setTimeout(() => {
+                    clueElement.style.display = 'none';
+                }, 8000);
+            }
+        }
+        
+        // 表单提交处理
+        document.getElementById('membershipForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 验证信息 - 现在只需要填写了任何内容即可通过
+            const verificationAnswer = document.getElementById('verification').value.trim();
+            
+            if (!verificationAnswer) {
+                document.getElementById('formMessage').innerHTML = '<p style="color:#e74c3c;">请填写验证信息。</p>';
+                document.getElementById('formMessage').style.display = 'block';
+                return;
+            }
+            
+            // 使用系统自带的alert显示第一条提示
+            alert('已收到信息，请等待回复。');
+            
+            // 清空表单
+            document.getElementById('membershipForm').reset();
+            
+            // 清空表单消息区域
+            document.getElementById('formMessage').style.display = 'none';
+            
+            // 10分钟后显示第二条系统提示（600000毫秒）
+            const delayTime = 600000; // 10分钟 = 600000毫秒
+            setTimeout(() => {
+                alert('你等了很久很久，也没有收到回复。');
+            }, delayTime);
+        });
+        
+        // 显示秘密模态框
+        function showSecretModal(event) {
+            // 阻止事件冒泡，防止触发其他点击事件
+            event.stopPropagation();
+            event.preventDefault();
+            document.getElementById('secretModal').style.display = 'flex';
+        }
+        
+        // 关闭秘密模态框
+        function closeSecretModal() {
+            document.getElementById('secretModal').style.display = 'none';
+        }
+        
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('secretModal');
+            if (event.target === modal) {
+                closeSecretModal();
+            }
+        };
+        
+        // 页面加载完成后显示初始线索
+        window.onload = function() {
+            // 显示第一个线索作为示例
+            setTimeout(() => {
+                showClue('clue1');
+            }, 3000);
+            
+            // 初始化骰子插件
+            window.dicePlugin = new PixelDicePlugin('#dicePluginContainer', {
+                userName: '调查员',
+                skillName: '灵感',
+                skillValue: 50,
+                extraText: '' // 默认附加文本为空
+            });
+        };
+        
+        // 平滑滚动到锚点
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

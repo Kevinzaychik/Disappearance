@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泗水吧 - 千度贴吧</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Sans Serif", Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #e8f0e8;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4jWNgYGD4T0cwwsLwMKP4QhIYJQwLQ8M0VhgaJYwShgUA6oYEBXh2BpUAAAAASUVORK5CYII=');
+        }
+        
+        .container {
+            width: 980px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+        }
+        
+        /* 开屏登录弹窗样式 */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .login-modal {
+            background: linear-gradient(145deg, #2e8b57, #1e6b47);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 320px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-modal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .login-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .qr-code-container {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .qr-code {
+            width: 180px;
+            height: 180px;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+        }
+        
+        .loading-circle {
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(46, 139, 87, 0.2);
+            border-top: 6px solid #2e8b57;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: #2e8b57;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .login-success {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #2e8b57;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        
+        .success-text {
+            color: #2e8b57;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .login-tip {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(to bottom, #2e8b57, #1e6b47);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0a4d2e;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .bar-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border: 2px solid white;
+            border-radius: 4px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .bar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+        
+        .logo-subtitle {
+            font-size: 14px;
+            margin-left: 10px;
+            opacity: 0.8;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .search-container:focus-within {
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3) inset;
+        }
+        
+        .search-input {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            color: white;
+            width: 200px;
+            font-size: 14px;
+            outline: none;
+            border-radius: 16px 0 0 16px;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-button {
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 0 16px 16px 0;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+        
+        .search-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .user-info {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2e8b57;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: #3a9a66;
+            padding: 8px 20px;
+            border-bottom: 1px solid #2e8b57;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-right: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        
+        nav ul li a:hover {
+            background-color: #2e8b57;
+        }
+        
+        /* 主要内容区域 */
+        .main-content {
+            display: flex;
+            padding: 20px;
+        }
+        
+        .posts {
+            flex: 3;
+            margin-right: 20px;
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* 帖子样式 */
+        .post {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 5px;
+        }
+        
+        .post-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .post-title a {
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .post-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .post-content {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .post-footer {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* 侧边栏样式 */
+        .sidebar-section {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            color: #2e8b57;
+        }
+        
+        .bar-info {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .bar-master {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .friend-bars {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .friend-bar {
+            width: 50%;
+            margin-bottom: 10px;
+        }
+        
+        /* 底部样式 */
+        footer {
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .post-image {
+            max-width: 200px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .page-nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .page-nav a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            background-color: #2e8b57;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        
+        .page-nav a:hover {
+            background-color: #1e6b47;
+        }
+        
+        .highlight {
+            background-color: #f0fff0;
+            border-left: 3px solid #2e8b57;
+        }
+        
+        /* 隐藏用户头像的样式 */
+        .user-avatar, .comment-avatar, .author-avatar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 开屏登录弹窗 -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-modal">
+            <div class="login-title">请扫码登录</div>
+            <div class="qr-code-container">
+                <div class="qr-code">
+                    <img src="images/erweima.png" alt="登录二维码">
+                </div>
+                <div class="loading-container" id="loadingContainer">
+                    <div class="loading-circle"></div>
+                    <div class="loading-text">登录中...</div>
+                </div>
+                <div class="login-success" id="loginSuccess">
+                    <div class="success-icon">✓</div>
+                    <div class="success-text">登录成功</div>
+                </div>
+            </div>
+            <div class="login-tip">使用千度贴吧APP扫码登录</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <a href="sishuiba.html" style="text-decoration: none; color: inherit;">
+                <div class="logo-container">
+                    <div class="bar-logo">
+                        <img src="images/xishuitouxiang.jpg" alt="泗水吧头像">
+                    </div>
+                    <div>
+                        <div class="logo">泗水吧<span class="logo-subtitle">千度贴吧</span></div>
+                    </div>
+                </div>
+            </a>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="搜索贴吧内容">
+                    <button class="search-button" id="search-button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.7422 10.3439C12.5329 9.2673 13 7.9382 13 6.5C13 2.91015 10.0899 0 6.5 0C2.91015 0 0 2.91015 0 6.5C0 10.0899 2.91015 13 6.5 13C7.93858 13 9.26801 12.5327 10.3448 11.7415L10.3439 11.7422C10.3734 11.7822 10.4062 11.8204 10.4424 11.8566L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L11.8566 10.4424C11.8204 10.4062 11.7822 10.3734 11.7422 10.3439ZM12 6.5C12 9.53757 9.53757 12 6.5 12C3.46243 12 1 9.53757 1 6.5C1 3.46243 3.46243 1 6.5 1C9.53757 1 12 3.46243 12 6.5Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="user-info">
+                    <span>登录/注册</span>
+                </div>
+            </div>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">精华</a></li>
+                <li><a href="#">图片</a></li>
+                <li><a href="#">视频</a></li>
+            </ul>
+        </nav>
+        
+        <div class="main-content">
+            <div class="posts">
+                <!-- 帖子列表 -->
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">贴吧吧主...</a></span>
+                        <span>2025-11-24</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">[公告]关于撤销 一溜大下沿 吧主管理权限的说明</a>
+                    </div>
+                    <div class="post-content">
+                        根据相关规定，撤销一溜大下沿吧主管理权限。
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-24</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">15313537936</a></span>
+                        <span>2025-11-22</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">泗水附近有地方收购糯米酒吗，</a>
+                    </div>
+                    <div class="post-content">
+                        如题，有知道的哥哥姐姐说一下说一下，谢谢啦
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-22</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">青石巷听雨</a></span>
+                        <span>2025-11-20</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">最近泗水有啥瓜</a>
+                    </div>
+                    <div class="post-content">
+                        有没有什么八卦吃一吃
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-20</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">泗水老农民</a></span>
+                        <span>2025-11-19</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">趋源泉风景美如画，周末有一起去的吗？</a>
+                    </div>
+                    <div class="post-content">
+                        周末想去趋源泉玩，听说那里的泉水特别清澈，风景也很美，有想一起去的朋友吗？可以拼车一起去！
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-19</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">无奈的我...</a></span>
+                        <span>2025-11-16</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">泗水县有没有有名的老中医</a>
+                    </div>
+                    <div class="post-content">
+                        脸上起痘痘，听说中医调理比较好，。我们这有吗
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-16</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">夏日凉风</a></span>
+                        <span>2025-11-15</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">山东单招！春考！招募代理！</a>
+                    </div>
+                    <div class="post-content">
+                        山东单招！春考！招募代理！解决省内外春考代报名问题！ 解决单招 春考 技能培训问题！解决所有学籍提升！都是代理价！
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-15</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">糖醋蒜子</a></span>
+                        <span>2025-11-14</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">泗水有没有浴室？</a>
+                    </div>
+                    <div class="post-content">
+                        这边比南方冷，想找个浴室，最好有单间。浴场就算了，谢谢。
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-14</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">贴吧用户_...</a></span>
+                        <span>2025-11-13</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">永胜锦城是不是回迁房？孩子上学都归哪个学区？</a>
+                    </div>
+                    <div class="post-content">
+                        我相中一套最前排B2-2-301送车储的毛坯房子问的销售62万我想问问各位亲人这价格是不是高了？
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-13</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">李二卖瓜</a></span>
+                        <span>2025-11-12</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">得偿所愿，祝你也祝我</a>
+                    </div>
+                    <div class="post-content">
+                        希望大家都能够实现自己的愿望，生活愉快！
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-12</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">爱吃东北...</a></span>
+                        <span>2025-11-11</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">11.9号找伴郎🙏</a>
+                    </div>
+                    <div class="post-content">
+                        济宁泗水找伴郎，175左右的，伴郎服定好了，管饭搂席！！有偿！！！
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-11</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">zoom</a></span>
+                        <span>2025-11-08</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">欲购城区独院</a>
+                    </div>
+                    <div class="post-content">
+                        城区有没有独院出售，必须能过户的，有意联系
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-08</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">镰刀锤子...</a></span>
+                        <span>2025-11-06</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">伙界们，泗非哪家的羊汤好喝啊。</a>
+                    </div>
+                    <div class="post-content">
+                        一年回不了几天泗水，每次回去，就想吃点小时候的味道。伙计们，泗水哪家的羊汤馆好喝，哪家的火烧好吃呀。
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 11-06</span>
+                    </div>
+                </div>
+                
+                <!-- 新增的三个帖子 -->
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">贴吧用户_...</a></span>
+                        <span>2025-09-28</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">以前石龙嘴神婆搬到什么地方了？</a>
+                    </div>
+                    <div class="post-content">
+                        以前石龙嘴神婆搬到什么地方了？
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 09-28</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">小张鱿鱼</a></span>
+                        <span>2025-09-01</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">个人感觉现在的天气预报就跟放屁一样</a>
+                    </div>
+                    <div class="post-content">
+                        越来越感觉没普，
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 09-01</span>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <span>作者: <a href="#">泗水老司机</a></span>
+                        <span>2025-08-15</span>
+                    </div>
+                    <div class="post-title">
+                        <a href="#">泗水哪里有修老式缝纫机的？</a>
+                    </div>
+                    <div class="post-content">
+                        家里有一台老式缝纫机，用了很多年了，现在有点问题，不知道泗水哪里还有修这种老式缝纫机的师傅？
+                    </div>
+                    <div class="post-footer">
+                        <span>最后回复: 08-15</span>
+                    </div>
+                </div>
+                
+                <div class="page-nav">
+                    <a href="#">首页</a>
+                    <a href="#">上一页</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">下一页</a>
+                    <a href="#">尾页</a>
+                </div>
+                
+            </div>
+            
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">吧主信息</div>
+                    <div class="bar-master">
+                        <div>
+                            <div><strong>爱上山寨机</strong></div>
+                            <div>小吧主共8人</div>
+                        </div>
+                    </div>
+                    <div class="bar-info">
+                        <div>会员: <strong>泗水圣人</strong></div>
+                        <div>目录: <strong>西南地区</strong></div>
+                    </div>
+                    <div>
+                        <a href="#" style="color:#2e8b57;">申请吧主</a> | <a href="#" style="color:#2e8b57;">申请小吧主</a>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">友情贴吧</div>
+                    <div class="friend-bars">
+                        <div class="friend-bar">
+                            <a href="#" style="color:#2e8b57;">泉林</a>
+                        </div>
+                        <div class="friend-bar">
+                            <a href="#" style="color:#2e8b57;">泉乡</a>
+                        </div>
+                        <div class="friend-bar">
+                            <a href="#" style="color:#2e8b57;">泗水钓鱼</a>
+                        </div>
+                        <div class="friend-bar">
+                            <a href="#" style="color:#2e8b57;">泗水一中</a>
+                        </div>
+                        <div class="friend-bar">
+                            <a href="#" style="color:#2e8b57;">苗馆</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">本吧统计</div>
+                    <div class="bar-info">
+                        <div>主题数: <strong>303804</strong></div>
+                        <div>贴子数: <strong>7490499</strong></div>
+                        <div>会员数: <strong>289682</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>©2025 千度 贴吧协议 | 隐私政策 | 吧主制度 | 意见反馈 | 网络谣言警示</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 开屏登录动画
+            const loginOverlay = document.getElementById('loginOverlay');
+            const qrCode = document.querySelector('.qr-code');
+            const loadingContainer = document.getElementById('loadingContainer');
+            const loginSuccess = document.getElementById('loginSuccess');
+            
+            // 页面加载后开始动画序列
+            setTimeout(function() {
+                // 0.5秒后隐藏二维码，显示加载动画
+                qrCode.style.display = 'none';
+                loadingContainer.style.display = 'flex';
+                
+                setTimeout(function() {
+                    // 1秒后隐藏加载动画，显示登录成功
+                    loadingContainer.style.display = 'none';
+                    loginSuccess.style.display = 'flex';
+                    
+                    setTimeout(function() {
+                        // 1秒后跳转到sishuiba.html
+                        window.location.href = 'sishuiba.html';
+                    }, 1000);
+                }, 1000);
+            }, 500);
+            
+            // 搜索功能
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    // 跳转到searchba.html，并传递搜索关键词作为参数
+                    window.location.href = `searchba.html?q=${encodeURIComponent(searchTerm)}`;
+                } else {
+                    alert('请输入搜索内容！');
+                }
+            }
+            
+            // 搜索按钮点击事件
+            searchButton.addEventListener('click', performSearch);
+            
+            // 按回车键搜索
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
